@@ -97,6 +97,10 @@ async function pullCnn(): Promise<string | boolean> {
 interface NytMeasureRace {
   nyt_id: string;
   office_id: string;
+  /** "Proposition", "Constitutional Amendment", ... or "Local Measure". */
+  office?: string | null;
+  /** "state" for statewide measures; "county"/"city" for local ones in the same file. */
+  coverage?: string | null;
   seat: string | null;
   seat_number: string | null;
   long_description: string | null;
@@ -160,7 +164,9 @@ async function pullNytStates(): Promise<string | boolean> {
       const res = await fetchJson<{ races: NytMeasureRace[] }>(`${NYT_BASE}/results-${slug}.json`, { conditional: true, timeoutMs: 30_000 });
       nytMissing.delete(st);
       if (!res.changed) continue;
-      const list = (res.data?.races ?? []).filter((r) => r.office_id === 'I').map(normalizeNyt).filter((m): m is MeasureInput => !!m);
+      // The state files also carry local measures (city/county); the dashboard is statewide only.
+      const statewide = (r: NytMeasureRace) => r.office_id === 'I' && (r.coverage ?? 'state') === 'state' && !/local/i.test(r.office ?? '');
+      const list = (res.data?.races ?? []).filter(statewide).map(normalizeNyt).filter((m): m is MeasureInput => !!m);
       nytFound.set(st, list);
       changed = true;
     } catch (err) {
@@ -401,8 +407,8 @@ export function startBallot() {
     id: 'nyt-measures',
     name: 'NYT / AP state files',
     role: 'All statewide measures once NYT publishes per-state files',
-    hotIntervalS: 120,
-    coldIntervalS: 900,
+    hotIntervalS: config.intervals.nytMeasures.hot,
+    coldIntervalS: config.intervals.nytMeasures.cold,
     enabled: config.sources.nyt,
     initialDelayMs: 20_000,
     run: pullNytStates,

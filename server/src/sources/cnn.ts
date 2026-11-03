@@ -97,7 +97,20 @@ async function pull(code: string, office: Office): Promise<boolean> {
     store.touch('cnn', [office]);
     return false;
   }
-  const races = (res.data ?? []).map(normalizeCnnRace).filter((r): r is RaceInput => !!r);
+  // The national files also keep contests decided earlier in the year for the same seat (e.g.
+  // 2026-HQ-TX-18, the Jan 31 special runoff, already marked won). Drop anything whose polls
+  // closed before general-election day, and if a seat still appears twice keep the latest contest.
+  const cutoff = Date.parse(`${config.electionDate}T12:00:00Z`);
+  const current = (res.data ?? []).filter((r) => !r.raceEmbargo?.assignedPollsClose || r.raceEmbargo.assignedPollsClose >= cutoff);
+  const byId = new Map<string, { race: RaceInput; close: number }>();
+  for (const r of current) {
+    const race = normalizeCnnRace(r);
+    if (!race) continue;
+    const close = r.raceEmbargo?.assignedPollsClose ?? 0;
+    const prev = byId.get(race.id);
+    if (!prev || close > prev.close) byId.set(race.id, { race, close });
+  }
+  const races = [...byId.values()].map((x) => x.race);
   store.ingest({ provider: 'cnn', offices: [office], fetchedAt: Date.now(), races });
   return true;
 }

@@ -34,6 +34,7 @@ export const config = {
     nyt: { hot: num('NYT_INTERVAL_S', 20), cold: 300 },
     nytHouse: { hot: num('NYT_HOUSE_INTERVAL_S', 45), cold: 600 },
     nytCounties: { hot: num('NYT_COUNTY_INTERVAL_S', 45), cold: 900 },
+    nytMeasures: { hot: 120, cold: 900 },
     cnn: { hot: num('CNN_INTERVAL_S', 30), cold: 300 },
     polymarketPrices: { hot: num('POLYMARKET_INTERVAL_S', 30), cold: 120 },
     polymarketDiscovery: { hot: 1800, cold: 3600 },
@@ -86,6 +87,15 @@ export const config = {
 
 export function isHot(now = Date.now()): boolean {
   return now >= Date.parse(config.hotStart) && now <= Date.parse(config.hotEnd);
+}
+
+/**
+ * When a primary feed counts as stale (and the store fails over to its backup): STALE_AFTER_S,
+ * but never before the feed has missed about two of its own polls. Outside the hot window NYT is
+ * polled every 5-15 min, so a fixed 3-minute threshold would flip races to CNN between polls.
+ */
+export function staleAfterFor(interval: { hot: number; cold: number }, now = Date.now()): number {
+  return Math.max(config.staleAfterMs, 2_000 * (isHot(now) ? interval.hot : interval.cold));
 }
 
 export const NYT_BASE = `https://static01.nyt.com/elections-assets/pages/data/${config.electionDate}`;

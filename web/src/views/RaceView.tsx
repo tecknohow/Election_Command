@@ -7,6 +7,7 @@ import { FloatingCard } from '../components/FloatingCard';
 import { WatchStar } from '../components/Watch';
 import { NEUTRAL, PARTY_COLOR, RAMP, forecastFor, levelColor } from '../lib/colors';
 import { fmtEt, fmtNum, fmtProb, raceName, statusText } from '../lib/format';
+import { PrevResults } from '../components/PrevResults';
 import { loadCounties, pathBounds, type CountyShape } from '../map/counties';
 import { loadDistricts } from '../map/geo';
 import { useElection, wantsSimView } from '../store/election';
@@ -128,8 +129,10 @@ export function RaceView() {
 
   const stFips = STATE_BY_POSTAL[race.state]?.fips ?? '';
   const mapped = shapes ? rows.filter((s) => s.u.fips && shapes.has(s.u.fips)) : [];
-  // House: show the whole state's counties clipped to the district; else just the state's counties.
-  const shapeList = shapes ? (race.office === 'H' ? [...shapes.values()].filter((c) => c.fips.startsWith(stFips)) : mapped.map((s) => shapes.get(s.u.fips!)!)) : [];
+  // House: show the whole state's units clipped to the district; else just the reported units.
+  // A state's shapes come from one set: us-atlas counties, or (CT, AK) the newer extra units.
+  const unitSet = mapped.length ? shapes?.get(mapped[0].u.fips!)?.set : undefined;
+  const shapeList = shapes ? (race.office === 'H' ? [...shapes.values()].filter((c) => c.fips.startsWith(stFips) && c.set === unitSet) : mapped.map((s) => shapes.get(s.u.fips!)!)) : [];
   const byFips = new Map(rows.filter((s) => s.u.fips).map((s) => [s.u.fips!, s]));
   const box = pathBounds(race.office === 'H' && districtPath ? [districtPath] : shapeList.map((c) => c.d));
   const hoverStats = hover ? rows.find((s) => s.u.id === hover.id) : undefined;
@@ -159,14 +162,16 @@ export function RaceView() {
     return (typeof x === 'string' ? x.localeCompare(y as string) : (x as number) - (y as number)) * sort.dir;
   });
   const th = (key: string, label: string, num = true) => (
-    <th className={`${num ? 'num' : ''} sortable ${sort.key === key ? 'sorted' : ''}`} onClick={() => setSort((s) => ({ key, dir: s.key === key ? ((-s.dir) as 1 | -1) : -1 }))}>
+    <th className={`${num ? 'num' : ''} sortable ${sort.key === key ? 'sorted' : ''}`} onClick={() => setSort((s) => ({ key, dir: s.key === key ? (-s.dir as 1 | -1) : -1 }))}>
       {label}
       {sort.key === key ? (sort.dir === 1 ? ' ▲' : ' ▼') : ''}
     </th>
   );
   const f = forecastFor(race);
   const bp = race.market?.byParty;
-  const unitWord = rows[0]?.u.level === 'state_house_district' ? 'districts' : race.office === 'H' ? 'county parts' : 'counties';
+  // Alaska reports by state house district; Connecticut by its 9 planning regions (FIPS 091x0),
+  // which replaced its counties after the bundled county shapes were drawn.
+  const unitWord = rows.some((s) => s.u.level === 'state_house_district') ? 'districts' : race.state === 'CT' ? 'planning regions' : race.office === 'H' ? 'county parts' : 'counties';
 
   return (
     <div className="race-view">
@@ -202,7 +207,8 @@ export function RaceView() {
         </div>
         {race.expectedLater ? <div className="rc-note">{race.expectedLater}.</div> : null}
         {race.rcv && !race.expectedLater ? <div className="rc-note">Ranked-choice race: first-choice votes shown. If no one passes 50%, the final result can take days.</div> : null}
-        <div className="rv-cands">
+        <div className="rv-body-row">
+        <div className="rv-cands" style={{ '--n': Math.max(1, Math.min(4, race.candidates.length)) } as React.CSSProperties}>
           {race.candidates.slice(0, 4).map((c) => (
             <div key={c.id} className={`rv-cand ${c.winner ? 'won' : ''}`}>
               <div className="rv-cand-name">
@@ -228,6 +234,8 @@ export function RaceView() {
             </span>
           </div>
         </div>
+        <PrevResults race={race} />
+        </div>
       </header>
 
       <section className="panel rv-map">
@@ -248,7 +256,7 @@ export function RaceView() {
             <div className="empty">No county-level results published for this race yet.</div>
           ) : !shapes ? (
             <div className="empty">Loading county map…</div>
-          ) : !box || (!mapped.length && race.office !== 'H') ? (
+          ) : !box || !mapped.length ? (
             <div className="empty">This state reports by {unitWord}, which have no map shapes. See the table below.</div>
           ) : (
             <svg viewBox={`${box.x} ${box.y} ${box.w} ${box.h}`} preserveAspectRatio="xMidYMid meet">
@@ -336,7 +344,8 @@ export function RaceView() {
             {rows.length} {unitWord}
           </h2>
           <span className="muted small">
-            {data?.source && data.source !== 'none' ? `Source: ${data.source.replace(' (G)', '')}` : ''} {data?.updatedAt ? `· updated ${fmtEt(data.updatedAt)} ET` : ''} · refreshes every 15 s
+            {data?.source && data.source !== 'none' ? `Source: ${data.source.replace(' (G)', '')}` : ''} {data?.updatedAt ? `· updated ${fmtEt(data.updatedAt)} ET` : ''} · refreshes every 15
+            s
           </span>
         </div>
         <div className="table-scroll">

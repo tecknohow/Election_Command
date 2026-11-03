@@ -7,24 +7,33 @@ export interface CountyShape {
   fips: string;
   name: string;
   d: string;
+  /** 'atlas' = us-atlas counties (2017 boundaries); 'extra' = CT planning regions / AK house districts. */
+  set: 'atlas' | 'extra';
 }
 
 let promise: Promise<Map<string, CountyShape>> | null = null;
 
 /**
- * us-atlas counties (pre-projected AlbersUSA, same frame as the state map). Loaded lazily as
- * its own chunk (~260 KB gzipped) the first time a race drill-down opens.
+ * us-atlas counties (pre-projected AlbersUSA, same frame as the state map), plus the units
+ * us-atlas predates: Connecticut's planning regions and Alaska's state house districts
+ * (web/public/geo/extra-units.json, built by scripts/build-units.mjs). Loaded lazily the first
+ * time a race drill-down opens.
  */
 export function loadCounties(): Promise<Map<string, CountyShape>> {
-  promise ??= import('us-atlas/counties-albers-10m.json')
-    .then((m) => {
+  const extra = () =>
+    fetch('/geo/extra-units.json')
+      .then((r) => (r.ok ? (r.json() as Promise<{ units: { fips: string; name: string; d: string }[] }>) : { units: [] }))
+      .catch(() => ({ units: [] }));
+  promise ??= Promise.all([import('us-atlas/counties-albers-10m.json'), extra()])
+    .then(([m, x]) => {
       const topo = (m.default ?? m) as unknown as Topology<{ counties: GeometryCollection }>;
       const path = geoPath();
       const out = new Map<string, CountyShape>();
       for (const f of (feature(topo, topo.objects.counties) as unknown as { features: Feature<Geometry, { name: string }>[] }).features) {
         const fips = String(f.id).padStart(5, '0');
-        out.set(fips, { fips, name: f.properties?.name ?? fips, d: path(f) ?? '' });
+        out.set(fips, { fips, name: f.properties?.name ?? fips, d: path(f) ?? '', set: 'atlas' });
       }
+      for (const u of x.units) out.set(u.fips, { fips: u.fips, name: u.name, d: u.d, set: 'extra' });
       return out;
     })
     .catch((err) => {

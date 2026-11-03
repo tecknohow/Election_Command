@@ -3,7 +3,7 @@
 ## Goals that shaped the design
 
 - **Many windows, one poller.** The app will be open full-screen on several monitors at once. Browsers never call upstream APIs; a single server polls each source once and fans updates out to every window. Opening a fifth monitor costs upstream nothing.
-- **One topic per screen.** Each route is a full-screen dashboard (master dashboard, Senate map, Governor map, …), switchable with `1`–`9` (in nav order) or the top nav. Map settings live in the URL (`/map/senate?fill=market`), so each monitor can be bookmarked to a specific view.
+- **One topic per screen.** Each route is a full-screen dashboard (master dashboard, Senate map, Governor map, …), switchable with `1`–`9` and `0` (in nav order; `0` is the tenth view, Swing) or the top nav. Map settings live in the URL (`/map/senate?fill=market`), so each monitor can be bookmarked to a specific view.
 - **Aggregators over election offices.** Results come from two news aggregators that already normalize AP / Decision Desk data for all 50 states, rather than 50 state election-night reporting sites.
 - **Degrade gracefully.** Every source has independent backoff and health reporting; results fail over from NYT to CNN automatically; state is persisted so a container restart mid-night loses nothing.
 
@@ -42,20 +42,22 @@
 | Source | Endpoint | Provides | Cadence (hot / cold) | Limits & etiquette |
 |---|---|---|---|---|
 | **NYT results** (primary) | `static01.nyt.com/elections-assets/pages/data/2026-11-03/results-{senate,governor,house}.json` | AP vote counts, EEVP, AP calls, candidates + incumbency + headshots, NYT ratings, poll-closing times, House control baseline, 2024 baselines | 20s (S+G), 45s (House) / 5–10 min | Public CDN (Fastly/GCS), `max-age=5`, strong ETags → conditional GET returns 304 when unchanged. House file ≈350 KB gzipped. |
-| **CNN results** (secondary) | `politics.api.cnn.io/results/national-races/2026-{SG,GG,HG}.json` | Decision Desk vote counts & calls, flip flag, poll embargo times | 30s / 5 min | Public CDN, `max-age=20`, ETags. Used for failover when NYT data is >3 min stale, and to surface CNN calls before AP's. |
+| **CNN results** (secondary) | `politics.api.cnn.io/results/national-races/2026-{SG,GG,HG}.json` | Decision Desk vote counts & calls, flip flag, poll embargo times | 30s / 5 min | Public CDN, `max-age=20`, ETags. Used for failover when NYT data is stale, and to surface CNN calls before AP's. The files also keep contests decided earlier in the year for the same seat (e.g. `2026-HQ-TX-18`, the Jan 31 special runoff, already marked won), so anything whose polls closed before Nov 3 is dropped, and a seat appearing twice keeps its latest contest. |
 | **Wikipedia** | MediaWiki `action=parse` on "2026 United States Senate elections" / "…gubernatorial elections" | **FLIPR** rating (Silver Bulletin column), **Cook** rating, prior holding party, incumbent name | 30 min / 60 min | No hard limit for polite clients; descriptive User-Agent, serial requests. |
 | **Polymarket Gamma** | `gamma-api.polymarket.com/public-search`, `/events?tag_slug=house-elections`, `/events?slug=…` | Locates each race's market ("{State} Senate Election Winner", "{ST}-{NN} House Election Winner") + chamber-control markets; token IDs | 30 min / 60 min | Documented ~4000 req/10s (events ~500/10s). Responses CDN-cached 5 min, so not used for live prices. |
 | **Polymarket CLOB** | `POST clob.polymarket.com/midpoints` | Live midpoint price for every outcome (≈1,070 tokens incl. House) in batches of 100 | 30s / 2 min | Price endpoints ~1500 req/10s; we use ~11 requests per 30s. Falls back to Gamma's `outcomePrices`. |
 | **CNN ballot measures** | `politics.api.cnn.io/results/national-races/2026-I{n}G.json` (n = 1…6, auto-discovered) | Live yes/no votes + calls for ~60 notable measures | 30s / 5 min | Same CDN as CNN results. Slots also contain measures decided at earlier 2026 elections; only those closing on Nov 3 are kept. |
-| **NYT state files** | `…/2026-11-03/results-{state}.json` (`office_id: "I"`) | AP results for every statewide measure | probe every 10 / 60 min until published, then 2 min | Not yet published as of Nov 2; picked up automatically. Per-state errors are retried individually. |
-| **Wikipedia measures catalog** | "2026 United States ballot measures" | Every certified measure: origin (legislature / citizens), what a yes vote does; used to classify constitutional amendments | 60 min | Matched to live measures by measure number, then text similarity within the state. |
+| **NYT state files** | `…/2026-11-03/results-{state}.json` (`office_id: "I"`) | AP results for every statewide measure | probe every 10 / 60 min until published, then 2 / 15 min | Published on election morning. The same files carry city and county measures (`coverage: "county"`, `office: "Local Measure"`); only `coverage: "state"` is kept. Per-state errors are retried individually. |
+| **Wikipedia measures catalog** | "2026 United States ballot measures" | Every certified measure: origin (legislature / citizens), what a yes vote does, official number, and the Ballotpedia page each row cites | 60 min | Display names come from the cited Ballotpedia URL slug (Ballotpedia blocks automated access and isn't fetched); citations pointing at another state, number or subject are ignored, and a URL cited by two rows stays with the better match. Numbers missing from a row are looked up from the title of the Wikipedia article it links to. Local measures listed on the page (e.g. Buffalo charter amendments) are excluded. Matched to live measures by number, then text similarity, then by elimination when a state has exactly one unmatched measure on each side. Measures with no Ballotpedia page link to their Wikipedia article or the state's section of the list. |
 | **Wikipedia House tables** | "2026 … House of Representatives elections" + "… election ratings" | Incumbent party for 429 districts; FLIPR + Cook for 145 competitive seats | 30 min | Seats not on the competitive list are shown as Safe for the incumbent party in the forecast view. |
 | **Census TIGER/Line 2026** | `www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_{SS}_cd120.zip` | 120th-Congress district boundaries (the districts on this ballot, incl. TX/CA/MO/NC/OH/UT redraws) | build time only | `scripts/build-districts.mjs` projects with the same AlbersUSA settings as us-atlas (scale 1300, translate 487.5/305) and simplifies to 3.5% of points. |
-| **News RSS** | NYT, NPR, Politico, The Hill, CBS, ABC, NBC, Fox, Axios (filtered), Google News search (filtered) | Breaking-news headlines | 90s / 5 min | Conditional GET per feed; items de-duplicated by normalized headline. Configurable via `NEWS_FEEDS`. |
+| **Census cartographic boundaries 2024** | `GENZ2024/shp/cb_2024_us_county_5m.zip`, `cb_2024_02_sldl_500k.zip` | Connecticut's 9 planning regions (its county-equivalents since 2022) and Alaska's 40 state house districts, the units AP reports by there; us-atlas predates both | build time only | `scripts/build-units.mjs` → `web/public/geo/extra-units.json`, same projection. |
+| **CNN past results** | `…/national-races/{2020,2022,2024}-SG.json`, `{2022,2024}-GG`, `{2022,2024}-HG`, `2024-PG` | Previous result for every 2026 seat, House and presidential vote totals, 2024 president by state | build time only | `scripts/build-history.mjs` → `shared/src/history.json` (committed). See *Past results & swing* below. |
+| **News RSS** | NYT, NPR, Politico, The Hill, CBS, ABC, NBC, Fox, Axios (filtered), Google News search (filtered), Google News election-day issues search (issue-filtered) | Breaking-news headlines | 90s / 5 min | Conditional GET per feed; items de-duplicated by normalized headline, within a poll as well as against stored items (the same story often arrives from its publisher and from Google News in one poll). Configurable via `NEWS_FEEDS`. |
 
 **About FLIPR:** FLIPR is Nate Silver's 2026 midterm model (Silver Bulletin). Its race-level probabilities are paywalled, but its published rating categories are tracked in Wikipedia's predictions tables (the "Silver" column), which editors update daily. That column is the FLIPR source; Cook (from the same tables) is the fallback, then NYT's own rating.
 
-**Prior control** comes from the incumbent party shading in those same Wikipedia tables, with a vetted static seed (`server/src/seed/seats.ts`) as fallback. House prior control arrives in phase 2; until then House flips rely on the provider's own flip flag.
+**Prior control** comes from the incumbent party shading in those same Wikipedia tables, with a vetted static seed (`server/src/seed/seats.ts`) as fallback. House prior control comes from the incumbent party in the House elections tables (429 districts), with the provider's own flip flag for the rest.
 
 ### Polling discipline
 
@@ -67,7 +69,7 @@
 ## Merge & derivation rules (ElectionStore)
 
 1. **Race identity**: `TX-S`, `OH-G`, `CA-H-22` (at-large districts = 1).
-2. **Which numbers to show**: simulator (when running) ▸ NYT if fresh (<3 min) ▸ CNN if fresher. CNN votes are mapped onto NYT's candidate list by last name + party.
+2. **Which numbers to show**: simulator (when running) ▸ NYT if fresh ▸ CNN if fresher. NYT counts as stale after `STALE_AFTER_S` (3 min) or two missed NYT polls, whichever is longer, so the 5–10 minute cold-window cadence doesn't flip races to CNN between polls. CNN votes are mapped onto NYT's candidate list by last name + party.
 3. **Calls are unioned**: if NYT/AP hasn't called a race but CNN has, the CNN call is shown (`calledBy: CNN`).
 4. **Status**: `called`/`runoff` ▸ `counting` (votes > 0) ▸ `closed` (past poll-closing time) ▸ `upcoming`.
 5. **Flip** = projected winner's party ≠ prior party (or the provider's own flip flag when the prior party is unknown).
@@ -78,7 +80,7 @@
 
 `POST /api/admin/sim/start {speed}` replays a compressed election night over the **real** race definitions: real candidates, poll-closing schedule, Polymarket/FLIPR expectations and 2024 baselines. Reporting curves are per state (slow West Coast counts), early-vote skew fades as the count completes, and calls happen at poll close for blowouts or once the remaining vote can't flip the race.
 
-The simulation runs in its **own `ElectionStore` + `MeasureStore` pair**. They're seeded with a copy of the live race definitions and share the live store's forecasts and markets by reference (`adoptContext`). The SSE hub attaches a window to the sim store only when an admin session asks for `?view=sim`; every other window, and the public REST API, stays on the live store. Simulator status is scrubbed from snapshots sent to non-admins. Stopping discards the sim stores.
+The simulation runs in its **own `ElectionStore` + `MeasureStore` pair**. They're seeded with a copy of the live race definitions and share the live store's forecasts and markets by reference (`adoptContext`). The SSE hub attaches a window to the sim store only when an admin session asks for `?view=sim`; every other window, and the public REST API, stays on the live store. Simulator status is scrubbed from snapshots sent to non-admins. Stopping discards the sim stores. `POST /api/admin/sim/pause {paused}` freezes simulated time (no ticks run); resuming re-anchors the clock so it continues from the paused moment, and a speed change while paused keeps it paused.
 
 ## Multi-user hardening
 
@@ -88,7 +90,7 @@ The simulation runs in its **own `ElectionStore` + `MeasureStore` pair**. They'r
 - **Untrusted content:** feed links and NYT URLs are reduced to http(s) on the server and again on the client.
 - **Limits:** per-IP token-bucket rate limit on REST, live-stream caps (total and per IP), 16 KB bodies. `trustProxy` reads real client IPs behind Caddy/Cloudflare.
 - **Stream efficiency:** per-connection gzip (`Z_SYNC_FLUSH` per event) and field-level patches (`diffFields`): a 1.1 MB snapshot becomes ~150 KB on the wire, and a typical race update is about 10 fields instead of 33.
-- **Client resilience:** manual EventSource reopen with backoff (EventSource gives up on proxy 502s and 429s), a 45 s silence watchdog, and error boundaries per view and per desk widget.
+- **Client resilience:** manual EventSource reopen with backoff (EventSource gives up on proxy 502s and 429s), a 45 s silence watchdog, and error boundaries per view and per desk widget. The stream closes on `pagehide` and reopens on a back/forward-cache restore; otherwise each page left for another URL keeps its stream open in the cache, and six full page loads exhaust the browser's per-host HTTP/1.1 connections.
 - **Container:** non-root, read-only root filesystem, no capabilities, `no-new-privileges`, memory/PID limits, port bound to localhost; the public profile puts Caddy (automatic HTTPS) in front.
 - **No user data on the server:** custom maps live in each browser's localStorage only.
 
@@ -96,16 +98,20 @@ The simulation runs in its **own `ElectionStore` + `MeasureStore` pair**. They'r
 
 ```
 web/src
-├── main.tsx              routes + global shortcuts (1-4 views, F fullscreen)
-├── store/election.ts     SSE client → Zustand (snapshot + deltas)
-├── lib/colors.ts         validated party palette, rating ramps, map fill modes
-├── map/                  geo (us-atlas → SVG paths), USMap, Legend
-├── components/           TopBar, BalanceOfPower, RaceCard, FloatingCard, KeyRaces,
-│                         NewsFeed, PollClosings, RecentCalls, SourcesPanel
-└── views/                Dashboard, MapView
+├── main.tsx              routes + global shortcuts (1-9 and 0 views, F fullscreen)
+├── store/election.ts     SSE client → Zustand (snapshot + deltas), admin/sim actions
+├── lib/                  colors (validated palette, fill modes), projection (BoP per map mode),
+│                         odds, history (past results, 2024 baselines), swing (swing math),
+│                         prefs, watchlist, customMap, sound, format
+├── map/                  geo (us-atlas → SVG paths), counties (us-atlas + CT/AK extra units)
+├── components/           TopBar, BalanceOfPower, RaceCard, PrevResults, FloatingCard, NewsFeed,
+│   │                     KeyRaces, PollClosings, RecentCalls, SourcesPanel, Watch, Kiosk, …
+│   └── chamber/          desk widgets: Hemicycle, SeatLadder, RaceTable, TileMap, …
+└── views/                Dashboard, MyRacesView, ChamberView, MapView, BallotView, SwingView, RaceView
+shared/src                types, states, ratings, issues (election-day trouble matcher), history.json
 ```
 
-Map fill modes: **Results** (called = solid, leading = hatched, shaded by margin), **Polymarket** (implied probability bands), **FLIPR** (rating, Cook fallback), **Current** (party holding the seat before the election; governors not up shown muted), **My map**. The balance-of-power tracker follows the mode (`lib/projection.ts`): live count under Results; under Polymarket/FLIPR, solid/likely seats count as won, lean/tilt as leaning, and toss-ups as uncalled; under Current, it shows the seats each party held. Hover shows a race card; click pins/unpins it (Esc unpins). Small northeastern states get callout boxes.
+Map fill modes: **Results** (called = solid, leading = hatched, shaded by margin), **Polymarket** (implied probability bands), **FLIPR** (rating, Cook fallback), **Current** (party holding the seat before the election; governors not up shown muted), **My map**. The balance-of-power tracker follows the mode (`lib/projection.ts`): under Results the big numbers are seats secured (called + not up) and the small line is the expected total (secured + currently leading); under Polymarket/FLIPR, solid/likely seats count as won, lean/tilt as leaning, and toss-ups as uncalled; under Current, it shows the seats each party held. Hover shows a race card; click pins/unpins it (Esc unpins). Small northeastern states get callout boxes.
 
 ## House map
 
@@ -125,11 +131,23 @@ A small Zustand store holds `raceId → rating code` per office, saved in `local
 
 ## Drill-downs, alerts, kiosk, watchlist
 
-- **County data**: NYT publishes `sen-county-data` and `gov-county-data` feeds (URLs discovered from the results files' page config). The House results file already carries each district's county parts. A separate `CountyStore` keeps these out of the main snapshot, and `/api/races/:id/counties` serves one race at a time; admins viewing the simulation get synthesized counties (statewide progress plus each county's 2024 lean). County shapes come from us-atlas `counties-albers-10m`, lazy-loaded as its own chunk. Alaska reports by state-house district (table only).
+- **County data**: NYT publishes `sen-county-data` and `gov-county-data` feeds (URLs discovered from the results files' page config). The House results file already carries each district's county parts. A separate `CountyStore` keeps these out of the main snapshot, and `/api/races/:id/counties` serves one race at a time; admins viewing the simulation get synthesized counties (statewide progress plus each county's 2024 lean). County shapes come from us-atlas `counties-albers-10m`, lazy-loaded as its own chunk, plus `extra-units.json` for Connecticut's planning regions (FIPS 091x0) and Alaska's state house districts (key `02HD001`…); a state's map uses whichever set its units belong to. House files also list city, "rest of county" and ward units (Chicago, Detroit, Kansas City, Hartford, Bridgeport, Waterbury) that are subsets of counties also listed; those are dropped so votes aren't counted twice, while units with no county code ("Overseas absentee") stay.
 - **Breaking alerts** are detected client-side from live patches only (never snapshots, so reconnects don't replay). Triggers: a newly called race that is key (forecast/market-competitive), flipped, or starred, plus a chamber's `controlWinner` appearing. The chime is synthesized with Web Audio after a user gesture unlocks audio.
 - **Kiosk**: per-window (sessionStorage) rotation through chosen routes after 60 s idle, paused while a banner is up.
 - **Watchlist**: localStorage ids; any element with `data-race-id` opens the drill-down via one delegated click handler.
 
-## Next ideas
+## Past results & swing
 
-- Race tables / sortable full-screen lists, BoP timeline chart (history is already recorded), county-level drill-down (NYT per-state files), House key-race list on the dashboard.
+`shared/src/history.json` is generated once by `scripts/build-history.mjs` and committed; nothing is fetched at runtime.
+
+- **Previous result per seat.** House: the 2024 House race. Governor: the most recent governor's race (2022, or 2024 for NH and VT). Senate: matched by **seat class**, never by state alone. CNN types its contests `SG` (that year's regular class: 2 in 2020, 3 in 2022, 1 in 2024), `SW` (its runoff), `SP` (a same-class lame-duck special, skipped) and `S2G`/`S2W` (the state's other seat). So Georgia's class-2 seat uses the Jan 2021 runoff, Oklahoma's the 2022 special, Nebraska's the 2024 special (not the 2024 regular for the other seat), and the Ohio and Florida specials use 2022.
+- **Margins** are D minus R over CNN's `totalVote` (its candidate lists omit minor candidates). Contests that weren't D vs R (same-party top-two, unopposed) are labeled and never used as a baseline.
+- **Redrawn districts** are found by comparing each district's land area in TIGER cd119 (2024) and cd120 (2026): 142 changed, in AL, CA, FL, LA, MO, NC, OH, TN, TX and UT. Their 2024 House result is shown as "old lines" and not compared.
+- **2024 presidential margin within today's boundaries** comes from NYT's comparison data in the 2026 results files (Missouri's new map isn't covered yet).
+- **Midterm history** (1994–2022): seat changes and House vote shares from Wikipedia election infoboxes; each midterm's swing is measured against the House vote two years earlier.
+
+The Swing view (`lib/swing.ts`) shows raw national totals, but leads with **like-for-like** shifts: each race against its own baseline, vote-weighted, once ≥50% is counted, so partial counts don't bias it. Its scatter, state map and table each switch between House, Senate and Governor. Seat change is **net flips** (seats won or led that another party held, minus the reverse), so races not yet reporting count for nobody.
+
+## Election-day issues
+
+`shared/src/issues.ts` is one matcher for election-administration trouble: lawsuits and court orders, extended hours, machine, scanner and poll-book failures, ballot shortages, long lines, closures and evacuations, threats, intimidation, misinformation, recounts. The server uses it to keep only matching stories from a dedicated Google News search; the client uses it for the live feed's **Voting issues** filter and ISSUE tag. Ordinary closing-time stories ("when each polling site closes") don't match.

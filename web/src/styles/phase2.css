@@ -430,3 +430,18 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* ---- election-day trouble stories (lawsuits, extended hours, machine failures...) */
+.news-item.issue {
+  background: #1a130d;
+  border-left-color: #e8833a;
+}
+.kind.kind-issue {
+  background: #e8833a;
+  color: #0b0e14;
+}
+.chip.chip-issues.on {
+  background: #e8833a;
+  border-color: #e8833a;
+  color: #0b0e14;
+}

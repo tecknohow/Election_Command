@@ -1221,6 +1221,67 @@ a.news-title:hover {
   color: var(--muted);
   font-weight: 600;
 }
+.prev-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.5rem;
+}
+.prev-strip > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+.prev-strip label {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.prev-strip small {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rc-hist-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.5rem;
+}
+.rc-hist-row .prev-strip {
+  flex: 1;
+  min-width: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+.rc-hist-row .rc-details {
+  flex: none;
+  max-width: 9.5rem;
+  white-space: normal;
+  line-height: 1.2;
+  text-align: center;
+  font-size: 0.8rem;
+}
+.prev-strip.compact {
+  border-top: 0;
+  padding-top: 0;
+  gap: 0.4rem;
+}
+.prev-strip.compact > div {
+  font-size: 0.78rem;
+}
 .rc-source {
   font-size: 0.7rem;
   color: var(--muted);
@@ -1381,4 +1442,10 @@ a.news-title:hover {
   .views .view-tab kbd {
     display: none;
   }
+}
+.sim-banner button + button {
+  margin-left: 0.4rem;
+}
+.sim-paused {
+  letter-spacing: 0.08em;
 }

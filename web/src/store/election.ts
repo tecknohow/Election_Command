@@ -183,6 +183,21 @@ export function connectStream() {
     }
   }, 10_000);
   void refreshAdmin();
+  // Leaving the page for another URL can park it in the back/forward cache with its stream still
+  // open. Browsers allow ~6 connections per host over HTTP/1.1, so six full page loads (bookmarks,
+  // typed URLs) would exhaust them and hang the next page. Close on pagehide; reopen (with a fresh
+  // snapshot) if the page is restored from the cache.
+  window.addEventListener('pagehide', () => {
+    source?.close();
+    if (reopenTimer) clearTimeout(reopenTimer);
+    reopenTimer = null;
+  });
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      useElection.getState().setConnected(false);
+      open();
+    }
+  });
 }
 
 /** Admin: switch this window between the live feed and the private simulation. */
@@ -247,6 +262,11 @@ export async function adminLogout() {
   }
   useAdmin.setState({ admin: false });
   open();
+}
+
+/** Admin: freeze or resume simulated time. */
+export async function simPause(paused: boolean) {
+  return api('/api/admin/sim/pause', { paused });
 }
 
 export async function simAction(action: 'start' | 'stop' | 'speed', speed?: number) {

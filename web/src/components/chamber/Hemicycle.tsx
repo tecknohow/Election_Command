@@ -56,7 +56,14 @@ export function Hemicycle({ chamber, races, onHover }: { chamber: ChamberSummary
         <span className="muted small">safest D (left) → safest R (right) · 218 for majority</span>
       </div>
       <div className="hemi-body">
-        <svg viewBox="-1.05 -1.05 2.1 1.18" preserveAspectRatio="xMidYMid meet" role="img" aria-label="House seats">
+        <div className="hemi-side d">
+          <b className="hemi-num" style={{ color: PARTY_COLOR.D }} title="Seats secured (called)">
+            {dWon}
+          </b>
+          <span className="hemi-sub">{dWon + dLead} expected</span>
+          <span className="hemi-sub">leading {dLead}</span>
+        </div>
+        <svg viewBox="-1.05 -1.05 2.1 1.1" preserveAspectRatio="xMidYMid meet" role="img" aria-label="House seats">
           {seats.map((s, i) => {
             const r = ordered[i];
             if (!r) return null;
@@ -79,16 +86,14 @@ export function Hemicycle({ chamber, races, onHover }: { chamber: ChamberSummary
             );
           })}
           <line x1={0} y1={-1.03} x2={0} y2={-0.33} className="hemi-mid" />
-          <text x={-0.12} y={-0.12} textAnchor="end" className="hemi-num" fill={PARTY_COLOR.D}>
-            {dWon + dLead}
-          </text>
-          <text x={0.12} y={-0.12} textAnchor="start" className="hemi-num" fill={PARTY_COLOR.R}>
-            {rWon + rLead}
-          </text>
-          <text x={0} y={0.07} textAnchor="middle" className="hemi-sub">
-            won {dWon} · lead {dLead} | won {rWon} · lead {rLead}
-          </text>
         </svg>
+        <div className="hemi-side r">
+          <b className="hemi-num" style={{ color: PARTY_COLOR.R }} title="Seats secured (called)">
+            {rWon}
+          </b>
+          <span className="hemi-sub">{rWon + rLead} expected</span>
+          <span className="hemi-sub">leading {rLead}</span>
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import type { BallotMeasure, MeasureChoice, MeasureType, NewsItem } from '../../../shared/src/types.js';
 import { STATE_BY_POSTAL } from '../../../shared/src/states.js';
-import { config } from '../config.js';
+import { config, staleAfterFor } from '../config.js';
 import { logger } from '../lib/log.js';
 import { store, type ElectionStore } from './store.js';
 
@@ -188,7 +188,7 @@ export class MeasureStore {
     const cnn = this.inputs.get('cnn');
     const sim = includeSim && this.store.mode === 'simulation' ? this.inputs.get('sim') : undefined;
     const out = new Map<string, MeasureInput>();
-    const nytFresh = !!nyt && Date.now() - nyt.fetchedAt < config.staleAfterMs;
+    const nytFresh = !!nyt && Date.now() - nyt.fetchedAt < staleAfterFor(config.intervals.nytMeasures);
 
     // Map CNN items onto NYT keys (number token first, then text similarity within the state).
     const cnnByKey = new Map(cnn?.items ?? []);
@@ -250,6 +250,20 @@ export class MeasureStore {
       if (matched.has(p.key) || used.has(p.cat)) continue;
       matched.set(p.key, p.cat);
       used.add(p.cat);
+    }
+    // Feeds and the catalog can word the same measure with no overlap ("K-12 Funding" vs "TABOR
+    // Revenue Cap Increase for K-12 Education Measure"). If a state has exactly one unmatched
+    // measure on each side, they are the same measure.
+    for (const st of new Set(inputs.map((m) => m.state))) {
+      const liveLeft = inputs.filter((m) => m.state === st && !matched.has(m.key));
+      const catLeft = this.catalog.filter((c) => c.state === st && !used.has(c));
+      if (liveLeft.length !== 1 || catLeft.length !== 1) continue;
+      const [m, c] = [liveLeft[0], catLeft[0]];
+      const tok = codeToken(m.code);
+      const ctok = codeToken(c.code);
+      if (tok && ctok && tok !== ctok) continue; // both numbered, and differently: not the same
+      matched.set(m.key, c);
+      used.add(c);
     }
     return matched;
   }

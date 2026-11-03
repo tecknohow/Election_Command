@@ -93,10 +93,17 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
                 </td>
               </tr>
               <tr>
+                <td>Previous results &amp; swing baselines</td>
+                <td>
+                  Past Senate, governor, House and presidential results from <A href="https://www.cnn.com/election">CNN</A>'s results files (2020–2024); 2024 presidential margins inside
+                  each 2026 district from The New York Times / AP; midterm history from Wikipedia election infoboxes (<A href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</A>).
+                </td>
+              </tr>
+              <tr>
                 <td>Congressional district boundaries</td>
                 <td>
                   U.S. Census Bureau, <A href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html">TIGER/Line 2026</A> (public domain), simplified
-                  for display
+                  for display; 2024 vs 2026 lines compared to flag redrawn districts. Connecticut planning regions and Alaska state house districts from Census cartographic boundary files.
                 </td>
               </tr>
               <tr>

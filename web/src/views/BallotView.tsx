@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router';
 import type { BallotMeasure } from '../../../shared/src/types';
 import { FloatingCard } from '../components/FloatingCard';
@@ -158,7 +158,7 @@ export function BallotView() {
   const measures = useElection((s) => s.measures);
   const flashed = useElection((s) => s.flashed);
   const [params, setParams] = useSearchParams();
-  const type = (params.get('type') as TypeFilter) || 'amend';
+  const type: TypeFilter = params.get('type') === 'amend' ? 'amend' : 'all';
   const status = (params.get('status') as StatusFilter) || 'all';
   const sort = (params.get('sort') as SortKey) || 'state';
   const topic = params.get('topic');
@@ -213,6 +213,20 @@ export function BallotView() {
     for (const m of typed) if (!topic || m.topics.includes(topic)) c[m.state] = (c[m.state] ?? 0) + 1;
     return c;
   }, [typed, topic]);
+
+  // A selected state (or topic) that the current view no longer offers can't be clicked off the
+  // map / chip row, so drop it. Waits for measures to load so a deep-linked ?state= survives.
+  useEffect(() => {
+    if (!all.length) return;
+    const topicGone = !!topic && !topics.some(([t]) => t === topic);
+    const effTopic = topicGone ? null : topic;
+    const stateGone = !!stateSel && !typed.some((m) => m.state === stateSel && (!effTopic || m.topics.includes(effTopic)));
+    if (!topicGone && !stateGone) return;
+    const p = new URLSearchParams(window.location.search);
+    if (topicGone) p.delete('topic');
+    if (stateGone) p.delete('state');
+    setParams(p, { replace: true });
+  }, [all.length, typed, topics, topic, stateSel, setParams]);
 
   const summary = useMemo(
     () => ({
@@ -276,11 +290,11 @@ export function BallotView() {
         </div>
         <div className="bv-filters">
           <div className="seg-control">
-            <button className={type === 'amend' ? 'on' : ''} onClick={() => setParam('type', null)}>
-              Constitutional amendments
-            </button>
-            <button className={type === 'all' ? 'on' : ''} onClick={() => setParam('type', 'all')}>
+            <button className={type === 'all' ? 'on' : ''} onClick={() => setParam('type', null)}>
               All measures
+            </button>
+            <button className={type === 'amend' ? 'on' : ''} onClick={() => setParam('type', 'amend')}>
+              Constitutional amendments
             </button>
           </div>
           <div className="seg-control">

@@ -19,7 +19,7 @@ import type {
   StreamEvent,
 } from '../../../shared/src/types.js';
 import { OFFICE_LABEL, STATE_BY_POSTAL } from '../../../shared/src/states.js';
-import { config } from '../config.js';
+import { config, staleAfterFor } from '../config.js';
 import { allPollerStatus } from '../lib/poller.js';
 import { logger } from '../lib/log.js';
 import {
@@ -48,6 +48,12 @@ type ProviderId = ProviderBatch['provider'];
  * derives per-race state + chamber summaries, generates alert events, and emits StreamEvents
  * which the SSE hub fans out to every connected browser window.
  */
+/** First occurrence of each id wins (repairs state saved before batch de-duplication). */
+function uniqueById<T extends { id: string }>(items: T[]): T[] {
+  const seen = new Set<string>();
+  return items.filter((x) => !seen.has(x.id) && (seen.add(x.id), true));
+}
+
 export class ElectionStore extends EventEmitter {
   version = 0;
   /** provider -> office -> { fetchedAt, races } */
@@ -167,7 +173,9 @@ export class ElectionStore extends EventEmitter {
 
   addNews(items: NewsItem[]) {
     const seen = new Set(this.news.map((n) => n.id));
-    const fresh = items.filter((n) => !seen.has(n.id));
+    // De-duplicate within the batch too: the same story often arrives from its publisher's feed
+    // and from Google News in one poll, with the same headline-derived id.
+    const fresh = items.filter((n) => !seen.has(n.id) && (seen.add(n.id), true));
     if (!fresh.length) return;
     this.news = [...fresh, ...this.news]
       .sort((a, b) => Date.parse(b.published) - Date.parse(a.published))
@@ -226,7 +234,7 @@ export class ElectionStore extends EventEmitter {
       const cnn = this.batch('cnn', office);
       const sim = this.mode === 'simulation' ? this.batch('sim', office) : undefined;
       const ids = new Set<string>([...(nyt?.races.keys() ?? []), ...(cnn?.races.keys() ?? [])]);
-      const nytFresh = nyt && now - nyt.fetchedAt < config.staleAfterMs;
+      const nytFresh = nyt && now - nyt.fetchedAt < staleAfterFor(office === 'H' ? config.intervals.nytHouse : config.intervals.nyt, now);
       const useCnnVotes = !!cnn && (!nytFresh || !nyt) && (!nyt || cnn.fetchedAt > nyt.fetchedAt);
 
       for (const id of ids) {
@@ -642,7 +650,7 @@ export class ElectionStore extends EventEmitter {
     this.chamberMarkets = p.chamberMarkets ?? {};
     this.pollClosingMap = new Map(Object.entries(p.pollClosings ?? {}));
     if (p.houseBefore) this.houseBefore = p.houseBefore;
-    this.news = p.news ?? [];
+    this.news = uniqueById(p.news ?? []);
     this.bopHistory = p.bopHistory ?? [];
     this.announcedCalls = new Set(p.announcedCalls ?? []);
     this.announcedClosings = new Set(p.announcedClosings ?? []);

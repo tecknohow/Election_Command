@@ -1,17 +1,20 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router';
 import { fmtEt, fmtEtClock } from '../lib/format';
-import { useAdmin, useElection, useNow } from '../store/election';
+import { simPause, useAdmin, useElection, useNow } from '../store/election';
 import { usePrefs } from '../lib/prefs';
 import { useAudioState } from '../lib/sound';
 import { KioskChip } from './Kiosk';
 import { SettingsMenu } from './SettingsMenu';
 import { SourcesPanel } from './SourcesPanel';
 
-type Group = 'Overview' | 'Desks' | 'Maps' | 'Measures';
+type Group = 'Overview' | 'Desks' | 'Maps' | 'Measures' | 'Analysis';
 
-/** Number keys follow the order the views appear in the nav. */
-export const VIEWS: { path: string; label: string; key: string; group: Group; soon?: boolean }[] = [
+/**
+ * Number keys follow the order the views appear in the nav. The tenth view is on `0` (and on
+ * typing `1` then `0`); `badge` is what the nav shows.
+ */
+export const VIEWS: { path: string; label: string; key: string; badge?: string; group: Group; soon?: boolean }[] = [
   { path: '/', label: 'Overview', key: '1', group: 'Overview' },
   { path: '/mine', label: '★ My Races', key: '2', group: 'Overview' },
   { path: '/senate', label: 'Senate', key: '3', group: 'Desks' },
@@ -21,6 +24,7 @@ export const VIEWS: { path: string; label: string; key: string; group: Group; so
   { path: '/map/governor', label: 'Governor', key: '7', group: 'Maps' },
   { path: '/map/house', label: 'House', key: '8', group: 'Maps' },
   { path: '/ballot', label: 'Ballot Measures', key: '9', group: 'Measures' },
+  { path: '/swing', label: 'Swing', key: '0', badge: '10', group: 'Analysis' },
 ];
 
 export function toggleFullscreen() {
@@ -61,8 +65,13 @@ export function TopBar() {
               <span key={v.path} className="nav-item">
                 {newGroup && i > 0 ? <span className="nav-sep" /> : null}
                 {newGroup && (v.group === 'Desks' || v.group === 'Maps') ? <span className="nav-group-label">{v.group}</span> : null}
-                <NavLink to={v.path} end={v.path === '/'} className={({ isActive }) => `view-tab ${isActive ? 'active' : ''} ${v.soon ? 'soon' : ''}`}>
-                  <kbd>{v.key}</kbd>
+                <NavLink
+                  to={v.path}
+                  end={v.path === '/'}
+                  title={v.badge ? `Press ${v.key} (or 1 then ${v.key})` : `Press ${v.key}`}
+                  className={({ isActive }) => `view-tab ${isActive ? 'active' : ''} ${v.soon ? 'soon' : ''}`}
+                >
+                  <kbd>{v.badge ?? v.key}</kbd>
                   {v.label}
                   {v.soon ? <span className="soon-tag">soon</span> : null}
                 </NavLink>
@@ -101,7 +110,12 @@ export function TopBar() {
       </header>
       {mode === 'simulation' && sim ? (
         <div className="sim-banner">
-          SIMULATION MODE — synthetic results for testing only · simulated time <b>{fmtEt(sim.simTime)} ET</b> · {sim.speed}× speed
+          SIMULATION MODE — synthetic results for testing only · simulated time <b>{fmtEt(sim.simTime)} ET</b> · {sim.paused ? <b className="sim-paused">PAUSED</b> : `${sim.speed}× speed`}
+          {admin ? (
+            <button onClick={() => void simPause(!sim.paused).catch(() => undefined)} title={sim.paused ? 'Resume the simulation' : 'Pause the simulation (freezes simulated time)'}>
+              {sim.paused ? '▶ Resume' : '❚❚ Pause'}
+            </button>
+          ) : null}
           {admin ? <button onClick={() => setPanel(true)}>Controls</button> : null}
         </div>
       ) : null}

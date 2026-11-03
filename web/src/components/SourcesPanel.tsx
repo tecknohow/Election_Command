@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { relTime } from '../lib/format';
-import { adminLogout, setSimView, simAction, useAdmin, useElection, useNow, wantsSimView } from '../store/election';
+import { adminLogout, setSimView, simAction, simPause, useAdmin, useElection, useNow, wantsSimView } from '../store/election';
 
 const SPEEDS = [10, 30, 60, 120, 300];
 
@@ -12,11 +12,12 @@ function SimulatorControls() {
   const [busy, setBusy] = useState(false);
   const viewing = wantsSimView();
 
-  const run = async (a: 'start' | 'stop' | 'speed', s?: number) => {
+  const run = async (a: 'start' | 'stop' | 'speed' | 'pause' | 'resume', s?: number) => {
     setBusy(true);
     setErr(null);
     try {
-      await simAction(a, s);
+      if (a === 'pause' || a === 'resume') await simPause(a === 'pause');
+      else await simAction(a, s);
     } catch (e) {
       setErr((e as Error).message);
     } finally {
@@ -44,6 +45,9 @@ function SimulatorControls() {
         </label>
         {sim.running ? (
           <>
+            <button className={sim.paused ? 'primary' : ''} disabled={busy} onClick={() => run(sim.paused ? 'resume' : 'pause')}>
+              {sim.paused ? '▶ Resume' : '❚❚ Pause'}
+            </button>
             <button disabled={busy} onClick={() => run('speed', speed)}>
               Apply speed
             </button>

@@ -21,7 +21,7 @@ interface Client {
   close: () => void;
 }
 
-const PUBLIC_SIM: SimStatus = { enabled: false, allowed: false, running: false, speed: 0, simTime: null };
+const PUBLIC_SIM: SimStatus = { enabled: false, allowed: false, running: false, paused: false, speed: 0, simTime: null };
 
 export function simStatus(admin: boolean): SimStatus {
   if (!admin) return PUBLIC_SIM;
@@ -30,6 +30,7 @@ export function simStatus(admin: boolean): SimStatus {
     enabled: allowed,
     allowed,
     running: simulator.running,
+    paused: simulator.running && simulator.paused,
     speed: simulator.speed,
     simTime: simulator.running ? new Date(simulator.now()).toISOString() : null,
   };

@@ -132,9 +132,12 @@ export class Simulator extends EventEmitter {
   private simStart = SIM_START;
   speed = config.sim.speed;
   running = false;
+  /** Paused: simulated time is frozen at simStart and no ticks run. */
+  paused = false;
   private ticks = 0;
 
   now(): number {
+    if (this.paused) return this.simStart;
     return this.simStart + (Date.now() - this.realStart) * this.speed;
   }
 
@@ -142,6 +145,7 @@ export class Simulator extends EventEmitter {
     const inputs = store.liveInputs();
     if (!inputs.length) throw new Error('No race definitions loaded yet — wait for NYT/CNN to load.');
     this.stopTimer();
+    this.paused = false;
     this.speed = clamp(speed, 1, 600);
     this.realStart = Date.now();
     this.simStart = SIM_START;
@@ -215,6 +219,7 @@ export class Simulator extends EventEmitter {
 
   stop() {
     this.stopTimer();
+    this.paused = false;
     if (!this.running) return;
     this.running = false;
     this.simStore?.removeAllListeners();
@@ -225,7 +230,7 @@ export class Simulator extends EventEmitter {
   }
 
   setSpeed(speed: number) {
-    // Re-anchor so sim time stays continuous when the speed changes.
+    // Re-anchor so sim time stays continuous when the speed changes (a no-op while paused).
     const now = this.now();
     this.simStart = now;
     this.realStart = Date.now();
@@ -234,6 +239,24 @@ export class Simulator extends EventEmitter {
       this.simStore.sim.speed = this.speed;
       this.simStore.broadcastMeta();
     }
+  }
+
+  /** Freeze or resume simulated time. Resuming continues from the exact moment it was paused. */
+  setPaused(paused: boolean) {
+    if (!this.running || paused === this.paused) return;
+    if (paused) {
+      this.simStart = this.now();
+      this.paused = true;
+      this.stopTimer();
+      log.info(`paused at ${new Date(this.simStart).toISOString()}`);
+    } else {
+      this.realStart = Date.now();
+      this.paused = false;
+      this.timer = setInterval(() => this.tick(), TICK_MS);
+      this.tick();
+      log.info('resumed');
+    }
+    this.simStore?.broadcastMeta();
   }
 
   private stopTimer() {
@@ -370,7 +393,7 @@ export class Simulator extends EventEmitter {
   }
 
   status() {
-    return { running: this.running, speed: this.speed, simTime: this.running ? new Date(this.now()).toISOString() : null };
+    return { running: this.running, paused: this.paused, speed: this.speed, simTime: this.running ? new Date(this.now()).toISOString() : null };
   }
 }
 

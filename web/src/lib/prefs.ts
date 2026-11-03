@@ -11,6 +11,7 @@ export const KIOSK_VIEWS: { path: string; label: string }[] = [
   { path: '/map/governor', label: 'Governor map' },
   { path: '/map/house', label: 'House map' },
   { path: '/ballot', label: 'Ballot measures' },
+  { path: '/swing', label: 'Swing' },
 ];
 
 export interface Prefs {

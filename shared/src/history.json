@@ -1,0 +1,10011 @@
+{
+ "generated": "2026-11-03",
+ "sources": {
+  "results": "CNN results API (politics.api.cnn.io), 2020-2024 national race files",
+  "lines": "US Census Bureau TIGER/Line, congressional districts cd119 (2024) vs cd120 (2026)",
+  "midterms": "Wikipedia election infoboxes, 1994-2022 (CC BY-SA 4.0)"
+ },
+ "senate": {
+  "AK-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -12.7,
+   "kind": "DR",
+   "d": {
+    "name": "Al Gross",
+    "pct": 41.2
+   },
+   "r": {
+    "name": "Dan Sullivan",
+    "pct": 53.9
+   },
+   "winner": {
+    "name": "Dan Sullivan",
+    "party": "R"
+   },
+   "total": 354587,
+   "cnnKey": "2020-SG-AK"
+  },
+  "AL-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -20.36,
+   "kind": "DR",
+   "d": {
+    "name": "Doug Jones",
+    "pct": 39.7
+   },
+   "r": {
+    "name": "Tommy Tuberville",
+    "pct": 60.1
+   },
+   "winner": {
+    "name": "Tommy Tuberville",
+    "party": "R"
+   },
+   "total": 2316445,
+   "cnnKey": "2020-SG-AL"
+  },
+  "AR-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": null,
+   "kind": "R-noD",
+   "d": null,
+   "r": {
+    "name": "Tom Cotton",
+    "pct": 66.5
+   },
+   "winner": {
+    "name": "Tom Cotton",
+    "party": "R"
+   },
+   "total": 1193261,
+   "cnnKey": "2020-SG-AR"
+  },
+  "CO-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": 9.32,
+   "kind": "DR",
+   "d": {
+    "name": "John Hickenlooper",
+    "pct": 53.5
+   },
+   "r": {
+    "name": "Cory Gardner",
+    "pct": 44.2
+   },
+   "winner": {
+    "name": "John Hickenlooper",
+    "party": "D"
+   },
+   "total": 3235790,
+   "cnnKey": "2020-SG-CO"
+  },
+  "DE-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": 21.54,
+   "kind": "DR",
+   "d": {
+    "name": "Christopher Coons",
+    "pct": 59.4
+   },
+   "r": {
+    "name": "Lauren Witzke",
+    "pct": 37.9
+   },
+   "winner": {
+    "name": "Christopher Coons",
+    "party": "D"
+   },
+   "total": 490935,
+   "cnnKey": "2020-SG-DE"
+  },
+  "FL-S": {
+   "year": 2022,
+   "seatClass": 3,
+   "label": "2022",
+   "margin": -16.41,
+   "kind": "DR",
+   "d": {
+    "name": "Val Demings",
+    "pct": 41.3
+   },
+   "r": {
+    "name": "Marco Rubio",
+    "pct": 57.7
+   },
+   "winner": {
+    "name": "Marco Rubio",
+    "party": "R"
+   },
+   "total": 7758014,
+   "cnnKey": "2022-SG-FL"
+  },
+  "GA-S": {
+   "year": 2021,
+   "seatClass": 2,
+   "label": "2021 runoff",
+   "margin": 1.23,
+   "kind": "DR",
+   "d": {
+    "name": "Jon Ossoff",
+    "pct": 50.6
+   },
+   "r": {
+    "name": "David Perdue",
+    "pct": 49.4
+   },
+   "winner": {
+    "name": "Jon Ossoff",
+    "party": "D"
+   },
+   "total": 4484902,
+   "cnnKey": "2020-SW-GA"
+  },
+  "IA-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -6.59,
+   "kind": "DR",
+   "d": {
+    "name": "Theresa Greenfield",
+    "pct": 45.2
+   },
+   "r": {
+    "name": "Joni Ernst",
+    "pct": 51.8
+   },
+   "winner": {
+    "name": "Joni Ernst",
+    "party": "R"
+   },
+   "total": 1670617,
+   "cnnKey": "2020-SG-IA"
+  },
+  "ID-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -29.38,
+   "kind": "DR",
+   "d": {
+    "name": "Paulette Jordan",
+    "pct": 33.2
+   },
+   "r": {
+    "name": "Jim Risch",
+    "pct": 62.6
+   },
+   "winner": {
+    "name": "Jim Risch",
+    "party": "R"
+   },
+   "total": 859827,
+   "cnnKey": "2020-SG-ID"
+  },
+  "IL-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": 16.07,
+   "kind": "DR",
+   "d": {
+    "name": "Dick Durbin",
+    "pct": 54.9
+   },
+   "r": {
+    "name": "Mark Curran",
+    "pct": 38.9
+   },
+   "winner": {
+    "name": "Dick Durbin",
+    "party": "D"
+   },
+   "total": 5968901,
+   "cnnKey": "2020-SG-IL"
+  },
+  "KS-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -11.44,
+   "kind": "DR",
+   "d": {
+    "name": "Barbara Bollier",
+    "pct": 41.8
+   },
+   "r": {
+    "name": "Roger Marshall",
+    "pct": 53.2
+   },
+   "winner": {
+    "name": "Roger Marshall",
+    "party": "R"
+   },
+   "total": 1367755,
+   "cnnKey": "2020-SG-KS"
+  },
+  "KY-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -19.53,
+   "kind": "DR",
+   "d": {
+    "name": "Amy McGrath",
+    "pct": 38.2
+   },
+   "r": {
+    "name": "Mitch McConnell",
+    "pct": 57.8
+   },
+   "winner": {
+    "name": "Mitch McConnell",
+    "party": "R"
+   },
+   "total": 2135057,
+   "cnnKey": "2020-SG-KY"
+  },
+  "LA-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -40.3,
+   "kind": "DR",
+   "d": {
+    "name": "Adrian Perkins",
+    "pct": 19
+   },
+   "r": {
+    "name": "Bill Cassidy",
+    "pct": 59.3
+   },
+   "winner": {
+    "name": "Bill Cassidy",
+    "party": "R"
+   },
+   "total": 2071543,
+   "cnnKey": "2020-SG-LA"
+  },
+  "MA-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": 33.11,
+   "kind": "DR",
+   "d": {
+    "name": "Ed Markey",
+    "pct": 66.2
+   },
+   "r": {
+    "name": "Kevin O'Connor",
+    "pct": 33
+   },
+   "winner": {
+    "name": "Ed Markey",
+    "party": "D"
+   },
+   "total": 3564136,
+   "cnnKey": "2020-SG-MA"
+  },
+  "ME-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -8.6,
+   "kind": "DR",
+   "d": {
+    "name": "Sara Gideon",
+    "pct": 42.4
+   },
+   "r": {
+    "name": "Susan Collins",
+    "pct": 51
+   },
+   "winner": {
+    "name": "Susan Collins",
+    "party": "R"
+   },
+   "total": 819183,
+   "cnnKey": "2020-SG-ME"
+  },
+  "MI-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": 1.69,
+   "kind": "DR",
+   "d": {
+    "name": "Gary Peters",
+    "pct": 49.9
+   },
+   "r": {
+    "name": "John James",
+    "pct": 48.2
+   },
+   "winner": {
+    "name": "Gary Peters",
+    "party": "D"
+   },
+   "total": 5479708,
+   "cnnKey": "2020-SG-MI"
+  },
+  "MN-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": 5.24,
+   "kind": "DR",
+   "d": {
+    "name": "Tina Smith",
+    "pct": 48.8
+   },
+   "r": {
+    "name": "Jason Lewis",
+    "pct": 43.5
+   },
+   "winner": {
+    "name": "Tina Smith",
+    "party": "D"
+   },
+   "total": 3211995,
+   "cnnKey": "2020-SG-MN"
+  },
+  "MS-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -9.97,
+   "kind": "DR",
+   "d": {
+    "name": "Mike Espy",
+    "pct": 44.1
+   },
+   "r": {
+    "name": "Cindy Hyde-Smith",
+    "pct": 54.1
+   },
+   "winner": {
+    "name": "Cindy Hyde-Smith",
+    "party": "R"
+   },
+   "total": 1312037,
+   "cnnKey": "2020-SG-MS"
+  },
+  "MT-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -10.02,
+   "kind": "DR",
+   "d": {
+    "name": "Steve Bullock",
+    "pct": 45
+   },
+   "r": {
+    "name": "Steve Daines",
+    "pct": 55
+   },
+   "winner": {
+    "name": "Steve Daines",
+    "party": "R"
+   },
+   "total": 605637,
+   "cnnKey": "2020-SG-MT"
+  },
+  "NC-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -1.75,
+   "kind": "DR",
+   "d": {
+    "name": "Cal Cunningham",
+    "pct": 46.9
+   },
+   "r": {
+    "name": "Thom Tillis",
+    "pct": 48.7
+   },
+   "winner": {
+    "name": "Thom Tillis",
+    "party": "R"
+   },
+   "total": 5474952,
+   "cnnKey": "2020-SG-NC"
+  },
+  "NE-S": {
+   "year": 2024,
+   "seatClass": 2,
+   "label": "2024 special",
+   "margin": -25.16,
+   "kind": "DR",
+   "d": {
+    "name": "Preston Love",
+    "pct": 37.4
+   },
+   "r": {
+    "name": "Pete Ricketts",
+    "pct": 62.6
+   },
+   "winner": {
+    "name": "Pete Ricketts",
+    "party": "R"
+   },
+   "total": 935005,
+   "cnnKey": "2024-S2G-NE"
+  },
+  "NH-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": 15.65,
+   "kind": "DR",
+   "d": {
+    "name": "Jeanne Shaheen",
+    "pct": 56.6
+   },
+   "r": {
+    "name": "Corky Messner",
+    "pct": 41
+   },
+   "winner": {
+    "name": "Jeanne Shaheen",
+    "party": "D"
+   },
+   "total": 795914,
+   "cnnKey": "2020-SG-NH"
+  },
+  "NJ-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": 16.3,
+   "kind": "DR",
+   "d": {
+    "name": "Cory Booker",
+    "pct": 57.2
+   },
+   "r": {
+    "name": "Rik Mehta",
+    "pct": 40.9
+   },
+   "winner": {
+    "name": "Cory Booker",
+    "party": "D"
+   },
+   "total": 4443784,
+   "cnnKey": "2020-SG-NJ"
+  },
+  "NM-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": 6.11,
+   "kind": "DR",
+   "d": {
+    "name": "Ben Ray Lujan",
+    "pct": 51.7
+   },
+   "r": {
+    "name": "Mark Ronchetti",
+    "pct": 45.6
+   },
+   "winner": {
+    "name": "Ben Ray Lujan",
+    "party": "D"
+   },
+   "total": 917237,
+   "cnnKey": "2020-SG-NM"
+  },
+  "OH-S": {
+   "year": 2022,
+   "seatClass": 3,
+   "label": "2022",
+   "margin": -6.11,
+   "kind": "DR",
+   "d": {
+    "name": "Tim Ryan",
+    "pct": 46.9
+   },
+   "r": {
+    "name": "JD Vance",
+    "pct": 53
+   },
+   "winner": {
+    "name": "JD Vance",
+    "party": "R"
+   },
+   "total": 4133342,
+   "cnnKey": "2022-SG-OH"
+  },
+  "OK-S": {
+   "year": 2022,
+   "seatClass": 2,
+   "label": "2022 special",
+   "margin": -26.53,
+   "kind": "DR",
+   "d": {
+    "name": "Kendra Horn",
+    "pct": 35.2
+   },
+   "r": {
+    "name": "Markwayne Mullin",
+    "pct": 61.8
+   },
+   "winner": {
+    "name": "Markwayne Mullin",
+    "party": "R"
+   },
+   "total": 1150481,
+   "cnnKey": "2022-S2G-OK"
+  },
+  "OR-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": 17.59,
+   "kind": "DR",
+   "d": {
+    "name": "Jeff Merkley",
+    "pct": 56.9
+   },
+   "r": {
+    "name": "Jo Rae Perkins",
+    "pct": 39.3
+   },
+   "winner": {
+    "name": "Jeff Merkley",
+    "party": "D"
+   },
+   "total": 2321249,
+   "cnnKey": "2020-SG-OR"
+  },
+  "RI-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": 33.18,
+   "kind": "DR",
+   "d": {
+    "name": "Jack Reed",
+    "pct": 66.6
+   },
+   "r": {
+    "name": "Allen Waters",
+    "pct": 33.4
+   },
+   "winner": {
+    "name": "Jack Reed",
+    "party": "D"
+   },
+   "total": 493429,
+   "cnnKey": "2020-SG-RI"
+  },
+  "SC-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -10.28,
+   "kind": "DR",
+   "d": {
+    "name": "Jaime Harrison",
+    "pct": 44.2
+   },
+   "r": {
+    "name": "Lindsey Graham",
+    "pct": 54.5
+   },
+   "winner": {
+    "name": "Lindsey Graham",
+    "party": "R"
+   },
+   "total": 2512810,
+   "cnnKey": "2020-SG-SC"
+  },
+  "SD-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -31.47,
+   "kind": "DR",
+   "d": {
+    "name": "Dan Ahlers",
+    "pct": 34.3
+   },
+   "r": {
+    "name": "Mike Rounds",
+    "pct": 65.7
+   },
+   "winner": {
+    "name": "Mike Rounds",
+    "party": "R"
+   },
+   "total": 420219,
+   "cnnKey": "2020-SG-SD"
+  },
+  "TN-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -27.04,
+   "kind": "DR",
+   "d": {
+    "name": "Marquita Bradshaw",
+    "pct": 35.2
+   },
+   "r": {
+    "name": "Bill Hagerty",
+    "pct": 62.2
+   },
+   "winner": {
+    "name": "Bill Hagerty",
+    "party": "R"
+   },
+   "total": 2959697,
+   "cnnKey": "2020-SG-TN"
+  },
+  "TX-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -9.64,
+   "kind": "DR",
+   "d": {
+    "name": "Mary Jennings \"MJ\" Hegar",
+    "pct": 43.9
+   },
+   "r": {
+    "name": "John Cornyn",
+    "pct": 53.5
+   },
+   "winner": {
+    "name": "John Cornyn",
+    "party": "R"
+   },
+   "total": 11144040,
+   "cnnKey": "2020-SG-TX"
+  },
+  "VA-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": 12.1,
+   "kind": "DR",
+   "d": {
+    "name": "Mark Warner",
+    "pct": 56
+   },
+   "r": {
+    "name": "Daniel Gade",
+    "pct": 44
+   },
+   "winner": {
+    "name": "Mark Warner",
+    "party": "D"
+   },
+   "total": 4400699,
+   "cnnKey": "2020-SG-VA"
+  },
+  "WV-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -43.28,
+   "kind": "DR",
+   "d": {
+    "name": "Paula Jean Swearengin",
+    "pct": 27
+   },
+   "r": {
+    "name": "Shelley Moore Capito",
+    "pct": 70.3
+   },
+   "winner": {
+    "name": "Shelley Moore Capito",
+    "party": "R"
+   },
+   "total": 778918,
+   "cnnKey": "2020-SG-WV"
+  },
+  "WY-S": {
+   "year": 2020,
+   "seatClass": 2,
+   "label": "2020",
+   "margin": -46.27,
+   "kind": "DR",
+   "d": {
+    "name": "Merav Ben-David",
+    "pct": 26.9
+   },
+   "r": {
+    "name": "Cynthia Lummis",
+    "pct": 73.1
+   },
+   "winner": {
+    "name": "Cynthia Lummis",
+    "party": "R"
+   },
+   "total": 270866,
+   "cnnKey": "2020-SG-WY"
+  }
+ },
+ "governor": {
+  "AK-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -26.08,
+   "kind": "DR",
+   "d": {
+    "name": "Les Gara",
+    "pct": 24.2
+   },
+   "r": {
+    "name": "Mike Dunleavy",
+    "pct": 50.3
+   },
+   "winner": {
+    "name": "Mike Dunleavy",
+    "party": "R"
+   },
+   "total": 263752,
+   "cnnKey": "2022-GG-AK"
+  },
+  "AL-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -37.73,
+   "kind": "DR",
+   "d": {
+    "name": "Yolanda Flowers",
+    "pct": 29.2
+   },
+   "r": {
+    "name": "Kay Ivey",
+    "pct": 66.9
+   },
+   "winner": {
+    "name": "Kay Ivey",
+    "party": "R"
+   },
+   "total": 1415283,
+   "cnnKey": "2022-GG-AL"
+  },
+  "AR-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -27.74,
+   "kind": "DR",
+   "d": {
+    "name": "Chris Jones",
+    "pct": 35.2
+   },
+   "r": {
+    "name": "Sarah Huckabee Sanders",
+    "pct": 62.9
+   },
+   "winner": {
+    "name": "Sarah Huckabee Sanders",
+    "party": "R"
+   },
+   "total": 907785,
+   "cnnKey": "2022-GG-AR"
+  },
+  "AZ-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 0.67,
+   "kind": "DR",
+   "d": {
+    "name": "Katie Hobbs",
+    "pct": 50.3
+   },
+   "r": {
+    "name": "Kari Lake",
+    "pct": 49.6
+   },
+   "winner": {
+    "name": "Katie Hobbs",
+    "party": "D"
+   },
+   "total": 2559694,
+   "cnnKey": "2022-GG-AZ"
+  },
+  "CA-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 18.36,
+   "kind": "DR",
+   "d": {
+    "name": "Gavin Newsom",
+    "pct": 59.2
+   },
+   "r": {
+    "name": "Brian Dahle",
+    "pct": 40.8
+   },
+   "winner": {
+    "name": "Gavin Newsom",
+    "party": "D"
+   },
+   "total": 10933018,
+   "cnnKey": "2022-GG-CA"
+  },
+  "CO-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 19.35,
+   "kind": "DR",
+   "d": {
+    "name": "Jared Polis",
+    "pct": 58.5
+   },
+   "r": {
+    "name": "Heidi Ganahl",
+    "pct": 39.2
+   },
+   "winner": {
+    "name": "Jared Polis",
+    "party": "D"
+   },
+   "total": 2508830,
+   "cnnKey": "2022-GG-CO"
+  },
+  "CT-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 12.92,
+   "kind": "DR",
+   "d": {
+    "name": "Ned Lamont",
+    "pct": 56
+   },
+   "r": {
+    "name": "Bob Stefanowski",
+    "pct": 43
+   },
+   "winner": {
+    "name": "Ned Lamont",
+    "party": "D"
+   },
+   "total": 1268898,
+   "cnnKey": "2022-GG-CT"
+  },
+  "FL-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -19.4,
+   "kind": "DR",
+   "d": {
+    "name": "Charlie Crist",
+    "pct": 40
+   },
+   "r": {
+    "name": "Ron DeSantis",
+    "pct": 59.4
+   },
+   "winner": {
+    "name": "Ron DeSantis",
+    "party": "R"
+   },
+   "total": 7771399,
+   "cnnKey": "2022-GG-FL"
+  },
+  "GA-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -7.54,
+   "kind": "DR",
+   "d": {
+    "name": "Stacey Abrams",
+    "pct": 45.9
+   },
+   "r": {
+    "name": "Brian Kemp",
+    "pct": 53.4
+   },
+   "winner": {
+    "name": "Brian Kemp",
+    "party": "R"
+   },
+   "total": 3953433,
+   "cnnKey": "2022-GG-GA"
+  },
+  "HI-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 26.32,
+   "kind": "DR",
+   "d": {
+    "name": "Josh Green",
+    "pct": 63.2
+   },
+   "r": {
+    "name": "Duke Aiona",
+    "pct": 36.8
+   },
+   "winner": {
+    "name": "Josh Green",
+    "party": "D"
+   },
+   "total": 413262,
+   "cnnKey": "2022-GG-HI"
+  },
+  "IA-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -18.52,
+   "kind": "DR",
+   "d": {
+    "name": "Deidre DeJear",
+    "pct": 39.5
+   },
+   "r": {
+    "name": "Kim Reynolds",
+    "pct": 58
+   },
+   "winner": {
+    "name": "Kim Reynolds",
+    "party": "R"
+   },
+   "total": 1221864,
+   "cnnKey": "2022-GG-IA"
+  },
+  "ID-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -40.24,
+   "kind": "DR",
+   "d": {
+    "name": "Stephen Heidt",
+    "pct": 20.3
+   },
+   "r": {
+    "name": "Brad Little",
+    "pct": 60.5
+   },
+   "winner": {
+    "name": "Brad Little",
+    "party": "R"
+   },
+   "total": 592603,
+   "cnnKey": "2022-GG-ID"
+  },
+  "IL-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 12.54,
+   "kind": "DR",
+   "d": {
+    "name": "J.B. Pritzker",
+    "pct": 54.9
+   },
+   "r": {
+    "name": "Darren Bailey",
+    "pct": 42.4
+   },
+   "winner": {
+    "name": "J.B. Pritzker",
+    "party": "D"
+   },
+   "total": 4104636,
+   "cnnKey": "2022-GG-IL"
+  },
+  "KS-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 2.21,
+   "kind": "DR",
+   "d": {
+    "name": "Laura Kelly",
+    "pct": 49.5
+   },
+   "r": {
+    "name": "Derek Schmidt",
+    "pct": 47.3
+   },
+   "winner": {
+    "name": "Laura Kelly",
+    "party": "D"
+   },
+   "total": 1008998,
+   "cnnKey": "2022-GG-KS"
+  },
+  "MA-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 29.07,
+   "kind": "DR",
+   "d": {
+    "name": "Maura Healey",
+    "pct": 63.7
+   },
+   "r": {
+    "name": "Geoff Diehl",
+    "pct": 34.6
+   },
+   "winner": {
+    "name": "Maura Healey",
+    "party": "D"
+   },
+   "total": 2482646,
+   "cnnKey": "2022-GG-MA"
+  },
+  "MD-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 32.41,
+   "kind": "DR",
+   "d": {
+    "name": "Wes Moore",
+    "pct": 64.5
+   },
+   "r": {
+    "name": "Dan Cox",
+    "pct": 32.1
+   },
+   "winner": {
+    "name": "Wes Moore",
+    "party": "D"
+   },
+   "total": 2005223,
+   "cnnKey": "2022-GG-MD"
+  },
+  "ME-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 13.07,
+   "kind": "DR",
+   "d": {
+    "name": "Janet Mills",
+    "pct": 55.6
+   },
+   "r": {
+    "name": "Paul LePage",
+    "pct": 42.5
+   },
+   "winner": {
+    "name": "Janet Mills",
+    "party": "D"
+   },
+   "total": 674981,
+   "cnnKey": "2022-GG-ME"
+  },
+  "MI-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 10.53,
+   "kind": "DR",
+   "d": {
+    "name": "Gretchen Whitmer",
+    "pct": 54.5
+   },
+   "r": {
+    "name": "Tudor Dixon",
+    "pct": 43.9
+   },
+   "winner": {
+    "name": "Gretchen Whitmer",
+    "party": "D"
+   },
+   "total": 4461972,
+   "cnnKey": "2022-GG-MI"
+  },
+  "MN-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 7.66,
+   "kind": "DR",
+   "d": {
+    "name": "Tim Walz",
+    "pct": 52.3
+   },
+   "r": {
+    "name": "Scott Jensen",
+    "pct": 44.6
+   },
+   "winner": {
+    "name": "Tim Walz",
+    "party": "D"
+   },
+   "total": 2510661,
+   "cnnKey": "2022-GG-MN"
+  },
+  "NE-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -23.24,
+   "kind": "DR",
+   "d": {
+    "name": "Carol Blood",
+    "pct": 36
+   },
+   "r": {
+    "name": "Jim Pillen",
+    "pct": 59.2
+   },
+   "winner": {
+    "name": "Jim Pillen",
+    "party": "R"
+   },
+   "total": 672593,
+   "cnnKey": "2022-GG-NE"
+  },
+  "NH-G": {
+   "year": 2024,
+   "label": "2024",
+   "margin": -9.34,
+   "kind": "DR",
+   "d": {
+    "name": "Joyce Craig",
+    "pct": 44.3
+   },
+   "r": {
+    "name": "Kelly Ayotte",
+    "pct": 53.6
+   },
+   "winner": {
+    "name": "Kelly Ayotte",
+    "party": "R"
+   },
+   "total": 813497,
+   "cnnKey": "2024-GG-NH"
+  },
+  "NM-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 6.38,
+   "kind": "DR",
+   "d": {
+    "name": "Michelle Lujan Grisham",
+    "pct": 52
+   },
+   "r": {
+    "name": "Mark Ronchetti",
+    "pct": 45.6
+   },
+   "winner": {
+    "name": "Michelle Lujan Grisham",
+    "party": "D"
+   },
+   "total": 712256,
+   "cnnKey": "2022-GG-NM"
+  },
+  "NV-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -1.51,
+   "kind": "DR",
+   "d": {
+    "name": "Steve Sisolak",
+    "pct": 47.3
+   },
+   "r": {
+    "name": "Joe Lombardo",
+    "pct": 48.8
+   },
+   "winner": {
+    "name": "Joe Lombardo",
+    "party": "R"
+   },
+   "total": 1019071,
+   "cnnKey": "2022-GG-NV"
+  },
+  "NY-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 6.39,
+   "kind": "DR",
+   "d": {
+    "name": "Kathy Hochul",
+    "pct": 53.1
+   },
+   "r": {
+    "name": "Lee Zeldin",
+    "pct": 46.7
+   },
+   "winner": {
+    "name": "Kathy Hochul",
+    "party": "D"
+   },
+   "total": 5912286,
+   "cnnKey": "2022-GG-NY"
+  },
+  "OH-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -25.03,
+   "kind": "DR",
+   "d": {
+    "name": "Nan Whaley",
+    "pct": 37.4
+   },
+   "r": {
+    "name": "Mike DeWine",
+    "pct": 62.4
+   },
+   "winner": {
+    "name": "Mike DeWine",
+    "party": "R"
+   },
+   "total": 4134877,
+   "cnnKey": "2022-GG-OH"
+  },
+  "OK-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -13.66,
+   "kind": "DR",
+   "d": {
+    "name": "Joy Hofmeister",
+    "pct": 41.8
+   },
+   "r": {
+    "name": "Kevin Stitt",
+    "pct": 55.4
+   },
+   "winner": {
+    "name": "Kevin Stitt",
+    "party": "R"
+   },
+   "total": 1153284,
+   "cnnKey": "2022-GG-OK"
+  },
+  "OR-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 3.42,
+   "kind": "DR",
+   "d": {
+    "name": "Tina Kotek",
+    "pct": 47
+   },
+   "r": {
+    "name": "Christine Drazan",
+    "pct": 43.5
+   },
+   "winner": {
+    "name": "Tina Kotek",
+    "party": "D"
+   },
+   "total": 1952883,
+   "cnnKey": "2022-GG-OR"
+  },
+  "PA-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 14.77,
+   "kind": "DR",
+   "d": {
+    "name": "Josh Shapiro",
+    "pct": 56.5
+   },
+   "r": {
+    "name": "Doug Mastriano",
+    "pct": 41.7
+   },
+   "winner": {
+    "name": "Josh Shapiro",
+    "party": "D"
+   },
+   "total": 5366179,
+   "cnnKey": "2022-GG-PA"
+  },
+  "RI-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 19.06,
+   "kind": "DR",
+   "d": {
+    "name": "Dan McKee",
+    "pct": 57.9
+   },
+   "r": {
+    "name": "Ashley Kalus",
+    "pct": 38.9
+   },
+   "winner": {
+    "name": "Dan McKee",
+    "party": "D"
+   },
+   "total": 357670,
+   "cnnKey": "2022-GG-RI"
+  },
+  "SC-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -17.37,
+   "kind": "DR",
+   "d": {
+    "name": "Joe Cunningham",
+    "pct": 40.7
+   },
+   "r": {
+    "name": "Henry McMaster",
+    "pct": 58
+   },
+   "winner": {
+    "name": "Henry McMaster",
+    "party": "R"
+   },
+   "total": 1703192,
+   "cnnKey": "2022-GG-SC"
+  },
+  "SD-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -26.81,
+   "kind": "DR",
+   "d": {
+    "name": "Jamie Smith",
+    "pct": 35.2
+   },
+   "r": {
+    "name": "Kristi Noem",
+    "pct": 62
+   },
+   "winner": {
+    "name": "Kristi Noem",
+    "party": "R"
+   },
+   "total": 350166,
+   "cnnKey": "2022-GG-SD"
+  },
+  "TN-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -31.99,
+   "kind": "DR",
+   "d": {
+    "name": "Jason Martin",
+    "pct": 32.9
+   },
+   "r": {
+    "name": "Bill Lee",
+    "pct": 64.9
+   },
+   "winner": {
+    "name": "Bill Lee",
+    "party": "R"
+   },
+   "total": 1739882,
+   "cnnKey": "2022-GG-TN"
+  },
+  "TX-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -10.9,
+   "kind": "DR",
+   "d": {
+    "name": "Beto O'Rourke",
+    "pct": 43.9
+   },
+   "r": {
+    "name": "Greg Abbott",
+    "pct": 54.8
+   },
+   "winner": {
+    "name": "Greg Abbott",
+    "party": "R"
+   },
+   "total": 8102908,
+   "cnnKey": "2022-GG-TX"
+  },
+  "VT-G": {
+   "year": 2024,
+   "label": "2024",
+   "margin": -51.6,
+   "kind": "DR",
+   "d": {
+    "name": "Esther Charlestin",
+    "pct": 21.8
+   },
+   "r": {
+    "name": "Phil Scott",
+    "pct": 73.4
+   },
+   "winner": {
+    "name": "Phil Scott",
+    "party": "R"
+   },
+   "total": 362841,
+   "cnnKey": "2024-GG-VT"
+  },
+  "WI-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": 3.4,
+   "kind": "DR",
+   "d": {
+    "name": "Tony Evers",
+    "pct": 51.1
+   },
+   "r": {
+    "name": "Tim Michels",
+    "pct": 47.8
+   },
+   "winner": {
+    "name": "Tony Evers",
+    "party": "D"
+   },
+   "total": 2656490,
+   "cnnKey": "2022-GG-WI"
+  },
+  "WY-G": {
+   "year": 2022,
+   "label": "2022",
+   "margin": -58.25,
+   "kind": "DR",
+   "d": {
+    "name": "Theresa Livingston",
+    "pct": 15.8
+   },
+   "r": {
+    "name": "Mark Gordon",
+    "pct": 74.1
+   },
+   "winner": {
+    "name": "Mark Gordon",
+    "party": "R"
+   },
+   "total": 194000,
+   "cnnKey": "2022-GG-WY"
+  }
+ },
+ "house2024": {
+  "AK-H-1": {
+   "margin": -2.04,
+   "kind": "DR",
+   "d": {
+    "name": "Mary Peltola",
+    "pct": 46.4
+   },
+   "r": {
+    "name": "Nick Begich",
+    "pct": 48.4
+   },
+   "winner": {
+    "name": "Nick Begich",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "AL-H-1": {
+   "margin": -56.9,
+   "kind": "DR",
+   "d": {
+    "name": "Tom Holmes",
+    "pct": 21.5
+   },
+   "r": {
+    "name": "Barry Moore",
+    "pct": 78.4
+   },
+   "winner": {
+    "name": "Barry Moore",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "AL-H-2": {
+   "margin": 9.19,
+   "kind": "DR",
+   "d": {
+    "name": "Shomari Figures",
+    "pct": 54.6
+   },
+   "r": {
+    "name": "Caroleene Dobson",
+    "pct": 45.4
+   },
+   "winner": {
+    "name": "Shomari Figures",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "AL-H-3": {
+   "margin": null,
+   "kind": "R-unopposed",
+   "d": null,
+   "r": {
+    "name": "Mike Rogers",
+    "pct": 97.9
+   },
+   "winner": {
+    "name": "Mike Rogers",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "AL-H-4": {
+   "margin": null,
+   "kind": "R-unopposed",
+   "d": null,
+   "r": {
+    "name": "Robert Aderholt",
+    "pct": 98.8
+   },
+   "winner": {
+    "name": "Robert Aderholt",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "AL-H-5": {
+   "margin": null,
+   "kind": "R-unopposed",
+   "d": null,
+   "r": {
+    "name": "Dale Strong",
+    "pct": 95.4
+   },
+   "winner": {
+    "name": "Dale Strong",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "AL-H-6": {
+   "margin": -40.75,
+   "kind": "DR",
+   "d": {
+    "name": "Elizabeth Anderson",
+    "pct": 29.6
+   },
+   "r": {
+    "name": "Gary Palmer",
+    "pct": 70.3
+   },
+   "winner": {
+    "name": "Gary Palmer",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "AL-H-7": {
+   "margin": 27.42,
+   "kind": "DR",
+   "d": {
+    "name": "Terri Sewell",
+    "pct": 63.7
+   },
+   "r": {
+    "name": "Robin Litaker",
+    "pct": 36.3
+   },
+   "winner": {
+    "name": "Terri Sewell",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "AR-H-1": {
+   "margin": -48.88,
+   "kind": "DR",
+   "d": {
+    "name": "Rodney Govens",
+    "pct": 24
+   },
+   "r": {
+    "name": "Rick Crawford",
+    "pct": 72.9
+   },
+   "winner": {
+    "name": "Rick Crawford",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "AR-H-2": {
+   "margin": -17.87,
+   "kind": "DR",
+   "d": {
+    "name": "Marcus Jones",
+    "pct": 41.1
+   },
+   "r": {
+    "name": "French Hill",
+    "pct": 58.9
+   },
+   "winner": {
+    "name": "French Hill",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "AR-H-3": {
+   "margin": -32.03,
+   "kind": "DR",
+   "d": {
+    "name": "Caitlin Draper",
+    "pct": 31.8
+   },
+   "r": {
+    "name": "Steve Womack",
+    "pct": 63.8
+   },
+   "winner": {
+    "name": "Steve Womack",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "AR-H-4": {
+   "margin": -45.82,
+   "kind": "DR",
+   "d": {
+    "name": "Risie Howard",
+    "pct": 27.1
+   },
+   "r": {
+    "name": "Bruce Westerman",
+    "pct": 72.9
+   },
+   "winner": {
+    "name": "Bruce Westerman",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "AZ-H-1": {
+   "margin": -3.81,
+   "kind": "DR",
+   "d": {
+    "name": "Amish Shah",
+    "pct": 48.1
+   },
+   "r": {
+    "name": "David Schweikert",
+    "pct": 51.9
+   },
+   "winner": {
+    "name": "David Schweikert",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "AZ-H-2": {
+   "margin": -8.97,
+   "kind": "DR",
+   "d": {
+    "name": "Jonathan Nez",
+    "pct": 45.5
+   },
+   "r": {
+    "name": "Eli Crane",
+    "pct": 54.5
+   },
+   "winner": {
+    "name": "Eli Crane",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "AZ-H-3": {
+   "margin": 44.36,
+   "kind": "DR",
+   "d": {
+    "name": "Yassamin Ansari",
+    "pct": 70.9
+   },
+   "r": {
+    "name": "Jeff Zink",
+    "pct": 26.6
+   },
+   "winner": {
+    "name": "Yassamin Ansari",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "AZ-H-4": {
+   "margin": 7.29,
+   "kind": "DR",
+   "d": {
+    "name": "Greg Stanton",
+    "pct": 52.7
+   },
+   "r": {
+    "name": "Kelly Cooper",
+    "pct": 45.5
+   },
+   "winner": {
+    "name": "Greg Stanton",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "AZ-H-5": {
+   "margin": -20.78,
+   "kind": "DR",
+   "d": {
+    "name": "Katrina Schaffner",
+    "pct": 39.6
+   },
+   "r": {
+    "name": "Andy Biggs",
+    "pct": 60.4
+   },
+   "winner": {
+    "name": "Andy Biggs",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "AZ-H-6": {
+   "margin": -2.51,
+   "kind": "DR",
+   "d": {
+    "name": "Kirsten Engel",
+    "pct": 47.5
+   },
+   "r": {
+    "name": "Juan Ciscomani",
+    "pct": 50
+   },
+   "winner": {
+    "name": "Juan Ciscomani",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "AZ-H-7": {
+   "margin": 26.9,
+   "kind": "DR",
+   "d": {
+    "name": "Raúl Grijalva",
+    "pct": 63.4
+   },
+   "r": {
+    "name": "Daniel Butierez",
+    "pct": 36.6
+   },
+   "winner": {
+    "name": "Raúl Grijalva",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "AZ-H-8": {
+   "margin": -13,
+   "kind": "DR",
+   "d": {
+    "name": "Greg Whitten",
+    "pct": 43.5
+   },
+   "r": {
+    "name": "Abe Hamadeh",
+    "pct": 56.5
+   },
+   "winner": {
+    "name": "Abe Hamadeh",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "AZ-H-9": {
+   "margin": -30.6,
+   "kind": "DR",
+   "d": {
+    "name": "Quacy Smith",
+    "pct": 34.7
+   },
+   "r": {
+    "name": "Paul Gosar",
+    "pct": 65.3
+   },
+   "winner": {
+    "name": "Paul Gosar",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "CA-H-1": {
+   "margin": -30.69,
+   "kind": "DR",
+   "d": {
+    "name": "Rose Yee",
+    "pct": 34.7
+   },
+   "r": {
+    "name": "Doug LaMalfa",
+    "pct": 65.3
+   },
+   "winner": {
+    "name": "Doug LaMalfa",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "CA-H-2": {
+   "margin": 43.77,
+   "kind": "DR",
+   "d": {
+    "name": "Jared Huffman",
+    "pct": 71.9
+   },
+   "r": {
+    "name": "Chris Coulombe",
+    "pct": 28.1
+   },
+   "winner": {
+    "name": "Jared Huffman",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-3": {
+   "margin": -10.93,
+   "kind": "DR",
+   "d": {
+    "name": "Jessica Morse",
+    "pct": 44.5
+   },
+   "r": {
+    "name": "Kevin Kiley",
+    "pct": 55.5
+   },
+   "winner": {
+    "name": "Kevin Kiley",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "CA-H-4": {
+   "margin": 32.91,
+   "kind": "DR",
+   "d": {
+    "name": "Mike Thompson",
+    "pct": 66.5
+   },
+   "r": {
+    "name": "John Munn",
+    "pct": 33.5
+   },
+   "winner": {
+    "name": "Mike Thompson",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-5": {
+   "margin": -23.53,
+   "kind": "DR",
+   "d": {
+    "name": "Mike Barkley",
+    "pct": 38.2
+   },
+   "r": {
+    "name": "Tom McClintock",
+    "pct": 61.8
+   },
+   "winner": {
+    "name": "Tom McClintock",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "CA-H-6": {
+   "margin": 15.24,
+   "kind": "DR",
+   "d": {
+    "name": "Ami Bera",
+    "pct": 57.6
+   },
+   "r": {
+    "name": "Christine Bish",
+    "pct": 42.4
+   },
+   "winner": {
+    "name": "Ami Bera",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-7": {
+   "margin": 33.5,
+   "kind": "DR",
+   "d": {
+    "name": "Doris Matsui",
+    "pct": 66.8
+   },
+   "r": {
+    "name": "Tom Silva",
+    "pct": 33.2
+   },
+   "winner": {
+    "name": "Doris Matsui",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-8": {
+   "margin": 47.94,
+   "kind": "DR",
+   "d": {
+    "name": "John Garamendi",
+    "pct": 74
+   },
+   "r": {
+    "name": "Rudy Recile",
+    "pct": 26
+   },
+   "winner": {
+    "name": "John Garamendi",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-9": {
+   "margin": 3.58,
+   "kind": "DR",
+   "d": {
+    "name": "Josh Harder",
+    "pct": 51.8
+   },
+   "r": {
+    "name": "Kevin Lincoln",
+    "pct": 48.2
+   },
+   "winner": {
+    "name": "Josh Harder",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-10": {
+   "margin": 32.95,
+   "kind": "DR",
+   "d": {
+    "name": "Mark DeSaulnier",
+    "pct": 66.5
+   },
+   "r": {
+    "name": "Katherine Piccinini",
+    "pct": 33.5
+   },
+   "winner": {
+    "name": "Mark DeSaulnier",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-11": {
+   "margin": 62.07,
+   "kind": "DR",
+   "d": {
+    "name": "Nancy Pelosi",
+    "pct": 81
+   },
+   "r": {
+    "name": "Bruce Lou",
+    "pct": 19
+   },
+   "winner": {
+    "name": "Nancy Pelosi",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CA-H-12": {
+   "margin": null,
+   "kind": "DD",
+   "d": {
+    "name": "Lateefah Simon",
+    "pct": 65.4
+   },
+   "r": null,
+   "winner": {
+    "name": "Lateefah Simon",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CA-H-13": {
+   "margin": 0.09,
+   "kind": "DR",
+   "d": {
+    "name": "Adam Gray",
+    "pct": 50
+   },
+   "r": {
+    "name": "John Duarte",
+    "pct": 50
+   },
+   "winner": {
+    "name": "Adam Gray",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-14": {
+   "margin": 35.51,
+   "kind": "DR",
+   "d": {
+    "name": "Eric Swalwell",
+    "pct": 67.8
+   },
+   "r": {
+    "name": "Vin Kruttiventi",
+    "pct": 32.2
+   },
+   "winner": {
+    "name": "Eric Swalwell",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-15": {
+   "margin": 46.19,
+   "kind": "DR",
+   "d": {
+    "name": "Kevin Mullin",
+    "pct": 73.1
+   },
+   "r": {
+    "name": "Anna Cheng Kramer",
+    "pct": 26.9
+   },
+   "winner": {
+    "name": "Kevin Mullin",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CA-H-16": {
+   "margin": null,
+   "kind": "DD",
+   "d": {
+    "name": "Sam Liccardo",
+    "pct": 58.2
+   },
+   "r": null,
+   "winner": {
+    "name": "Sam Liccardo",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CA-H-17": {
+   "margin": 35.33,
+   "kind": "DR",
+   "d": {
+    "name": "Ro Khanna",
+    "pct": 67.7
+   },
+   "r": {
+    "name": "Anita Chen",
+    "pct": 32.3
+   },
+   "winner": {
+    "name": "Ro Khanna",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-18": {
+   "margin": 29.25,
+   "kind": "DR",
+   "d": {
+    "name": "Zoe Lofgren",
+    "pct": 64.6
+   },
+   "r": {
+    "name": "Peter Hernandez",
+    "pct": 35.4
+   },
+   "winner": {
+    "name": "Zoe Lofgren",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-19": {
+   "margin": 38.59,
+   "kind": "DR",
+   "d": {
+    "name": "Jimmy Panetta",
+    "pct": 69.3
+   },
+   "r": {
+    "name": "Jason Anderson",
+    "pct": 30.7
+   },
+   "winner": {
+    "name": "Jimmy Panetta",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CA-H-20": {
+   "margin": null,
+   "kind": "RR",
+   "d": null,
+   "r": {
+    "name": "Vince Fong",
+    "pct": 65.1
+   },
+   "winner": {
+    "name": "Vince Fong",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "CA-H-21": {
+   "margin": 5.15,
+   "kind": "DR",
+   "d": {
+    "name": "Jim Costa",
+    "pct": 52.6
+   },
+   "r": {
+    "name": "Michael Maher",
+    "pct": 47.4
+   },
+   "winner": {
+    "name": "Jim Costa",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-22": {
+   "margin": -6.84,
+   "kind": "DR",
+   "d": {
+    "name": "Rudy Salas",
+    "pct": 46.6
+   },
+   "r": {
+    "name": "David Valadao",
+    "pct": 53.4
+   },
+   "winner": {
+    "name": "David Valadao",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "CA-H-23": {
+   "margin": -20.28,
+   "kind": "DR",
+   "d": {
+    "name": "Derek Marshall",
+    "pct": 39.9
+   },
+   "r": {
+    "name": "Jay Obernolte",
+    "pct": 60.1
+   },
+   "winner": {
+    "name": "Jay Obernolte",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "CA-H-24": {
+   "margin": 25.39,
+   "kind": "DR",
+   "d": {
+    "name": "Salud Carbajal",
+    "pct": 62.7
+   },
+   "r": {
+    "name": "Thomas Cole",
+    "pct": 37.3
+   },
+   "winner": {
+    "name": "Salud Carbajal",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-25": {
+   "margin": 12.51,
+   "kind": "DR",
+   "d": {
+    "name": "Raul Ruiz",
+    "pct": 56.3
+   },
+   "r": {
+    "name": "Ian Weeks",
+    "pct": 43.7
+   },
+   "winner": {
+    "name": "Raul Ruiz",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-26": {
+   "margin": 12.11,
+   "kind": "DR",
+   "d": {
+    "name": "Julia Brownley",
+    "pct": 56.1
+   },
+   "r": {
+    "name": "Michael Koslow",
+    "pct": 43.9
+   },
+   "winner": {
+    "name": "Julia Brownley",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-27": {
+   "margin": 2.66,
+   "kind": "DR",
+   "d": {
+    "name": "George Whitesides",
+    "pct": 51.3
+   },
+   "r": {
+    "name": "Mike Garcia",
+    "pct": 48.7
+   },
+   "winner": {
+    "name": "George Whitesides",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-28": {
+   "margin": 29.86,
+   "kind": "DR",
+   "d": {
+    "name": "Judy Chu",
+    "pct": 64.9
+   },
+   "r": {
+    "name": "April Verlato",
+    "pct": 35.1
+   },
+   "winner": {
+    "name": "Judy Chu",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-29": {
+   "margin": 39.55,
+   "kind": "DR",
+   "d": {
+    "name": "Luz Rivas",
+    "pct": 69.8
+   },
+   "r": {
+    "name": "Benito Bernal",
+    "pct": 30.2
+   },
+   "winner": {
+    "name": "Luz Rivas",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-30": {
+   "margin": 36.75,
+   "kind": "DR",
+   "d": {
+    "name": "Laura Friedman",
+    "pct": 68.4
+   },
+   "r": {
+    "name": "Alex Balekian",
+    "pct": 31.6
+   },
+   "winner": {
+    "name": "Laura Friedman",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-31": {
+   "margin": 19.46,
+   "kind": "DR",
+   "d": {
+    "name": "Gil Cisneros",
+    "pct": 59.7
+   },
+   "r": {
+    "name": "Daniel Martinez",
+    "pct": 40.3
+   },
+   "winner": {
+    "name": "Gil Cisneros",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-32": {
+   "margin": 32.4,
+   "kind": "DR",
+   "d": {
+    "name": "Brad Sherman",
+    "pct": 66.2
+   },
+   "r": {
+    "name": "Larry Thompson",
+    "pct": 33.8
+   },
+   "winner": {
+    "name": "Brad Sherman",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-33": {
+   "margin": 17.63,
+   "kind": "DR",
+   "d": {
+    "name": "Pete Aguilar",
+    "pct": 58.8
+   },
+   "r": {
+    "name": "Tom Herman",
+    "pct": 41.2
+   },
+   "winner": {
+    "name": "Pete Aguilar",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-34": {
+   "margin": null,
+   "kind": "DD",
+   "d": {
+    "name": "Jimmy Gomez",
+    "pct": 55.6
+   },
+   "r": null,
+   "winner": {
+    "name": "Jimmy Gomez",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CA-H-35": {
+   "margin": 16.81,
+   "kind": "DR",
+   "d": {
+    "name": "Norma Torres",
+    "pct": 58.4
+   },
+   "r": {
+    "name": "Mike Cargile",
+    "pct": 41.6
+   },
+   "winner": {
+    "name": "Norma Torres",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-36": {
+   "margin": 37.44,
+   "kind": "DR",
+   "d": {
+    "name": "Ted Lieu",
+    "pct": 68.7
+   },
+   "r": {
+    "name": "Melissa Toomim",
+    "pct": 31.3
+   },
+   "winner": {
+    "name": "Ted Lieu",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CA-H-37": {
+   "margin": null,
+   "kind": "D-noR",
+   "d": {
+    "name": "Sydney Kamlager-Dove",
+    "pct": 78.3
+   },
+   "r": null,
+   "winner": {
+    "name": "Sydney Kamlager-Dove",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CA-H-38": {
+   "margin": 19.68,
+   "kind": "DR",
+   "d": {
+    "name": "Linda Sanchez",
+    "pct": 59.8
+   },
+   "r": {
+    "name": "Eric Ching",
+    "pct": 40.2
+   },
+   "winner": {
+    "name": "Linda Sanchez",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-39": {
+   "margin": 13.38,
+   "kind": "DR",
+   "d": {
+    "name": "Mark Takano",
+    "pct": 56.7
+   },
+   "r": {
+    "name": "David Serpa",
+    "pct": 43.3
+   },
+   "winner": {
+    "name": "Mark Takano",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-40": {
+   "margin": -10.52,
+   "kind": "DR",
+   "d": {
+    "name": "Joe Kerr",
+    "pct": 44.7
+   },
+   "r": {
+    "name": "Young Kim",
+    "pct": 55.3
+   },
+   "winner": {
+    "name": "Young Kim",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "CA-H-41": {
+   "margin": -3.38,
+   "kind": "DR",
+   "d": {
+    "name": "Will Rollins",
+    "pct": 48.3
+   },
+   "r": {
+    "name": "Ken Calvert",
+    "pct": 51.7
+   },
+   "winner": {
+    "name": "Ken Calvert",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "CA-H-42": {
+   "margin": 36.28,
+   "kind": "DR",
+   "d": {
+    "name": "Robert Garcia",
+    "pct": 68.1
+   },
+   "r": {
+    "name": "John Briscoe",
+    "pct": 31.9
+   },
+   "winner": {
+    "name": "Robert Garcia",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-43": {
+   "margin": 50.15,
+   "kind": "DR",
+   "d": {
+    "name": "Maxine Waters",
+    "pct": 75.1
+   },
+   "r": {
+    "name": "Steve Williams",
+    "pct": 24.9
+   },
+   "winner": {
+    "name": "Maxine Waters",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CA-H-44": {
+   "margin": 42.75,
+   "kind": "DR",
+   "d": {
+    "name": "Nanette Barragan",
+    "pct": 71.4
+   },
+   "r": {
+    "name": "Roger Groh",
+    "pct": 28.6
+   },
+   "winner": {
+    "name": "Nanette Barragan",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-45": {
+   "margin": 0.21,
+   "kind": "DR",
+   "d": {
+    "name": "Derek Tran",
+    "pct": 50.1
+   },
+   "r": {
+    "name": "Michelle Steel",
+    "pct": 49.9
+   },
+   "winner": {
+    "name": "Derek Tran",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-46": {
+   "margin": 26.85,
+   "kind": "DR",
+   "d": {
+    "name": "Lou Correa",
+    "pct": 63.4
+   },
+   "r": {
+    "name": "David Pan",
+    "pct": 36.6
+   },
+   "winner": {
+    "name": "Lou Correa",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-47": {
+   "margin": 2.88,
+   "kind": "DR",
+   "d": {
+    "name": "Dave Min",
+    "pct": 51.4
+   },
+   "r": {
+    "name": "Scott Baugh",
+    "pct": 48.6
+   },
+   "winner": {
+    "name": "Dave Min",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-48": {
+   "margin": -18.59,
+   "kind": "DR",
+   "d": {
+    "name": "Stephen Houlahan",
+    "pct": 40.7
+   },
+   "r": {
+    "name": "Darrell Issa",
+    "pct": 59.3
+   },
+   "winner": {
+    "name": "Darrell Issa",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "CA-H-49": {
+   "margin": 4.35,
+   "kind": "DR",
+   "d": {
+    "name": "Mike Levin",
+    "pct": 52.2
+   },
+   "r": {
+    "name": "Matt Gunderson",
+    "pct": 47.8
+   },
+   "winner": {
+    "name": "Mike Levin",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-50": {
+   "margin": 28.55,
+   "kind": "DR",
+   "d": {
+    "name": "Scott Peters",
+    "pct": 64.3
+   },
+   "r": {
+    "name": "Peter Bono",
+    "pct": 35.7
+   },
+   "winner": {
+    "name": "Scott Peters",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-51": {
+   "margin": 21.39,
+   "kind": "DR",
+   "d": {
+    "name": "Sara Jacobs",
+    "pct": 60.7
+   },
+   "r": {
+    "name": "Bill Wells",
+    "pct": 39.3
+   },
+   "winner": {
+    "name": "Sara Jacobs",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CA-H-52": {
+   "margin": 32.62,
+   "kind": "DR",
+   "d": {
+    "name": "Juan Vargas",
+    "pct": 66.3
+   },
+   "r": {
+    "name": "Justin Lee",
+    "pct": 33.7
+   },
+   "winner": {
+    "name": "Juan Vargas",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "CO-H-1": {
+   "margin": 54.96,
+   "kind": "DR",
+   "d": {
+    "name": "Diana DeGette",
+    "pct": 76.5
+   },
+   "r": {
+    "name": "Valdamar Archuleta",
+    "pct": 21.6
+   },
+   "winner": {
+    "name": "Diana DeGette",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CO-H-2": {
+   "margin": 39.42,
+   "kind": "DR",
+   "d": {
+    "name": "Joe Neguse",
+    "pct": 68.4
+   },
+   "r": {
+    "name": "Marshall Dawson",
+    "pct": 28.9
+   },
+   "winner": {
+    "name": "Joe Neguse",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CO-H-3": {
+   "margin": -4.98,
+   "kind": "DR",
+   "d": {
+    "name": "Adam Frisch",
+    "pct": 45.8
+   },
+   "r": {
+    "name": "Jeff Hurd",
+    "pct": 50.8
+   },
+   "winner": {
+    "name": "Jeff Hurd",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "CO-H-4": {
+   "margin": -11.6,
+   "kind": "DR",
+   "d": {
+    "name": "Trisha Calvarese",
+    "pct": 42
+   },
+   "r": {
+    "name": "Lauren Boebert",
+    "pct": 53.6
+   },
+   "winner": {
+    "name": "Lauren Boebert",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "CO-H-5": {
+   "margin": -13.8,
+   "kind": "DR",
+   "d": {
+    "name": "River Gassen",
+    "pct": 40.9
+   },
+   "r": {
+    "name": "Jeff Crank",
+    "pct": 54.7
+   },
+   "winner": {
+    "name": "Jeff Crank",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "CO-H-6": {
+   "margin": 20.51,
+   "kind": "DR",
+   "d": {
+    "name": "Jason Crow",
+    "pct": 59
+   },
+   "r": {
+    "name": "John Fabbricatore",
+    "pct": 38.5
+   },
+   "winner": {
+    "name": "Jason Crow",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CO-H-7": {
+   "margin": 14.18,
+   "kind": "DR",
+   "d": {
+    "name": "Brittany Pettersen",
+    "pct": 55.3
+   },
+   "r": {
+    "name": "Sergei Matveyuk",
+    "pct": 41.1
+   },
+   "winner": {
+    "name": "Brittany Pettersen",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CO-H-8": {
+   "margin": -0.73,
+   "kind": "DR",
+   "d": {
+    "name": "Yadira Caraveo",
+    "pct": 48.2
+   },
+   "r": {
+    "name": "Gabe Evans",
+    "pct": 49
+   },
+   "winner": {
+    "name": "Gabe Evans",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "CT-H-1": {
+   "margin": 28.32,
+   "kind": "DR",
+   "d": {
+    "name": "John Larson",
+    "pct": 63.1
+   },
+   "r": {
+    "name": "Jim Griffin",
+    "pct": 34.8
+   },
+   "winner": {
+    "name": "John Larson",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CT-H-2": {
+   "margin": 16.03,
+   "kind": "DR",
+   "d": {
+    "name": "Joe Courtney",
+    "pct": 58
+   },
+   "r": {
+    "name": "Mike France",
+    "pct": 42
+   },
+   "winner": {
+    "name": "Joe Courtney",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CT-H-3": {
+   "margin": 17.81,
+   "kind": "DR",
+   "d": {
+    "name": "Rosa DeLauro",
+    "pct": 58.9
+   },
+   "r": {
+    "name": "Michael Massey",
+    "pct": 41.1
+   },
+   "winner": {
+    "name": "Rosa DeLauro",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CT-H-4": {
+   "margin": 23.72,
+   "kind": "DR",
+   "d": {
+    "name": "Jim Himes",
+    "pct": 61.1
+   },
+   "r": {
+    "name": "Michael Goldstein",
+    "pct": 37.3
+   },
+   "winner": {
+    "name": "Jim Himes",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "CT-H-5": {
+   "margin": 6.82,
+   "kind": "DR",
+   "d": {
+    "name": "Jahana Hayes",
+    "pct": 53.4
+   },
+   "r": {
+    "name": "George Logan",
+    "pct": 46.6
+   },
+   "winner": {
+    "name": "Jahana Hayes",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "DE-H-1": {
+   "margin": 15.73,
+   "kind": "DR",
+   "d": {
+    "name": "Sarah McBride",
+    "pct": 57.9
+   },
+   "r": {
+    "name": "John Whalen",
+    "pct": 42.1
+   },
+   "winner": {
+    "name": "Sarah McBride",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "FL-H-1": {
+   "margin": -32.07,
+   "kind": "DR",
+   "d": {
+    "name": "Gay Valimont",
+    "pct": 34
+   },
+   "r": {
+    "name": "Matt Gaetz",
+    "pct": 66
+   },
+   "winner": {
+    "name": "Matt Gaetz",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "FL-H-2": {
+   "margin": -23.28,
+   "kind": "DR",
+   "d": {
+    "name": "Yen Bailey",
+    "pct": 38.4
+   },
+   "r": {
+    "name": "Neal Dunn",
+    "pct": 61.6
+   },
+   "winner": {
+    "name": "Neal Dunn",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "FL-H-3": {
+   "margin": -23.22,
+   "kind": "DR",
+   "d": {
+    "name": "Tom Wells",
+    "pct": 38.4
+   },
+   "r": {
+    "name": "Kat Cammack",
+    "pct": 61.6
+   },
+   "winner": {
+    "name": "Kat Cammack",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "FL-H-4": {
+   "margin": -14.54,
+   "kind": "DR",
+   "d": {
+    "name": "LaShonda Holloway",
+    "pct": 42.7
+   },
+   "r": {
+    "name": "Aaron Bean",
+    "pct": 57.3
+   },
+   "winner": {
+    "name": "Aaron Bean",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "FL-H-5": {
+   "margin": -26.15,
+   "kind": "DR",
+   "d": {
+    "name": "Jay McGovern",
+    "pct": 36.9
+   },
+   "r": {
+    "name": "John Rutherford",
+    "pct": 63.1
+   },
+   "winner": {
+    "name": "John Rutherford",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "FL-H-6": {
+   "margin": -33.07,
+   "kind": "DR",
+   "d": {
+    "name": "James Stockton",
+    "pct": 33.5
+   },
+   "r": {
+    "name": "Michael Waltz",
+    "pct": 66.5
+   },
+   "winner": {
+    "name": "Michael Waltz",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "FL-H-7": {
+   "margin": -13.05,
+   "kind": "DR",
+   "d": {
+    "name": "Jennifer Adams",
+    "pct": 43.5
+   },
+   "r": {
+    "name": "Cory Mills",
+    "pct": 56.5
+   },
+   "winner": {
+    "name": "Cory Mills",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "FL-H-8": {
+   "margin": -24.48,
+   "kind": "DR",
+   "d": {
+    "name": "Sandy Kennedy",
+    "pct": 37.8
+   },
+   "r": {
+    "name": "Mike Haridopolos",
+    "pct": 62.2
+   },
+   "winner": {
+    "name": "Mike Haridopolos",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "FL-H-9": {
+   "margin": 12.55,
+   "kind": "DR",
+   "d": {
+    "name": "Darren Soto",
+    "pct": 55.1
+   },
+   "r": {
+    "name": "Thomas Chalifoux",
+    "pct": 42.6
+   },
+   "winner": {
+    "name": "Darren Soto",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "FL-H-10": {
+   "margin": 24.75,
+   "kind": "DR",
+   "d": {
+    "name": "Maxwell Frost",
+    "pct": 62.4
+   },
+   "r": {
+    "name": "Willie Montague",
+    "pct": 37.6
+   },
+   "winner": {
+    "name": "Maxwell Frost",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "FL-H-11": {
+   "margin": -20.75,
+   "kind": "DR",
+   "d": {
+    "name": "Barbie Harden Hall",
+    "pct": 39.6
+   },
+   "r": {
+    "name": "Daniel Webster",
+    "pct": 60.4
+   },
+   "winner": {
+    "name": "Daniel Webster",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "FL-H-12": {
+   "margin": -42.08,
+   "kind": "DR",
+   "d": {
+    "name": "Rock Aboujaoude",
+    "pct": 29
+   },
+   "r": {
+    "name": "Gus Bilirakis",
+    "pct": 71
+   },
+   "winner": {
+    "name": "Gus Bilirakis",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "FL-H-13": {
+   "margin": -9.65,
+   "kind": "DR",
+   "d": {
+    "name": "Whitney Fox",
+    "pct": 45.2
+   },
+   "r": {
+    "name": "Anna Paulina Luna",
+    "pct": 54.8
+   },
+   "winner": {
+    "name": "Anna Paulina Luna",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "FL-H-14": {
+   "margin": 15.36,
+   "kind": "DR",
+   "d": {
+    "name": "Kathy Castor",
+    "pct": 56.9
+   },
+   "r": {
+    "name": "Rocky Rochford",
+    "pct": 41.6
+   },
+   "winner": {
+    "name": "Kathy Castor",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "FL-H-15": {
+   "margin": -12.36,
+   "kind": "DR",
+   "d": {
+    "name": "Pat Kemp",
+    "pct": 43.8
+   },
+   "r": {
+    "name": "Laurel Lee",
+    "pct": 56.2
+   },
+   "winner": {
+    "name": "Laurel Lee",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "FL-H-16": {
+   "margin": -18.96,
+   "kind": "DR",
+   "d": {
+    "name": "Jan Schneider",
+    "pct": 40.5
+   },
+   "r": {
+    "name": "Vern Buchanan",
+    "pct": 59.5
+   },
+   "winner": {
+    "name": "Vern Buchanan",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "FL-H-17": {
+   "margin": -27.81,
+   "kind": "DR",
+   "d": {
+    "name": "Manny Lopez",
+    "pct": 36.1
+   },
+   "r": {
+    "name": "Greg Steube",
+    "pct": 63.9
+   },
+   "winner": {
+    "name": "Greg Steube",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "FL-H-18": {
+   "margin": -30.61,
+   "kind": "DR",
+   "d": {
+    "name": "Andrea Kale",
+    "pct": 34.7
+   },
+   "r": {
+    "name": "Scott Franklin",
+    "pct": 65.3
+   },
+   "winner": {
+    "name": "Scott Franklin",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "FL-H-19": {
+   "margin": -32.63,
+   "kind": "DR",
+   "d": {
+    "name": "Kari Lerner",
+    "pct": 33.7
+   },
+   "r": {
+    "name": "Byron Donalds",
+    "pct": 66.3
+   },
+   "winner": {
+    "name": "Byron Donalds",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "FL-H-20": {
+   "margin": null,
+   "kind": "D-unopposed",
+   "d": {
+    "name": "Sheila Cherfilus-McCormick",
+    "pct": null
+   },
+   "r": null,
+   "winner": {
+    "name": "Sheila Cherfilus-McCormick",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "FL-H-21": {
+   "margin": -23.65,
+   "kind": "DR",
+   "d": {
+    "name": "Thomas Witkop",
+    "pct": 38.2
+   },
+   "r": {
+    "name": "Brian Mast",
+    "pct": 61.8
+   },
+   "winner": {
+    "name": "Brian Mast",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "FL-H-22": {
+   "margin": 9.91,
+   "kind": "DR",
+   "d": {
+    "name": "Lois Frankel",
+    "pct": 55
+   },
+   "r": {
+    "name": "Dan Franzese",
+    "pct": 45
+   },
+   "winner": {
+    "name": "Lois Frankel",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "FL-H-23": {
+   "margin": 4.89,
+   "kind": "DR",
+   "d": {
+    "name": "Jared Moskowitz",
+    "pct": 52.4
+   },
+   "r": {
+    "name": "Joe Kaufman",
+    "pct": 47.6
+   },
+   "winner": {
+    "name": "Jared Moskowitz",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "FL-H-24": {
+   "margin": 36.48,
+   "kind": "DR",
+   "d": {
+    "name": "Frederica Wilson",
+    "pct": 68.2
+   },
+   "r": {
+    "name": "Jesus Navarro",
+    "pct": 31.8
+   },
+   "winner": {
+    "name": "Frederica Wilson",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "FL-H-25": {
+   "margin": 8.96,
+   "kind": "DR",
+   "d": {
+    "name": "Debbie Wasserman Schultz",
+    "pct": 54.5
+   },
+   "r": {
+    "name": "Chris Eddy",
+    "pct": 45.5
+   },
+   "winner": {
+    "name": "Debbie Wasserman Schultz",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "FL-H-26": {
+   "margin": -41.83,
+   "kind": "DR",
+   "d": {
+    "name": "Joey Atkins",
+    "pct": 29.1
+   },
+   "r": {
+    "name": "Mario Diaz-Balart",
+    "pct": 70.9
+   },
+   "winner": {
+    "name": "Mario Diaz-Balart",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "FL-H-27": {
+   "margin": -20.75,
+   "kind": "DR",
+   "d": {
+    "name": "Lucia Baez-Geller",
+    "pct": 39.6
+   },
+   "r": {
+    "name": "Maria Elvira Salazar",
+    "pct": 60.4
+   },
+   "winner": {
+    "name": "Maria Elvira Salazar",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "FL-H-28": {
+   "margin": -29.13,
+   "kind": "DR",
+   "d": {
+    "name": "Phil Ehr",
+    "pct": 35.4
+   },
+   "r": {
+    "name": "Carlos Giménez",
+    "pct": 64.6
+   },
+   "winner": {
+    "name": "Carlos Giménez",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "GA-H-1": {
+   "margin": -23.97,
+   "kind": "DR",
+   "d": {
+    "name": "Patti Hewitt",
+    "pct": 38
+   },
+   "r": {
+    "name": "Buddy Carter",
+    "pct": 62
+   },
+   "winner": {
+    "name": "Buddy Carter",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "GA-H-2": {
+   "margin": 12.66,
+   "kind": "DR",
+   "d": {
+    "name": "Sanford Bishop",
+    "pct": 56.3
+   },
+   "r": {
+    "name": "Wayne Johnson",
+    "pct": 43.7
+   },
+   "winner": {
+    "name": "Sanford Bishop",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "GA-H-3": {
+   "margin": -32.61,
+   "kind": "DR",
+   "d": {
+    "name": "Maura Keller",
+    "pct": 33.7
+   },
+   "r": {
+    "name": "Brian Jack",
+    "pct": 66.3
+   },
+   "winner": {
+    "name": "Brian Jack",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "GA-H-4": {
+   "margin": 51.17,
+   "kind": "DR",
+   "d": {
+    "name": "Hank Johnson",
+    "pct": 75.6
+   },
+   "r": {
+    "name": "Eugene Yu",
+    "pct": 24.4
+   },
+   "winner": {
+    "name": "Hank Johnson",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "GA-H-5": {
+   "margin": 71.36,
+   "kind": "DR",
+   "d": {
+    "name": "Nikema Williams",
+    "pct": 85.7
+   },
+   "r": {
+    "name": "John Salvesen",
+    "pct": 14.3
+   },
+   "winner": {
+    "name": "Nikema Williams",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "GA-H-6": {
+   "margin": 49.36,
+   "kind": "DR",
+   "d": {
+    "name": "Lucy McBath",
+    "pct": 74.7
+   },
+   "r": {
+    "name": "Jeff Criswell",
+    "pct": 25.3
+   },
+   "winner": {
+    "name": "Lucy McBath",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "GA-H-7": {
+   "margin": -29.7,
+   "kind": "DR",
+   "d": {
+    "name": "Bob Christian",
+    "pct": 35.1
+   },
+   "r": {
+    "name": "Rich McCormick",
+    "pct": 64.9
+   },
+   "winner": {
+    "name": "Rich McCormick",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "GA-H-8": {
+   "margin": -37.83,
+   "kind": "DR",
+   "d": {
+    "name": "Darrius Butler",
+    "pct": 31.1
+   },
+   "r": {
+    "name": "Austin Scott",
+    "pct": 68.9
+   },
+   "winner": {
+    "name": "Austin Scott",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "GA-H-9": {
+   "margin": -38.01,
+   "kind": "DR",
+   "d": {
+    "name": "Tambrei Cash",
+    "pct": 31
+   },
+   "r": {
+    "name": "Andrew Clyde",
+    "pct": 69
+   },
+   "winner": {
+    "name": "Andrew Clyde",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "GA-H-10": {
+   "margin": -26.1,
+   "kind": "DR",
+   "d": {
+    "name": "Lexy Doherty",
+    "pct": 36.9
+   },
+   "r": {
+    "name": "Mike Collins",
+    "pct": 63.1
+   },
+   "winner": {
+    "name": "Mike Collins",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "GA-H-11": {
+   "margin": -33.76,
+   "kind": "DR",
+   "d": {
+    "name": "Katy Stamper",
+    "pct": 31.9
+   },
+   "r": {
+    "name": "Barry Loudermilk",
+    "pct": 65.6
+   },
+   "winner": {
+    "name": "Barry Loudermilk",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "GA-H-12": {
+   "margin": -20.64,
+   "kind": "DR",
+   "d": {
+    "name": "Elizabeth Johnson",
+    "pct": 39.7
+   },
+   "r": {
+    "name": "Rick Allen",
+    "pct": 60.3
+   },
+   "winner": {
+    "name": "Rick Allen",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "GA-H-13": {
+   "margin": 43.67,
+   "kind": "DR",
+   "d": {
+    "name": "David Scott",
+    "pct": 71.8
+   },
+   "r": {
+    "name": "Jonathan Chavez",
+    "pct": 28.2
+   },
+   "winner": {
+    "name": "David Scott",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "GA-H-14": {
+   "margin": -28.74,
+   "kind": "DR",
+   "d": {
+    "name": "Shawn Harris",
+    "pct": 35.6
+   },
+   "r": {
+    "name": "Marjorie Taylor Greene",
+    "pct": 64.4
+   },
+   "winner": {
+    "name": "Marjorie Taylor Greene",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "HI-H-1": {
+   "margin": 43.68,
+   "kind": "DR",
+   "d": {
+    "name": "Ed Case",
+    "pct": 71.8
+   },
+   "r": {
+    "name": "Patrick Largey",
+    "pct": 28.2
+   },
+   "winner": {
+    "name": "Ed Case",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "HI-H-2": {
+   "margin": 36.29,
+   "kind": "DR",
+   "d": {
+    "name": "Jill Tokuda",
+    "pct": 66.5
+   },
+   "r": {
+    "name": "Steve Bond",
+    "pct": 30.2
+   },
+   "winner": {
+    "name": "Jill Tokuda",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IA-H-1": {
+   "margin": -0.19,
+   "kind": "DR",
+   "d": {
+    "name": "Christina Bohannan",
+    "pct": 49.9
+   },
+   "r": {
+    "name": "Mariannette Miller-Meeks",
+    "pct": 50.1
+   },
+   "winner": {
+    "name": "Mariannette Miller-Meeks",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "IA-H-2": {
+   "margin": -15.57,
+   "kind": "DR",
+   "d": {
+    "name": "Sarah Corkery",
+    "pct": 41.6
+   },
+   "r": {
+    "name": "Ashley Hinson",
+    "pct": 57.1
+   },
+   "winner": {
+    "name": "Ashley Hinson",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "IA-H-3": {
+   "margin": -3.83,
+   "kind": "DR",
+   "d": {
+    "name": "Lanon Baccam",
+    "pct": 48.1
+   },
+   "r": {
+    "name": "Zach Nunn",
+    "pct": 51.9
+   },
+   "winner": {
+    "name": "Zach Nunn",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "IA-H-4": {
+   "margin": -34.44,
+   "kind": "DR",
+   "d": {
+    "name": "Ryan Melton",
+    "pct": 32.8
+   },
+   "r": {
+    "name": "Randy Feenstra",
+    "pct": 67.2
+   },
+   "winner": {
+    "name": "Randy Feenstra",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "ID-H-1": {
+   "margin": -45.56,
+   "kind": "DR",
+   "d": {
+    "name": "Kaylee Peterson",
+    "pct": 25.4
+   },
+   "r": {
+    "name": "Russ Fulcher",
+    "pct": 71
+   },
+   "winner": {
+    "name": "Russ Fulcher",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "ID-H-2": {
+   "margin": -30.41,
+   "kind": "DR",
+   "d": {
+    "name": "David Roth",
+    "pct": 31
+   },
+   "r": {
+    "name": "Mike Simpson",
+    "pct": 61.4
+   },
+   "winner": {
+    "name": "Mike Simpson",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "IL-H-1": {
+   "margin": 31.7,
+   "kind": "DR",
+   "d": {
+    "name": "Jonathan Jackson",
+    "pct": 65.9
+   },
+   "r": {
+    "name": "Marcus Lewis",
+    "pct": 34.1
+   },
+   "winner": {
+    "name": "Jonathan Jackson",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IL-H-2": {
+   "margin": 35.12,
+   "kind": "DR",
+   "d": {
+    "name": "Robin Kelly",
+    "pct": 67.6
+   },
+   "r": {
+    "name": "Ashley Ramos",
+    "pct": 32.4
+   },
+   "winner": {
+    "name": "Robin Kelly",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IL-H-3": {
+   "margin": 34.58,
+   "kind": "DR",
+   "d": {
+    "name": "Delia Ramirez",
+    "pct": 67.3
+   },
+   "r": {
+    "name": "John Booras",
+    "pct": 32.7
+   },
+   "winner": {
+    "name": "Delia Ramirez",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IL-H-4": {
+   "margin": 40.23,
+   "kind": "DR",
+   "d": {
+    "name": "Jesús \"Chuy\" García",
+    "pct": 67.5
+   },
+   "r": {
+    "name": "Lupe Castillo",
+    "pct": 27.3
+   },
+   "winner": {
+    "name": "Jesús \"Chuy\" García",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IL-H-5": {
+   "margin": 37.94,
+   "kind": "DR",
+   "d": {
+    "name": "Mike Quigley",
+    "pct": 69
+   },
+   "r": {
+    "name": "Tommy Hanson",
+    "pct": 31
+   },
+   "winner": {
+    "name": "Mike Quigley",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IL-H-6": {
+   "margin": 8.42,
+   "kind": "DR",
+   "d": {
+    "name": "Sean Casten",
+    "pct": 54.2
+   },
+   "r": {
+    "name": "Niki Conforti",
+    "pct": 45.8
+   },
+   "winner": {
+    "name": "Sean Casten",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IL-H-7": {
+   "margin": 66.59,
+   "kind": "DR",
+   "d": {
+    "name": "Danny Davis",
+    "pct": 83.3
+   },
+   "r": {
+    "name": "Chad Koppie",
+    "pct": 16.7
+   },
+   "winner": {
+    "name": "Danny Davis",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IL-H-8": {
+   "margin": 14.11,
+   "kind": "DR",
+   "d": {
+    "name": "Raja Krishnamoorthi",
+    "pct": 57.1
+   },
+   "r": {
+    "name": "Mark Rice",
+    "pct": 42.9
+   },
+   "winner": {
+    "name": "Raja Krishnamoorthi",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IL-H-9": {
+   "margin": 36.78,
+   "kind": "DR",
+   "d": {
+    "name": "Janice Schakowsky",
+    "pct": 68.4
+   },
+   "r": {
+    "name": "Seth Cohen",
+    "pct": 31.6
+   },
+   "winner": {
+    "name": "Janice Schakowsky",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IL-H-10": {
+   "margin": 19.96,
+   "kind": "DR",
+   "d": {
+    "name": "Brad Schneider",
+    "pct": 60
+   },
+   "r": {
+    "name": "Jim Carris",
+    "pct": 40
+   },
+   "winner": {
+    "name": "Brad Schneider",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IL-H-11": {
+   "margin": 11.18,
+   "kind": "DR",
+   "d": {
+    "name": "Bill Foster",
+    "pct": 55.6
+   },
+   "r": {
+    "name": "Jerry Evans",
+    "pct": 44.4
+   },
+   "winner": {
+    "name": "Bill Foster",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IL-H-12": {
+   "margin": -48.39,
+   "kind": "DR",
+   "d": {
+    "name": "Brian Roberts",
+    "pct": 25.8
+   },
+   "r": {
+    "name": "Mike Bost",
+    "pct": 74.2
+   },
+   "winner": {
+    "name": "Mike Bost",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "IL-H-13": {
+   "margin": 16.23,
+   "kind": "DR",
+   "d": {
+    "name": "Nikki Budzinski",
+    "pct": 58.1
+   },
+   "r": {
+    "name": "Joshua Loyd",
+    "pct": 41.9
+   },
+   "winner": {
+    "name": "Nikki Budzinski",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IL-H-14": {
+   "margin": 10.21,
+   "kind": "DR",
+   "d": {
+    "name": "Lauren Underwood",
+    "pct": 55.1
+   },
+   "r": {
+    "name": "James Marter",
+    "pct": 44.9
+   },
+   "winner": {
+    "name": "Lauren Underwood",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IL-H-15": {
+   "margin": null,
+   "kind": "R-unopposed",
+   "d": null,
+   "r": {
+    "name": "Mary Miller",
+    "pct": 100
+   },
+   "winner": {
+    "name": "Mary Miller",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "IL-H-16": {
+   "margin": null,
+   "kind": "R-unopposed",
+   "d": null,
+   "r": {
+    "name": "Darin LaHood",
+    "pct": 100
+   },
+   "winner": {
+    "name": "Darin LaHood",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "IL-H-17": {
+   "margin": 8.85,
+   "kind": "DR",
+   "d": {
+    "name": "Eric Sorensen",
+    "pct": 54.4
+   },
+   "r": {
+    "name": "Joe McGraw",
+    "pct": 45.6
+   },
+   "winner": {
+    "name": "Eric Sorensen",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IN-H-1": {
+   "margin": 8.49,
+   "kind": "DR",
+   "d": {
+    "name": "Frank Mrvan",
+    "pct": 53.4
+   },
+   "r": {
+    "name": "Randy Niemeyer",
+    "pct": 44.9
+   },
+   "winner": {
+    "name": "Frank Mrvan",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IN-H-2": {
+   "margin": -28.13,
+   "kind": "DR",
+   "d": {
+    "name": "Lori Camp",
+    "pct": 34.6
+   },
+   "r": {
+    "name": "Rudy Yakym",
+    "pct": 62.7
+   },
+   "winner": {
+    "name": "Rudy Yakym",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "IN-H-3": {
+   "margin": -33.63,
+   "kind": "DR",
+   "d": {
+    "name": "Kiley Adolph",
+    "pct": 31.4
+   },
+   "r": {
+    "name": "Marlin Stutzman",
+    "pct": 65
+   },
+   "winner": {
+    "name": "Marlin Stutzman",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "IN-H-4": {
+   "margin": -33.9,
+   "kind": "DR",
+   "d": {
+    "name": "Derrick Holder",
+    "pct": 30.9
+   },
+   "r": {
+    "name": "Jim Baird",
+    "pct": 64.8
+   },
+   "winner": {
+    "name": "Jim Baird",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "IN-H-5": {
+   "margin": -18.58,
+   "kind": "DR",
+   "d": {
+    "name": "Deborah Pickett",
+    "pct": 38
+   },
+   "r": {
+    "name": "Victoria Spartz",
+    "pct": 56.6
+   },
+   "winner": {
+    "name": "Victoria Spartz",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "IN-H-6": {
+   "margin": -32.24,
+   "kind": "DR",
+   "d": {
+    "name": "Cinde Wirth",
+    "pct": 31.7
+   },
+   "r": {
+    "name": "Jefferson Shreve",
+    "pct": 63.9
+   },
+   "winner": {
+    "name": "Jefferson Shreve",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "IN-H-7": {
+   "margin": 39.39,
+   "kind": "DR",
+   "d": {
+    "name": "André Carson",
+    "pct": 68.3
+   },
+   "r": {
+    "name": "John Schmitz",
+    "pct": 29
+   },
+   "winner": {
+    "name": "André Carson",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "IN-H-8": {
+   "margin": -38.51,
+   "kind": "DR",
+   "d": {
+    "name": "Erik Hurt",
+    "pct": 29.5
+   },
+   "r": {
+    "name": "Mark Messmer",
+    "pct": 68
+   },
+   "winner": {
+    "name": "Mark Messmer",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "IN-H-9": {
+   "margin": -31.67,
+   "kind": "DR",
+   "d": {
+    "name": "Tim Peck",
+    "pct": 32.8
+   },
+   "r": {
+    "name": "Erin Houchin",
+    "pct": 64.5
+   },
+   "winner": {
+    "name": "Erin Houchin",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "KS-H-1": {
+   "margin": -38.27,
+   "kind": "DR",
+   "d": {
+    "name": "Paul Buskirk",
+    "pct": 30.9
+   },
+   "r": {
+    "name": "Tracey Mann",
+    "pct": 69.1
+   },
+   "winner": {
+    "name": "Tracey Mann",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "KS-H-2": {
+   "margin": -18.88,
+   "kind": "DR",
+   "d": {
+    "name": "Nancy Boyda",
+    "pct": 38.2
+   },
+   "r": {
+    "name": "Derek Schmidt",
+    "pct": 57.1
+   },
+   "winner": {
+    "name": "Derek Schmidt",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "KS-H-3": {
+   "margin": 10.75,
+   "kind": "DR",
+   "d": {
+    "name": "Sharice Davids",
+    "pct": 53.4
+   },
+   "r": {
+    "name": "Prasanth Reddy",
+    "pct": 42.6
+   },
+   "winner": {
+    "name": "Sharice Davids",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "KS-H-4": {
+   "margin": -30.1,
+   "kind": "DR",
+   "d": {
+    "name": "Esau Freeman",
+    "pct": 35
+   },
+   "r": {
+    "name": "Ron Estes",
+    "pct": 65
+   },
+   "winner": {
+    "name": "Ron Estes",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "KY-H-1": {
+   "margin": -49.43,
+   "kind": "DR",
+   "d": {
+    "name": "Erin Marshall",
+    "pct": 25.3
+   },
+   "r": {
+    "name": "James Comer",
+    "pct": 74.7
+   },
+   "winner": {
+    "name": "James Comer",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "KY-H-2": {
+   "margin": -46.2,
+   "kind": "DR",
+   "d": {
+    "name": "Hank Linderman",
+    "pct": 26.9
+   },
+   "r": {
+    "name": "Brett Guthrie",
+    "pct": 73.1
+   },
+   "winner": {
+    "name": "Brett Guthrie",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "KY-H-3": {
+   "margin": 23.91,
+   "kind": "DR",
+   "d": {
+    "name": "Morgan McGarvey",
+    "pct": 62
+   },
+   "r": {
+    "name": "Mike Craven",
+    "pct": 38
+   },
+   "winner": {
+    "name": "Morgan McGarvey",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "KY-H-4": {
+   "margin": null,
+   "kind": "R-unopposed",
+   "d": null,
+   "r": {
+    "name": "Thomas Massie",
+    "pct": 100
+   },
+   "winner": {
+    "name": "Thomas Massie",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "KY-H-5": {
+   "margin": null,
+   "kind": "R-unopposed",
+   "d": null,
+   "r": {
+    "name": "Hal Rogers",
+    "pct": 100
+   },
+   "winner": {
+    "name": "Hal Rogers",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "KY-H-6": {
+   "margin": -26.07,
+   "kind": "DR",
+   "d": {
+    "name": "Randy Cravens",
+    "pct": 37
+   },
+   "r": {
+    "name": "Andy Barr",
+    "pct": 63
+   },
+   "winner": {
+    "name": "Andy Barr",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "LA-H-1": {
+   "margin": -42.75,
+   "kind": "DR",
+   "d": {
+    "name": "Mel Manuel",
+    "pct": 24
+   },
+   "r": {
+    "name": "Steve Scalise",
+    "pct": 66.8
+   },
+   "winner": {
+    "name": "Steve Scalise",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "LA-H-2": {
+   "margin": 46.65,
+   "kind": "DR",
+   "d": {
+    "name": "Troy Carter",
+    "pct": 60.3
+   },
+   "r": {
+    "name": "Christy Lynch",
+    "pct": 13.6
+   },
+   "winner": {
+    "name": "Troy Carter",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "LA-H-3": {
+   "margin": -51.9,
+   "kind": "DR",
+   "d": {
+    "name": "Priscilla Gonzalez",
+    "pct": 18.7
+   },
+   "r": {
+    "name": "Clay Higgins",
+    "pct": 70.6
+   },
+   "winner": {
+    "name": "Clay Higgins",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "LA-H-4": {
+   "margin": null,
+   "kind": "RR",
+   "d": null,
+   "r": {
+    "name": "Mike Johnson",
+    "pct": 85.8
+   },
+   "winner": {
+    "name": "Mike Johnson",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "LA-H-5": {
+   "margin": -36.91,
+   "kind": "DR",
+   "d": {
+    "name": "Michael Vallien",
+    "pct": 25.9
+   },
+   "r": {
+    "name": "Julia Letlow",
+    "pct": 62.9
+   },
+   "winner": {
+    "name": "Julia Letlow",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "LA-H-6": {
+   "margin": 13.03,
+   "kind": "DR",
+   "d": {
+    "name": "Cleo Fields",
+    "pct": 50.8
+   },
+   "r": {
+    "name": "Elbert Guillory",
+    "pct": 37.7
+   },
+   "winner": {
+    "name": "Cleo Fields",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "MA-H-1": {
+   "margin": null,
+   "kind": "D-noR",
+   "d": {
+    "name": "Richard Neal",
+    "pct": 62.4
+   },
+   "r": null,
+   "winner": {
+    "name": "Richard Neal",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MA-H-2": {
+   "margin": null,
+   "kind": "D-noR",
+   "d": {
+    "name": "Jim McGovern",
+    "pct": 68.6
+   },
+   "r": null,
+   "winner": {
+    "name": "Jim McGovern",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MA-H-3": {
+   "margin": null,
+   "kind": "D-unopposed",
+   "d": {
+    "name": "Lori Trahan",
+    "pct": 97.5
+   },
+   "r": null,
+   "winner": {
+    "name": "Lori Trahan",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MA-H-4": {
+   "margin": null,
+   "kind": "D-unopposed",
+   "d": {
+    "name": "Jake Auchincloss",
+    "pct": 97.2
+   },
+   "r": null,
+   "winner": {
+    "name": "Jake Auchincloss",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MA-H-5": {
+   "margin": null,
+   "kind": "D-unopposed",
+   "d": {
+    "name": "Katherine Clark",
+    "pct": 98.2
+   },
+   "r": null,
+   "winner": {
+    "name": "Katherine Clark",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MA-H-6": {
+   "margin": null,
+   "kind": "D-unopposed",
+   "d": {
+    "name": "Seth Moulton",
+    "pct": 97.8
+   },
+   "r": null,
+   "winner": {
+    "name": "Seth Moulton",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MA-H-7": {
+   "margin": null,
+   "kind": "D-unopposed",
+   "d": {
+    "name": "Ayanna Pressley",
+    "pct": 97.1
+   },
+   "r": null,
+   "winner": {
+    "name": "Ayanna Pressley",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MA-H-8": {
+   "margin": 41.08,
+   "kind": "DR",
+   "d": {
+    "name": "Stephen Lynch",
+    "pct": 70.4
+   },
+   "r": {
+    "name": "Rob Burke",
+    "pct": 29.4
+   },
+   "winner": {
+    "name": "Stephen Lynch",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MA-H-9": {
+   "margin": 13.02,
+   "kind": "DR",
+   "d": {
+    "name": "Bill Keating",
+    "pct": 56.4
+   },
+   "r": {
+    "name": "Dan Sullivan",
+    "pct": 43.4
+   },
+   "winner": {
+    "name": "Bill Keating",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MD-H-1": {
+   "margin": -22.07,
+   "kind": "DR",
+   "d": {
+    "name": "Blane Miller",
+    "pct": 37.4
+   },
+   "r": {
+    "name": "Andy Harris",
+    "pct": 59.5
+   },
+   "winner": {
+    "name": "Andy Harris",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MD-H-2": {
+   "margin": 18.67,
+   "kind": "DR",
+   "d": {
+    "name": "Johnny Olszewski",
+    "pct": 58.3
+   },
+   "r": {
+    "name": "Kim Klacik",
+    "pct": 39.6
+   },
+   "winner": {
+    "name": "Johnny Olszewski",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MD-H-3": {
+   "margin": 21.46,
+   "kind": "DR",
+   "d": {
+    "name": "Sarah Elfreth",
+    "pct": 59.4
+   },
+   "r": {
+    "name": "Robert Steinberger",
+    "pct": 38
+   },
+   "winner": {
+    "name": "Sarah Elfreth",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MD-H-4": {
+   "margin": 77.45,
+   "kind": "DR",
+   "d": {
+    "name": "Glenn Ivey",
+    "pct": 88.7
+   },
+   "r": {
+    "name": "George McDermott",
+    "pct": 11.3
+   },
+   "winner": {
+    "name": "Glenn Ivey",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MD-H-5": {
+   "margin": 35.83,
+   "kind": "DR",
+   "d": {
+    "name": "Steny Hoyer",
+    "pct": 67.9
+   },
+   "r": {
+    "name": "Michelle Talkington",
+    "pct": 32.1
+   },
+   "winner": {
+    "name": "Steny Hoyer",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MD-H-6": {
+   "margin": 6.34,
+   "kind": "DR",
+   "d": {
+    "name": "April McClain Delaney",
+    "pct": 53.2
+   },
+   "r": {
+    "name": "Neil Parrott",
+    "pct": 46.8
+   },
+   "winner": {
+    "name": "April McClain Delaney",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MD-H-7": {
+   "margin": 63.23,
+   "kind": "DR",
+   "d": {
+    "name": "Kweisi Mfume",
+    "pct": 80.4
+   },
+   "r": {
+    "name": "Scott Collier",
+    "pct": 17.2
+   },
+   "winner": {
+    "name": "Kweisi Mfume",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MD-H-8": {
+   "margin": 56.46,
+   "kind": "DR",
+   "d": {
+    "name": "Jamie Raskin",
+    "pct": 77
+   },
+   "r": {
+    "name": "Cheryl Riley",
+    "pct": 20.5
+   },
+   "winner": {
+    "name": "Jamie Raskin",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "ME-H-1": {
+   "margin": 22.27,
+   "kind": "DR",
+   "d": {
+    "name": "Chellie Pingree",
+    "pct": 58.7
+   },
+   "r": {
+    "name": "Ronald Russell",
+    "pct": 36.4
+   },
+   "winner": {
+    "name": "Chellie Pingree",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "ME-H-2": {
+   "margin": 0.55,
+   "kind": "DR",
+   "d": {
+    "name": "Jared Golden",
+    "pct": 50.2
+   },
+   "r": {
+    "name": "Austin Theriault",
+    "pct": 49.7
+   },
+   "winner": {
+    "name": "Jared Golden",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MI-H-1": {
+   "margin": -21.23,
+   "kind": "DR",
+   "d": {
+    "name": "Callie Barr",
+    "pct": 37.9
+   },
+   "r": {
+    "name": "Jack Bergman",
+    "pct": 59.2
+   },
+   "winner": {
+    "name": "Jack Bergman",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MI-H-2": {
+   "margin": -33.45,
+   "kind": "DR",
+   "d": {
+    "name": "Michael Lynch",
+    "pct": 31.7
+   },
+   "r": {
+    "name": "John Moolenaar",
+    "pct": 65.1
+   },
+   "winner": {
+    "name": "John Moolenaar",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MI-H-3": {
+   "margin": 9.89,
+   "kind": "DR",
+   "d": {
+    "name": "Hillary Scholten",
+    "pct": 53.7
+   },
+   "r": {
+    "name": "Paul Hudson",
+    "pct": 43.8
+   },
+   "winner": {
+    "name": "Hillary Scholten",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MI-H-4": {
+   "margin": -11.71,
+   "kind": "DR",
+   "d": {
+    "name": "Jessica Swartz",
+    "pct": 43.4
+   },
+   "r": {
+    "name": "Bill Huizenga",
+    "pct": 55.1
+   },
+   "winner": {
+    "name": "Bill Huizenga",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MI-H-5": {
+   "margin": -32.92,
+   "kind": "DR",
+   "d": {
+    "name": "Libbi Urban",
+    "pct": 32.8
+   },
+   "r": {
+    "name": "Tim Walberg",
+    "pct": 65.7
+   },
+   "winner": {
+    "name": "Tim Walberg",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MI-H-6": {
+   "margin": 27.02,
+   "kind": "DR",
+   "d": {
+    "name": "Debbie Dingell",
+    "pct": 62
+   },
+   "r": {
+    "name": "Heather Smiley",
+    "pct": 35
+   },
+   "winner": {
+    "name": "Debbie Dingell",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MI-H-7": {
+   "margin": -3.72,
+   "kind": "DR",
+   "d": {
+    "name": "Curtis Hertel",
+    "pct": 46.6
+   },
+   "r": {
+    "name": "Tom Barrett",
+    "pct": 50.3
+   },
+   "winner": {
+    "name": "Tom Barrett",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MI-H-8": {
+   "margin": 6.64,
+   "kind": "DR",
+   "d": {
+    "name": "Kristen McDonald Rivet",
+    "pct": 51.3
+   },
+   "r": {
+    "name": "Paul Junge",
+    "pct": 44.6
+   },
+   "winner": {
+    "name": "Kristen McDonald Rivet",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MI-H-9": {
+   "margin": -37.26,
+   "kind": "DR",
+   "d": {
+    "name": "Clint St. Mosley",
+    "pct": 29.5
+   },
+   "r": {
+    "name": "Lisa McClain",
+    "pct": 66.8
+   },
+   "winner": {
+    "name": "Lisa McClain",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MI-H-10": {
+   "margin": -6.13,
+   "kind": "DR",
+   "d": {
+    "name": "Carl Marlinga",
+    "pct": 45
+   },
+   "r": {
+    "name": "John James",
+    "pct": 51.1
+   },
+   "winner": {
+    "name": "John James",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MI-H-11": {
+   "margin": 18.61,
+   "kind": "DR",
+   "d": {
+    "name": "Haley Stevens",
+    "pct": 58.2
+   },
+   "r": {
+    "name": "Nick Somberg",
+    "pct": 39.6
+   },
+   "winner": {
+    "name": "Haley Stevens",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MI-H-12": {
+   "margin": 44.25,
+   "kind": "DR",
+   "d": {
+    "name": "Rashida Tlaib",
+    "pct": 69.7
+   },
+   "r": {
+    "name": "James Hooper",
+    "pct": 25.4
+   },
+   "winner": {
+    "name": "Rashida Tlaib",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MI-H-13": {
+   "margin": 44.11,
+   "kind": "DR",
+   "d": {
+    "name": "Shri Thanedar",
+    "pct": 68.6
+   },
+   "r": {
+    "name": "Martell Bivings",
+    "pct": 24.5
+   },
+   "winner": {
+    "name": "Shri Thanedar",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MN-H-1": {
+   "margin": -17.11,
+   "kind": "DR",
+   "d": {
+    "name": "Rachel Bohman",
+    "pct": 41.4
+   },
+   "r": {
+    "name": "Brad Finstad",
+    "pct": 58.6
+   },
+   "winner": {
+    "name": "Brad Finstad",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MN-H-2": {
+   "margin": 13.46,
+   "kind": "DR",
+   "d": {
+    "name": "Angie Craig",
+    "pct": 55.6
+   },
+   "r": {
+    "name": "Joe Teirab",
+    "pct": 42.1
+   },
+   "winner": {
+    "name": "Angie Craig",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MN-H-3": {
+   "margin": 16.99,
+   "kind": "DR",
+   "d": {
+    "name": "Kelly Morrison",
+    "pct": 58.5
+   },
+   "r": {
+    "name": "Tad Jude",
+    "pct": 41.5
+   },
+   "winner": {
+    "name": "Kelly Morrison",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MN-H-4": {
+   "margin": 34.73,
+   "kind": "DR",
+   "d": {
+    "name": "Betty McCollum",
+    "pct": 67.4
+   },
+   "r": {
+    "name": "May Lor Xiong",
+    "pct": 32.6
+   },
+   "winner": {
+    "name": "Betty McCollum",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MN-H-5": {
+   "margin": 50.35,
+   "kind": "DR",
+   "d": {
+    "name": "Ilhan Omar",
+    "pct": 75.2
+   },
+   "r": {
+    "name": "Dalia Al-Aqidi",
+    "pct": 24.8
+   },
+   "winner": {
+    "name": "Ilhan Omar",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MN-H-6": {
+   "margin": -25.07,
+   "kind": "DR",
+   "d": {
+    "name": "Jeanne Hendricks",
+    "pct": 37.5
+   },
+   "r": {
+    "name": "Tom Emmer",
+    "pct": 62.5
+   },
+   "winner": {
+    "name": "Tom Emmer",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MN-H-7": {
+   "margin": -41.05,
+   "kind": "DR",
+   "d": {
+    "name": "AJ Peters",
+    "pct": 29.5
+   },
+   "r": {
+    "name": "Michelle Fischbach",
+    "pct": 70.5
+   },
+   "winner": {
+    "name": "Michelle Fischbach",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MN-H-8": {
+   "margin": -16.09,
+   "kind": "DR",
+   "d": {
+    "name": "Jen Schultz",
+    "pct": 42
+   },
+   "r": {
+    "name": "Pete Stauber",
+    "pct": 58
+   },
+   "winner": {
+    "name": "Pete Stauber",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MO-H-1": {
+   "margin": 57.56,
+   "kind": "DR",
+   "d": {
+    "name": "Wesley Bell",
+    "pct": 75.9
+   },
+   "r": {
+    "name": "Andrew Jones",
+    "pct": 18.4
+   },
+   "winner": {
+    "name": "Wesley Bell",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "MO-H-2": {
+   "margin": -12,
+   "kind": "DR",
+   "d": {
+    "name": "Ray Hartmann",
+    "pct": 42.5
+   },
+   "r": {
+    "name": "Ann Wagner",
+    "pct": 54.5
+   },
+   "winner": {
+    "name": "Ann Wagner",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "MO-H-3": {
+   "margin": -26.01,
+   "kind": "DR",
+   "d": {
+    "name": "Bethany Mann",
+    "pct": 35.3
+   },
+   "r": {
+    "name": "Bob Onder",
+    "pct": 61.3
+   },
+   "winner": {
+    "name": "Bob Onder",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "MO-H-4": {
+   "margin": -44.66,
+   "kind": "DR",
+   "d": {
+    "name": "Jeanette Cass",
+    "pct": 26.4
+   },
+   "r": {
+    "name": "Mark Alford",
+    "pct": 71.1
+   },
+   "winner": {
+    "name": "Mark Alford",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "MO-H-5": {
+   "margin": 23.78,
+   "kind": "DR",
+   "d": {
+    "name": "Emanuel Cleaver",
+    "pct": 60.2
+   },
+   "r": {
+    "name": "Sean Smith",
+    "pct": 36.4
+   },
+   "winner": {
+    "name": "Emanuel Cleaver",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "MO-H-6": {
+   "margin": -43.77,
+   "kind": "DR",
+   "d": {
+    "name": "Pam May",
+    "pct": 26.9
+   },
+   "r": {
+    "name": "Sam Graves",
+    "pct": 70.7
+   },
+   "winner": {
+    "name": "Sam Graves",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "MO-H-7": {
+   "margin": -45.28,
+   "kind": "DR",
+   "d": {
+    "name": "Missi Hesketh",
+    "pct": 26.3
+   },
+   "r": {
+    "name": "Eric Burlison",
+    "pct": 71.6
+   },
+   "winner": {
+    "name": "Eric Burlison",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MO-H-8": {
+   "margin": -54.37,
+   "kind": "DR",
+   "d": {
+    "name": "Randi McCallian",
+    "pct": 21.8
+   },
+   "r": {
+    "name": "Jason Smith",
+    "pct": 76.2
+   },
+   "winner": {
+    "name": "Jason Smith",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MS-H-1": {
+   "margin": -39.62,
+   "kind": "DR",
+   "d": {
+    "name": "Dianne Black",
+    "pct": 30.2
+   },
+   "r": {
+    "name": "Trent Kelly",
+    "pct": 69.8
+   },
+   "winner": {
+    "name": "Trent Kelly",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MS-H-2": {
+   "margin": 24.03,
+   "kind": "DR",
+   "d": {
+    "name": "Bennie Thompson",
+    "pct": 62
+   },
+   "r": {
+    "name": "Ron Eller",
+    "pct": 38
+   },
+   "winner": {
+    "name": "Bennie Thompson",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "MS-H-3": {
+   "margin": null,
+   "kind": "R-unopposed",
+   "d": null,
+   "r": {
+    "name": "Michael Guest",
+    "pct": 100
+   },
+   "winner": {
+    "name": "Michael Guest",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MS-H-4": {
+   "margin": -47.9,
+   "kind": "DR",
+   "d": {
+    "name": "Craig Raybon",
+    "pct": 26.1
+   },
+   "r": {
+    "name": "Mike Ezell",
+    "pct": 73.9
+   },
+   "winner": {
+    "name": "Mike Ezell",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MT-H-1": {
+   "margin": -7.68,
+   "kind": "DR",
+   "d": {
+    "name": "Monica Tranel",
+    "pct": 44.6
+   },
+   "r": {
+    "name": "Ryan Zinke",
+    "pct": 52.3
+   },
+   "winner": {
+    "name": "Ryan Zinke",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "MT-H-2": {
+   "margin": -31.98,
+   "kind": "DR",
+   "d": {
+    "name": "John Driscoll",
+    "pct": 34
+   },
+   "r": {
+    "name": "Troy Downing",
+    "pct": 66
+   },
+   "winner": {
+    "name": "Troy Downing",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NC-H-1": {
+   "margin": 1.68,
+   "kind": "DR",
+   "d": {
+    "name": "Don Davis",
+    "pct": 49.5
+   },
+   "r": {
+    "name": "Laurie Buckhout",
+    "pct": 47.8
+   },
+   "winner": {
+    "name": "Don Davis",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "NC-H-2": {
+   "margin": 34.65,
+   "kind": "DR",
+   "d": {
+    "name": "Deborah Ross",
+    "pct": 66.3
+   },
+   "r": {
+    "name": "Alan Swain",
+    "pct": 31.6
+   },
+   "winner": {
+    "name": "Deborah Ross",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NC-H-3": {
+   "margin": null,
+   "kind": "R-noD",
+   "d": null,
+   "r": {
+    "name": "Greg Murphy",
+    "pct": 77.4
+   },
+   "winner": {
+    "name": "Greg Murphy",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "NC-H-4": {
+   "margin": 45.71,
+   "kind": "DR",
+   "d": {
+    "name": "Valerie Foushee",
+    "pct": 71.8
+   },
+   "r": {
+    "name": "Eric Blankenburg",
+    "pct": 26.1
+   },
+   "winner": {
+    "name": "Valerie Foushee",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NC-H-5": {
+   "margin": -18.95,
+   "kind": "DR",
+   "d": {
+    "name": "Chuck Hubbard",
+    "pct": 40.5
+   },
+   "r": {
+    "name": "Virginia Foxx",
+    "pct": 59.5
+   },
+   "winner": {
+    "name": "Virginia Foxx",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NC-H-6": {
+   "margin": null,
+   "kind": "R-noD",
+   "d": null,
+   "r": {
+    "name": "Addison McDowell",
+    "pct": 69.2
+   },
+   "winner": {
+    "name": "Addison McDowell",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NC-H-7": {
+   "margin": -17.19,
+   "kind": "DR",
+   "d": {
+    "name": "Marlando Pridgen",
+    "pct": 41.4
+   },
+   "r": {
+    "name": "David Rouzer",
+    "pct": 58.6
+   },
+   "winner": {
+    "name": "David Rouzer",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NC-H-8": {
+   "margin": -19.22,
+   "kind": "DR",
+   "d": {
+    "name": "Justin Dues",
+    "pct": 40.4
+   },
+   "r": {
+    "name": "Mark Harris",
+    "pct": 59.6
+   },
+   "winner": {
+    "name": "Mark Harris",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NC-H-9": {
+   "margin": -18.55,
+   "kind": "DR",
+   "d": {
+    "name": "Nigel Bristow",
+    "pct": 37.8
+   },
+   "r": {
+    "name": "Richard Hudson",
+    "pct": 56.3
+   },
+   "winner": {
+    "name": "Richard Hudson",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NC-H-10": {
+   "margin": -19.28,
+   "kind": "DR",
+   "d": {
+    "name": "Ralph Scott",
+    "pct": 38.2
+   },
+   "r": {
+    "name": "Pat Harrigan",
+    "pct": 57.5
+   },
+   "winner": {
+    "name": "Pat Harrigan",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NC-H-11": {
+   "margin": -13.54,
+   "kind": "DR",
+   "d": {
+    "name": "Caleb Rudow",
+    "pct": 43.2
+   },
+   "r": {
+    "name": "Chuck Edwards",
+    "pct": 56.8
+   },
+   "winner": {
+    "name": "Chuck Edwards",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NC-H-12": {
+   "margin": 48.04,
+   "kind": "DR",
+   "d": {
+    "name": "Alma Adams",
+    "pct": 74
+   },
+   "r": {
+    "name": "Addul Ali",
+    "pct": 26
+   },
+   "winner": {
+    "name": "Alma Adams",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NC-H-13": {
+   "margin": -17.29,
+   "kind": "DR",
+   "d": {
+    "name": "Frank Pierce",
+    "pct": 41.4
+   },
+   "r": {
+    "name": "Brad Knott",
+    "pct": 58.6
+   },
+   "winner": {
+    "name": "Brad Knott",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NC-H-14": {
+   "margin": -16.13,
+   "kind": "DR",
+   "d": {
+    "name": "Pam Genant",
+    "pct": 41.9
+   },
+   "r": {
+    "name": "Tim Moore",
+    "pct": 58.1
+   },
+   "winner": {
+    "name": "Tim Moore",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "ND-H-1": {
+   "margin": -39.03,
+   "kind": "DR",
+   "d": {
+    "name": "Trygve Hammer",
+    "pct": 30.5
+   },
+   "r": {
+    "name": "Julie Fedorchak",
+    "pct": 69.5
+   },
+   "winner": {
+    "name": "Julie Fedorchak",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NE-H-1": {
+   "margin": -20.21,
+   "kind": "DR",
+   "d": {
+    "name": "Carol Blood",
+    "pct": 39.9
+   },
+   "r": {
+    "name": "Mike Flood",
+    "pct": 60.1
+   },
+   "winner": {
+    "name": "Mike Flood",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NE-H-2": {
+   "margin": -1.85,
+   "kind": "DR",
+   "d": {
+    "name": "Tony Vargas",
+    "pct": 49.1
+   },
+   "r": {
+    "name": "Don Bacon",
+    "pct": 50.9
+   },
+   "winner": {
+    "name": "Don Bacon",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NE-H-3": {
+   "margin": -60.84,
+   "kind": "DR",
+   "d": {
+    "name": "Daniel Ebers",
+    "pct": 19.6
+   },
+   "r": {
+    "name": "Adrian Smith",
+    "pct": 80.4
+   },
+   "winner": {
+    "name": "Adrian Smith",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NH-H-1": {
+   "margin": 8.06,
+   "kind": "DR",
+   "d": {
+    "name": "Chris Pappas",
+    "pct": 54
+   },
+   "r": {
+    "name": "Russell Prescott",
+    "pct": 45.9
+   },
+   "winner": {
+    "name": "Chris Pappas",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NH-H-2": {
+   "margin": 5.96,
+   "kind": "DR",
+   "d": {
+    "name": "Maggie Goodlander",
+    "pct": 52.9
+   },
+   "r": {
+    "name": "Lily Tang Williams",
+    "pct": 47
+   },
+   "winner": {
+    "name": "Maggie Goodlander",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NJ-H-1": {
+   "margin": 17.83,
+   "kind": "DR",
+   "d": {
+    "name": "Donald Norcross",
+    "pct": 57.8
+   },
+   "r": {
+    "name": "Teddy Liddell",
+    "pct": 40
+   },
+   "winner": {
+    "name": "Donald Norcross",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NJ-H-2": {
+   "margin": -16.89,
+   "kind": "DR",
+   "d": {
+    "name": "Joe Salerno",
+    "pct": 41.2
+   },
+   "r": {
+    "name": "Jeff Van Drew",
+    "pct": 58.1
+   },
+   "winner": {
+    "name": "Jeff Van Drew",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NJ-H-3": {
+   "margin": 8.58,
+   "kind": "DR",
+   "d": {
+    "name": "Herb Conaway",
+    "pct": 53.2
+   },
+   "r": {
+    "name": "Rajesh Mohan",
+    "pct": 44.6
+   },
+   "winner": {
+    "name": "Herb Conaway",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NJ-H-4": {
+   "margin": -35.7,
+   "kind": "DR",
+   "d": {
+    "name": "Matthew Jenkins",
+    "pct": 31.6
+   },
+   "r": {
+    "name": "Chris Smith",
+    "pct": 67.3
+   },
+   "winner": {
+    "name": "Chris Smith",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NJ-H-5": {
+   "margin": 11.27,
+   "kind": "DR",
+   "d": {
+    "name": "Josh Gottheimer",
+    "pct": 54.5
+   },
+   "r": {
+    "name": "Mary Jo Guinchard",
+    "pct": 43.3
+   },
+   "winner": {
+    "name": "Josh Gottheimer",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NJ-H-6": {
+   "margin": 15.71,
+   "kind": "DR",
+   "d": {
+    "name": "Frank Pallone",
+    "pct": 56
+   },
+   "r": {
+    "name": "Scott Fegler",
+    "pct": 40.3
+   },
+   "winner": {
+    "name": "Frank Pallone",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NJ-H-7": {
+   "margin": -5.4,
+   "kind": "DR",
+   "d": {
+    "name": "Sue Altman",
+    "pct": 46.3
+   },
+   "r": {
+    "name": "Thomas Kean Jr.",
+    "pct": 51.7
+   },
+   "winner": {
+    "name": "Thomas Kean Jr.",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NJ-H-8": {
+   "margin": 24.43,
+   "kind": "DR",
+   "d": {
+    "name": "Rob Menendez",
+    "pct": 58.9
+   },
+   "r": {
+    "name": "Anthony Valdes",
+    "pct": 34.5
+   },
+   "winner": {
+    "name": "Rob Menendez",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NJ-H-9": {
+   "margin": 4.89,
+   "kind": "DR",
+   "d": {
+    "name": "Nellie Pou",
+    "pct": 50.7
+   },
+   "r": {
+    "name": "Billy Prempeh",
+    "pct": 45.8
+   },
+   "winner": {
+    "name": "Nellie Pou",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NJ-H-10": {
+   "margin": 52.13,
+   "kind": "DR",
+   "d": {
+    "name": "LaMonica McIver",
+    "pct": 74.3
+   },
+   "r": {
+    "name": "Carmen Bucco",
+    "pct": 22.2
+   },
+   "winner": {
+    "name": "LaMonica McIver",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NJ-H-11": {
+   "margin": 14.73,
+   "kind": "DR",
+   "d": {
+    "name": "Mikie Sherrill",
+    "pct": 56.5
+   },
+   "r": {
+    "name": "Joseph Belnome",
+    "pct": 41.8
+   },
+   "winner": {
+    "name": "Mikie Sherrill",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NJ-H-12": {
+   "margin": 24.73,
+   "kind": "DR",
+   "d": {
+    "name": "Bonnie Watson Coleman",
+    "pct": 61.1
+   },
+   "r": {
+    "name": "Darius Mayfield",
+    "pct": 36.4
+   },
+   "winner": {
+    "name": "Bonnie Watson Coleman",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NM-H-1": {
+   "margin": 12.74,
+   "kind": "DR",
+   "d": {
+    "name": "Melanie Stansbury",
+    "pct": 56.4
+   },
+   "r": {
+    "name": "Steve Jones",
+    "pct": 43.6
+   },
+   "winner": {
+    "name": "Melanie Stansbury",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NM-H-2": {
+   "margin": 4.16,
+   "kind": "DR",
+   "d": {
+    "name": "Gabriel Vasquez",
+    "pct": 52.1
+   },
+   "r": {
+    "name": "Yvette Herrell",
+    "pct": 47.9
+   },
+   "winner": {
+    "name": "Gabriel Vasquez",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NM-H-3": {
+   "margin": 12.57,
+   "kind": "DR",
+   "d": {
+    "name": "Teresa Leger Fernandez",
+    "pct": 56.3
+   },
+   "r": {
+    "name": "Sharon Clahchischilliage",
+    "pct": 43.7
+   },
+   "winner": {
+    "name": "Teresa Leger Fernandez",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NV-H-1": {
+   "margin": 7.51,
+   "kind": "DR",
+   "d": {
+    "name": "Dina Titus",
+    "pct": 52
+   },
+   "r": {
+    "name": "Mark Robertson",
+    "pct": 44.5
+   },
+   "winner": {
+    "name": "Dina Titus",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NV-H-2": {
+   "margin": null,
+   "kind": "R-noD",
+   "d": null,
+   "r": {
+    "name": "Mark Amodei",
+    "pct": 55
+   },
+   "winner": {
+    "name": "Mark Amodei",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NV-H-3": {
+   "margin": 2.74,
+   "kind": "DR",
+   "d": {
+    "name": "Susie Lee",
+    "pct": 51.4
+   },
+   "r": {
+    "name": "Drew Johnson",
+    "pct": 48.6
+   },
+   "winner": {
+    "name": "Susie Lee",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NV-H-4": {
+   "margin": 8.09,
+   "kind": "DR",
+   "d": {
+    "name": "Steven Horsford",
+    "pct": 52.7
+   },
+   "r": {
+    "name": "John Lee",
+    "pct": 44.6
+   },
+   "winner": {
+    "name": "Steven Horsford",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-1": {
+   "margin": -10.43,
+   "kind": "DR",
+   "d": {
+    "name": "John Avlon",
+    "pct": 44.8
+   },
+   "r": {
+    "name": "Nicholas LaLota",
+    "pct": 55.2
+   },
+   "winner": {
+    "name": "Nicholas LaLota",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NY-H-2": {
+   "margin": -19.54,
+   "kind": "DR",
+   "d": {
+    "name": "Rob Lubin",
+    "pct": 40.2
+   },
+   "r": {
+    "name": "Andrew Garbarino",
+    "pct": 59.8
+   },
+   "winner": {
+    "name": "Andrew Garbarino",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NY-H-3": {
+   "margin": 3.58,
+   "kind": "DR",
+   "d": {
+    "name": "Thomas Suozzi",
+    "pct": 51.8
+   },
+   "r": {
+    "name": "Mike LiPetri",
+    "pct": 48.2
+   },
+   "winner": {
+    "name": "Thomas Suozzi",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-4": {
+   "margin": 2.29,
+   "kind": "DR",
+   "d": {
+    "name": "Laura Gillen",
+    "pct": 51.1
+   },
+   "r": {
+    "name": "Anthony D'Esposito",
+    "pct": 48.9
+   },
+   "winner": {
+    "name": "Laura Gillen",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-5": {
+   "margin": 45.85,
+   "kind": "DR",
+   "d": {
+    "name": "Gregory Meeks",
+    "pct": 72.9
+   },
+   "r": {
+    "name": "Paul King",
+    "pct": 27.1
+   },
+   "winner": {
+    "name": "Gregory Meeks",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-6": {
+   "margin": 23.05,
+   "kind": "DR",
+   "d": {
+    "name": "Grace Meng",
+    "pct": 60.7
+   },
+   "r": {
+    "name": "Thomas Zmich",
+    "pct": 37.6
+   },
+   "winner": {
+    "name": "Grace Meng",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-7": {
+   "margin": 56.21,
+   "kind": "DR",
+   "d": {
+    "name": "Nydia Velazquez",
+    "pct": 78.1
+   },
+   "r": {
+    "name": "Bill Kregler",
+    "pct": 21.9
+   },
+   "winner": {
+    "name": "Nydia Velazquez",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-8": {
+   "margin": 50.77,
+   "kind": "DR",
+   "d": {
+    "name": "Hakeem Jeffries",
+    "pct": 75.4
+   },
+   "r": {
+    "name": "John Delaney",
+    "pct": 24.6
+   },
+   "winner": {
+    "name": "Hakeem Jeffries",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-9": {
+   "margin": 48.5,
+   "kind": "DR",
+   "d": {
+    "name": "Yvette Clarke",
+    "pct": 74.3
+   },
+   "r": {
+    "name": "Menachem Raitport",
+    "pct": 25.7
+   },
+   "winner": {
+    "name": "Yvette Clarke",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-10": {
+   "margin": 67.32,
+   "kind": "DR",
+   "d": {
+    "name": "Dan Goldman",
+    "pct": 82.3
+   },
+   "r": {
+    "name": "Alexander Dodenhoff",
+    "pct": 15
+   },
+   "winner": {
+    "name": "Dan Goldman",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-11": {
+   "margin": -28.2,
+   "kind": "DR",
+   "d": {
+    "name": "Andrea Morse",
+    "pct": 35.9
+   },
+   "r": {
+    "name": "Nicole Malliotakis",
+    "pct": 64.1
+   },
+   "winner": {
+    "name": "Nicole Malliotakis",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NY-H-12": {
+   "margin": 61.02,
+   "kind": "DR",
+   "d": {
+    "name": "Jerrold Nadler",
+    "pct": 80.5
+   },
+   "r": {
+    "name": "Michael Zumbluskas",
+    "pct": 19.5
+   },
+   "winner": {
+    "name": "Jerrold Nadler",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-13": {
+   "margin": 67.08,
+   "kind": "DR",
+   "d": {
+    "name": "Adriano Espaillat",
+    "pct": 83.5
+   },
+   "r": {
+    "name": "Ruben Dario Vargas",
+    "pct": 16.5
+   },
+   "winner": {
+    "name": "Adriano Espaillat",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-14": {
+   "margin": 38.39,
+   "kind": "DR",
+   "d": {
+    "name": "Alexandria Ocasio-Cortez",
+    "pct": 69.2
+   },
+   "r": {
+    "name": "Tina Forte",
+    "pct": 30.8
+   },
+   "winner": {
+    "name": "Alexandria Ocasio-Cortez",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-15": {
+   "margin": 55.36,
+   "kind": "DR",
+   "d": {
+    "name": "Ritchie Torres",
+    "pct": 76.5
+   },
+   "r": {
+    "name": "Gonzalo Duran",
+    "pct": 21.1
+   },
+   "winner": {
+    "name": "Ritchie Torres",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-16": {
+   "margin": 43.17,
+   "kind": "DR",
+   "d": {
+    "name": "George Latimer",
+    "pct": 71.6
+   },
+   "r": {
+    "name": "Miriam Flisser",
+    "pct": 28.4
+   },
+   "winner": {
+    "name": "George Latimer",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-17": {
+   "margin": -6.31,
+   "kind": "DR",
+   "d": {
+    "name": "Mondaire Jones",
+    "pct": 45.9
+   },
+   "r": {
+    "name": "Mike Lawler",
+    "pct": 52.2
+   },
+   "winner": {
+    "name": "Mike Lawler",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NY-H-18": {
+   "margin": 14.35,
+   "kind": "DR",
+   "d": {
+    "name": "Pat Ryan",
+    "pct": 57.2
+   },
+   "r": {
+    "name": "Alison Esposito",
+    "pct": 42.8
+   },
+   "winner": {
+    "name": "Pat Ryan",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-19": {
+   "margin": 2.22,
+   "kind": "DR",
+   "d": {
+    "name": "Josh Riley",
+    "pct": 51.1
+   },
+   "r": {
+    "name": "Marc Molinaro",
+    "pct": 48.9
+   },
+   "winner": {
+    "name": "Josh Riley",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-20": {
+   "margin": 22.26,
+   "kind": "DR",
+   "d": {
+    "name": "Paul Tonko",
+    "pct": 61.1
+   },
+   "r": {
+    "name": "Kevin Waltz",
+    "pct": 38.9
+   },
+   "winner": {
+    "name": "Paul Tonko",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-21": {
+   "margin": -23.98,
+   "kind": "DR",
+   "d": {
+    "name": "Paula Collins",
+    "pct": 38
+   },
+   "r": {
+    "name": "Elise Stefanik",
+    "pct": 62
+   },
+   "winner": {
+    "name": "Elise Stefanik",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NY-H-22": {
+   "margin": 9.12,
+   "kind": "DR",
+   "d": {
+    "name": "John Mannion",
+    "pct": 54.6
+   },
+   "r": {
+    "name": "Brandon Williams",
+    "pct": 45.4
+   },
+   "winner": {
+    "name": "John Mannion",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-23": {
+   "margin": -31.59,
+   "kind": "DR",
+   "d": {
+    "name": "Thomas Carle",
+    "pct": 34.2
+   },
+   "r": {
+    "name": "Nick Langworthy",
+    "pct": 65.8
+   },
+   "winner": {
+    "name": "Nick Langworthy",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NY-H-24": {
+   "margin": -31.33,
+   "kind": "DR",
+   "d": {
+    "name": "Dave Wagenhauser",
+    "pct": 34.3
+   },
+   "r": {
+    "name": "Claudia Tenney",
+    "pct": 65.7
+   },
+   "winner": {
+    "name": "Claudia Tenney",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "NY-H-25": {
+   "margin": 21.64,
+   "kind": "DR",
+   "d": {
+    "name": "Joseph Morelle",
+    "pct": 60.8
+   },
+   "r": {
+    "name": "Gregg Sadwick",
+    "pct": 39.2
+   },
+   "winner": {
+    "name": "Joseph Morelle",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "NY-H-26": {
+   "margin": 30.34,
+   "kind": "DR",
+   "d": {
+    "name": "Timothy Kennedy",
+    "pct": 65.2
+   },
+   "r": {
+    "name": "Anthony Marecki",
+    "pct": 34.8
+   },
+   "winner": {
+    "name": "Timothy Kennedy",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "OH-H-1": {
+   "margin": 9.17,
+   "kind": "DR",
+   "d": {
+    "name": "Greg Landsman",
+    "pct": 54.6
+   },
+   "r": {
+    "name": "Orlando Sonza",
+    "pct": 45.4
+   },
+   "winner": {
+    "name": "Greg Landsman",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "OH-H-2": {
+   "margin": -47.12,
+   "kind": "DR",
+   "d": {
+    "name": "Samantha Meadows",
+    "pct": 26.4
+   },
+   "r": {
+    "name": "David Taylor",
+    "pct": 73.6
+   },
+   "winner": {
+    "name": "David Taylor",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "OH-H-3": {
+   "margin": 41.48,
+   "kind": "DR",
+   "d": {
+    "name": "Joyce Beatty",
+    "pct": 70.7
+   },
+   "r": {
+    "name": "Michael Young",
+    "pct": 29.3
+   },
+   "winner": {
+    "name": "Joyce Beatty",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "OH-H-4": {
+   "margin": -36.92,
+   "kind": "DR",
+   "d": {
+    "name": "Tamie Wilson",
+    "pct": 31.5
+   },
+   "r": {
+    "name": "Jim Jordan",
+    "pct": 68.5
+   },
+   "winner": {
+    "name": "Jim Jordan",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "OH-H-5": {
+   "margin": -35.02,
+   "kind": "DR",
+   "d": {
+    "name": "Keith Mundy",
+    "pct": 32.5
+   },
+   "r": {
+    "name": "Bob Latta",
+    "pct": 67.5
+   },
+   "winner": {
+    "name": "Bob Latta",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "OH-H-6": {
+   "margin": -33.48,
+   "kind": "DR",
+   "d": {
+    "name": "Michael Kripchak",
+    "pct": 33.3
+   },
+   "r": {
+    "name": "Michael Rulli",
+    "pct": 66.7
+   },
+   "winner": {
+    "name": "Michael Rulli",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "OH-H-7": {
+   "margin": -14.96,
+   "kind": "DR",
+   "d": {
+    "name": "Matt Diemer",
+    "pct": 36.1
+   },
+   "r": {
+    "name": "Max Miller",
+    "pct": 51.1
+   },
+   "winner": {
+    "name": "Max Miller",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "OH-H-8": {
+   "margin": -25.62,
+   "kind": "DR",
+   "d": {
+    "name": "Vanessa Enoch",
+    "pct": 37.2
+   },
+   "r": {
+    "name": "Warren Davidson",
+    "pct": 62.8
+   },
+   "winner": {
+    "name": "Warren Davidson",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "OH-H-9": {
+   "margin": 0.63,
+   "kind": "DR",
+   "d": {
+    "name": "Marcy Kaptur",
+    "pct": 48.3
+   },
+   "r": {
+    "name": "Derek Merrin",
+    "pct": 47.6
+   },
+   "winner": {
+    "name": "Marcy Kaptur",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "OH-H-10": {
+   "margin": -18.42,
+   "kind": "DR",
+   "d": {
+    "name": "Amy Cox",
+    "pct": 39.2
+   },
+   "r": {
+    "name": "Mike Turner",
+    "pct": 57.6
+   },
+   "winner": {
+    "name": "Mike Turner",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "OH-H-11": {
+   "margin": 58.69,
+   "kind": "DR",
+   "d": {
+    "name": "Shontel Brown",
+    "pct": 78.3
+   },
+   "r": {
+    "name": "Alan Rapoport",
+    "pct": 19.6
+   },
+   "winner": {
+    "name": "Shontel Brown",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "OH-H-12": {
+   "margin": -37.01,
+   "kind": "DR",
+   "d": {
+    "name": "Jerrad Christian",
+    "pct": 31.5
+   },
+   "r": {
+    "name": "Troy Balderson",
+    "pct": 68.5
+   },
+   "winner": {
+    "name": "Troy Balderson",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "OH-H-13": {
+   "margin": 2.21,
+   "kind": "DR",
+   "d": {
+    "name": "Emilia Sykes",
+    "pct": 51.1
+   },
+   "r": {
+    "name": "Kevin Coughlin",
+    "pct": 48.9
+   },
+   "winner": {
+    "name": "Emilia Sykes",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "OH-H-14": {
+   "margin": -26.83,
+   "kind": "DR",
+   "d": {
+    "name": "Brian Kenderes",
+    "pct": 36.6
+   },
+   "r": {
+    "name": "David Joyce",
+    "pct": 63.4
+   },
+   "winner": {
+    "name": "David Joyce",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "OH-H-15": {
+   "margin": -12.92,
+   "kind": "DR",
+   "d": {
+    "name": "Adam Miller",
+    "pct": 43.5
+   },
+   "r": {
+    "name": "Mike Carey",
+    "pct": 56.5
+   },
+   "winner": {
+    "name": "Mike Carey",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "OK-H-1": {
+   "margin": -25.9,
+   "kind": "DR",
+   "d": {
+    "name": "Dennis Baker",
+    "pct": 34.5
+   },
+   "r": {
+    "name": "Kevin Hern",
+    "pct": 60.4
+   },
+   "winner": {
+    "name": "Kevin Hern",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "OK-H-2": {
+   "margin": -52.73,
+   "kind": "DR",
+   "d": {
+    "name": "Brandon Wade",
+    "pct": 21.4
+   },
+   "r": {
+    "name": "Josh Brecheen",
+    "pct": 74.2
+   },
+   "winner": {
+    "name": "Josh Brecheen",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "OK-H-3": {
+   "margin": null,
+   "kind": "R-unopposed",
+   "d": null,
+   "r": {
+    "name": "Frank Lucas",
+    "pct": null
+   },
+   "winner": {
+    "name": "Frank Lucas",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "OK-H-4": {
+   "margin": -36.98,
+   "kind": "DR",
+   "d": {
+    "name": "Mary Brannon",
+    "pct": 28.3
+   },
+   "r": {
+    "name": "Tom Cole",
+    "pct": 65.2
+   },
+   "winner": {
+    "name": "Tom Cole",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "OK-H-5": {
+   "margin": -21.39,
+   "kind": "DR",
+   "d": {
+    "name": "Madison Horn",
+    "pct": 39.3
+   },
+   "r": {
+    "name": "Stephanie Bice",
+    "pct": 60.7
+   },
+   "winner": {
+    "name": "Stephanie Bice",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "OR-H-1": {
+   "margin": 40.61,
+   "kind": "DR",
+   "d": {
+    "name": "Suzanne Bonamici",
+    "pct": 68.8
+   },
+   "r": {
+    "name": "Bob Todd",
+    "pct": 28.2
+   },
+   "winner": {
+    "name": "Suzanne Bonamici",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "OR-H-2": {
+   "margin": -31.11,
+   "kind": "DR",
+   "d": {
+    "name": "Dan Ruby",
+    "pct": 32.8
+   },
+   "r": {
+    "name": "Cliff Bentz",
+    "pct": 64
+   },
+   "winner": {
+    "name": "Cliff Bentz",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "OR-H-3": {
+   "margin": 42.59,
+   "kind": "DR",
+   "d": {
+    "name": "Maxine Dexter",
+    "pct": 67.9
+   },
+   "r": {
+    "name": "Joanna Harbour",
+    "pct": 25.3
+   },
+   "winner": {
+    "name": "Maxine Dexter",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "OR-H-4": {
+   "margin": 7.78,
+   "kind": "DR",
+   "d": {
+    "name": "Val Hoyle",
+    "pct": 51.8
+   },
+   "r": {
+    "name": "Monique DeSpain",
+    "pct": 44
+   },
+   "winner": {
+    "name": "Val Hoyle",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "OR-H-5": {
+   "margin": 2.73,
+   "kind": "DR",
+   "d": {
+    "name": "Janelle Bynum",
+    "pct": 47.7
+   },
+   "r": {
+    "name": "Lori Chavez-DeRemer",
+    "pct": 45
+   },
+   "winner": {
+    "name": "Janelle Bynum",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "OR-H-6": {
+   "margin": 6.86,
+   "kind": "DR",
+   "d": {
+    "name": "Andrea Salinas",
+    "pct": 53.4
+   },
+   "r": {
+    "name": "Mike Erickson",
+    "pct": 46.6
+   },
+   "winner": {
+    "name": "Andrea Salinas",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "PA-H-1": {
+   "margin": -12.81,
+   "kind": "DR",
+   "d": {
+    "name": "Ashley Ehasz",
+    "pct": 43.6
+   },
+   "r": {
+    "name": "Brian Fitzpatrick",
+    "pct": 56.4
+   },
+   "winner": {
+    "name": "Brian Fitzpatrick",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "PA-H-2": {
+   "margin": 42.92,
+   "kind": "DR",
+   "d": {
+    "name": "Brendan Boyle",
+    "pct": 71.5
+   },
+   "r": {
+    "name": "Aaron Bashir",
+    "pct": 28.5
+   },
+   "winner": {
+    "name": "Brendan Boyle",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "PA-H-3": {
+   "margin": null,
+   "kind": "D-unopposed",
+   "d": {
+    "name": "Dwight Evans",
+    "pct": 100
+   },
+   "r": null,
+   "winner": {
+    "name": "Dwight Evans",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "PA-H-4": {
+   "margin": 18.13,
+   "kind": "DR",
+   "d": {
+    "name": "Madeleine Dean",
+    "pct": 59.1
+   },
+   "r": {
+    "name": "David Winkler",
+    "pct": 40.9
+   },
+   "winner": {
+    "name": "Madeleine Dean",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "PA-H-5": {
+   "margin": 30.58,
+   "kind": "DR",
+   "d": {
+    "name": "Mary Gay Scanlon",
+    "pct": 65.3
+   },
+   "r": {
+    "name": "Alfeia Goodwin",
+    "pct": 34.7
+   },
+   "winner": {
+    "name": "Mary Gay Scanlon",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "PA-H-6": {
+   "margin": 12.4,
+   "kind": "DR",
+   "d": {
+    "name": "Chrissy Houlahan",
+    "pct": 56.2
+   },
+   "r": {
+    "name": "Neil Young",
+    "pct": 43.8
+   },
+   "winner": {
+    "name": "Chrissy Houlahan",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "PA-H-7": {
+   "margin": -1.01,
+   "kind": "DR",
+   "d": {
+    "name": "Susan Wild",
+    "pct": 49.5
+   },
+   "r": {
+    "name": "Ryan Mackenzie",
+    "pct": 50.5
+   },
+   "winner": {
+    "name": "Ryan Mackenzie",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "PA-H-8": {
+   "margin": -1.62,
+   "kind": "DR",
+   "d": {
+    "name": "Matt Cartwright",
+    "pct": 49.2
+   },
+   "r": {
+    "name": "Rob Bresnahan",
+    "pct": 50.8
+   },
+   "winner": {
+    "name": "Rob Bresnahan",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "PA-H-9": {
+   "margin": -41.02,
+   "kind": "DR",
+   "d": {
+    "name": "Amanda Waldman",
+    "pct": 29.5
+   },
+   "r": {
+    "name": "Dan Meuser",
+    "pct": 70.5
+   },
+   "winner": {
+    "name": "Dan Meuser",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "PA-H-10": {
+   "margin": -1.26,
+   "kind": "DR",
+   "d": {
+    "name": "Janelle Stelson",
+    "pct": 49.4
+   },
+   "r": {
+    "name": "Scott Perry",
+    "pct": 50.6
+   },
+   "winner": {
+    "name": "Scott Perry",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "PA-H-11": {
+   "margin": -25.79,
+   "kind": "DR",
+   "d": {
+    "name": "Jim Atkinson",
+    "pct": 37.1
+   },
+   "r": {
+    "name": "Lloyd Smucker",
+    "pct": 62.9
+   },
+   "winner": {
+    "name": "Lloyd Smucker",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "PA-H-12": {
+   "margin": 12.82,
+   "kind": "DR",
+   "d": {
+    "name": "Summer Lee",
+    "pct": 56.4
+   },
+   "r": {
+    "name": "James Hayes",
+    "pct": 43.6
+   },
+   "winner": {
+    "name": "Summer Lee",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "PA-H-13": {
+   "margin": -48.4,
+   "kind": "DR",
+   "d": {
+    "name": "Beth Farnham",
+    "pct": 25.8
+   },
+   "r": {
+    "name": "John Joyce",
+    "pct": 74.2
+   },
+   "winner": {
+    "name": "John Joyce",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "PA-H-14": {
+   "margin": -33.15,
+   "kind": "DR",
+   "d": {
+    "name": "Chris Dziados",
+    "pct": 33.4
+   },
+   "r": {
+    "name": "Guy Reschenthaler",
+    "pct": 66.6
+   },
+   "winner": {
+    "name": "Guy Reschenthaler",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "PA-H-15": {
+   "margin": -42.93,
+   "kind": "DR",
+   "d": {
+    "name": "Zach Womer",
+    "pct": 28.5
+   },
+   "r": {
+    "name": "Glenn Thompson",
+    "pct": 71.5
+   },
+   "winner": {
+    "name": "Glenn Thompson",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "PA-H-16": {
+   "margin": -27.31,
+   "kind": "DR",
+   "d": {
+    "name": "Preston Nouri",
+    "pct": 36.3
+   },
+   "r": {
+    "name": "Mike Kelly",
+    "pct": 63.7
+   },
+   "winner": {
+    "name": "Mike Kelly",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "PA-H-17": {
+   "margin": 7.75,
+   "kind": "DR",
+   "d": {
+    "name": "Chris Deluzio",
+    "pct": 53.9
+   },
+   "r": {
+    "name": "Rob Mercuri",
+    "pct": 46.1
+   },
+   "winner": {
+    "name": "Chris Deluzio",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "RI-H-1": {
+   "margin": 31.11,
+   "kind": "DR",
+   "d": {
+    "name": "Gabriel Amo",
+    "pct": 63.2
+   },
+   "r": {
+    "name": "Allen Waters",
+    "pct": 32.1
+   },
+   "winner": {
+    "name": "Gabriel Amo",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "RI-H-2": {
+   "margin": 16.76,
+   "kind": "DR",
+   "d": {
+    "name": "Seth Magaziner",
+    "pct": 58.4
+   },
+   "r": {
+    "name": "Steven Corvi",
+    "pct": 41.6
+   },
+   "winner": {
+    "name": "Seth Magaziner",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "SC-H-1": {
+   "margin": -16.64,
+   "kind": "DR",
+   "d": {
+    "name": "Michael Moore",
+    "pct": 41.7
+   },
+   "r": {
+    "name": "Nancy Mace",
+    "pct": 58.3
+   },
+   "winner": {
+    "name": "Nancy Mace",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "SC-H-2": {
+   "margin": -19.33,
+   "kind": "DR",
+   "d": {
+    "name": "David Robinson",
+    "pct": 40.3
+   },
+   "r": {
+    "name": "Joe Wilson",
+    "pct": 59.7
+   },
+   "winner": {
+    "name": "Joe Wilson",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "SC-H-3": {
+   "margin": -46.44,
+   "kind": "DR",
+   "d": {
+    "name": "Bryon Best",
+    "pct": 25.3
+   },
+   "r": {
+    "name": "Sheri Biggs",
+    "pct": 71.8
+   },
+   "winner": {
+    "name": "Sheri Biggs",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "SC-H-4": {
+   "margin": -22.55,
+   "kind": "DR",
+   "d": {
+    "name": "Kathryn Harvey",
+    "pct": 37.3
+   },
+   "r": {
+    "name": "William Timmons",
+    "pct": 59.9
+   },
+   "winner": {
+    "name": "William Timmons",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "SC-H-5": {
+   "margin": -27.22,
+   "kind": "DR",
+   "d": {
+    "name": "Evangeline Hundley",
+    "pct": 36.4
+   },
+   "r": {
+    "name": "Ralph Norman",
+    "pct": 63.6
+   },
+   "winner": {
+    "name": "Ralph Norman",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "SC-H-6": {
+   "margin": 22.8,
+   "kind": "DR",
+   "d": {
+    "name": "Jim Clyburn",
+    "pct": 59.6
+   },
+   "r": {
+    "name": "Duke Buckner",
+    "pct": 36.8
+   },
+   "winner": {
+    "name": "Jim Clyburn",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "SC-H-7": {
+   "margin": -29.96,
+   "kind": "DR",
+   "d": {
+    "name": "Mal Hyman",
+    "pct": 35
+   },
+   "r": {
+    "name": "Russell Fry",
+    "pct": 65
+   },
+   "winner": {
+    "name": "Russell Fry",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "SD-H-1": {
+   "margin": -44.09,
+   "kind": "DR",
+   "d": {
+    "name": "Sheryl Johnson",
+    "pct": 28
+   },
+   "r": {
+    "name": "Dusty Johnson",
+    "pct": 72
+   },
+   "winner": {
+    "name": "Dusty Johnson",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "TN-H-1": {
+   "margin": -58.69,
+   "kind": "DR",
+   "d": {
+    "name": "Kevin  Jenkins",
+    "pct": 19.4
+   },
+   "r": {
+    "name": "Diana Harshbarger",
+    "pct": 78.1
+   },
+   "winner": {
+    "name": "Diana Harshbarger",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "TN-H-2": {
+   "margin": -38.52,
+   "kind": "DR",
+   "d": {
+    "name": "Jane George",
+    "pct": 30.7
+   },
+   "r": {
+    "name": "Tim Burchett",
+    "pct": 69.3
+   },
+   "winner": {
+    "name": "Tim Burchett",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "TN-H-3": {
+   "margin": -38.16,
+   "kind": "DR",
+   "d": {
+    "name": "Jack Allen",
+    "pct": 29.4
+   },
+   "r": {
+    "name": "Chuck Fleischmann",
+    "pct": 67.5
+   },
+   "winner": {
+    "name": "Chuck Fleischmann",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TN-H-4": {
+   "margin": -43.19,
+   "kind": "DR",
+   "d": {
+    "name": "Victoria Broderick",
+    "pct": 26.8
+   },
+   "r": {
+    "name": "Scott DesJarlais",
+    "pct": 70
+   },
+   "winner": {
+    "name": "Scott DesJarlais",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TN-H-5": {
+   "margin": -17.38,
+   "kind": "DR",
+   "d": {
+    "name": "Maryam Abolfazli",
+    "pct": 39.5
+   },
+   "r": {
+    "name": "Andy Ogles",
+    "pct": 56.9
+   },
+   "winner": {
+    "name": "Andy Ogles",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TN-H-6": {
+   "margin": -36,
+   "kind": "DR",
+   "d": {
+    "name": "Lore Bergman",
+    "pct": 32
+   },
+   "r": {
+    "name": "John Rose",
+    "pct": 68
+   },
+   "winner": {
+    "name": "John Rose",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TN-H-7": {
+   "margin": -21.46,
+   "kind": "DR",
+   "d": {
+    "name": "Megan Barry",
+    "pct": 38
+   },
+   "r": {
+    "name": "Mark Green",
+    "pct": 59.5
+   },
+   "winner": {
+    "name": "Mark Green",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TN-H-8": {
+   "margin": -46.75,
+   "kind": "DR",
+   "d": {
+    "name": "Sarah Freeman",
+    "pct": 25.6
+   },
+   "r": {
+    "name": "David Kustoff",
+    "pct": 72.3
+   },
+   "winner": {
+    "name": "David Kustoff",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TN-H-9": {
+   "margin": 45.65,
+   "kind": "DR",
+   "d": {
+    "name": "Steve Cohen",
+    "pct": 71.3
+   },
+   "r": {
+    "name": "Charlotte Bergmann",
+    "pct": 25.7
+   },
+   "winner": {
+    "name": "Steve Cohen",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-1": {
+   "margin": null,
+   "kind": "R-unopposed",
+   "d": null,
+   "r": {
+    "name": "Nathaniel Moran",
+    "pct": 100
+   },
+   "winner": {
+    "name": "Nathaniel Moran",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-2": {
+   "margin": -31.32,
+   "kind": "DR",
+   "d": {
+    "name": "Peter Filler",
+    "pct": 34.3
+   },
+   "r": {
+    "name": "Dan Crenshaw",
+    "pct": 65.7
+   },
+   "winner": {
+    "name": "Dan Crenshaw",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-3": {
+   "margin": -24.91,
+   "kind": "DR",
+   "d": {
+    "name": "Sandeep Srivastava",
+    "pct": 37.5
+   },
+   "r": {
+    "name": "Keith Self",
+    "pct": 62.5
+   },
+   "winner": {
+    "name": "Keith Self",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-4": {
+   "margin": -36.77,
+   "kind": "DR",
+   "d": {
+    "name": "Simon Cardell",
+    "pct": 31.6
+   },
+   "r": {
+    "name": "Pat Fallon",
+    "pct": 68.4
+   },
+   "winner": {
+    "name": "Pat Fallon",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-5": {
+   "margin": -28.17,
+   "kind": "DR",
+   "d": {
+    "name": "Ruth Torres",
+    "pct": 35.9
+   },
+   "r": {
+    "name": "Lance Gooden",
+    "pct": 64.1
+   },
+   "winner": {
+    "name": "Lance Gooden",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-6": {
+   "margin": -31.35,
+   "kind": "DR",
+   "d": {
+    "name": "John Love",
+    "pct": 34.3
+   },
+   "r": {
+    "name": "Jake Ellzey",
+    "pct": 65.7
+   },
+   "winner": {
+    "name": "Jake Ellzey",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-7": {
+   "margin": 22.57,
+   "kind": "DR",
+   "d": {
+    "name": "Lizzie Fletcher",
+    "pct": 61.3
+   },
+   "r": {
+    "name": "Caroline Kane",
+    "pct": 38.7
+   },
+   "winner": {
+    "name": "Lizzie Fletcher",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-8": {
+   "margin": -36.43,
+   "kind": "DR",
+   "d": {
+    "name": "Laura Jones",
+    "pct": 31.8
+   },
+   "r": {
+    "name": "Morgan Luttrell",
+    "pct": 68.2
+   },
+   "winner": {
+    "name": "Morgan Luttrell",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-9": {
+   "margin": null,
+   "kind": "D-unopposed",
+   "d": {
+    "name": "Al Green",
+    "pct": 100
+   },
+   "r": null,
+   "winner": {
+    "name": "Al Green",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-10": {
+   "margin": -29.6,
+   "kind": "DR",
+   "d": {
+    "name": "Theresa Boisseau",
+    "pct": 34
+   },
+   "r": {
+    "name": "Michael McCaul",
+    "pct": 63.6
+   },
+   "winner": {
+    "name": "Michael McCaul",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-11": {
+   "margin": null,
+   "kind": "R-unopposed",
+   "d": null,
+   "r": {
+    "name": "August Pfluger",
+    "pct": 100
+   },
+   "winner": {
+    "name": "August Pfluger",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-12": {
+   "margin": -26.91,
+   "kind": "DR",
+   "d": {
+    "name": "Trey Hunt",
+    "pct": 36.5
+   },
+   "r": {
+    "name": "Craig Goldman",
+    "pct": 63.5
+   },
+   "winner": {
+    "name": "Craig Goldman",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-13": {
+   "margin": null,
+   "kind": "R-unopposed",
+   "d": null,
+   "r": {
+    "name": "Ronny Jackson",
+    "pct": 100
+   },
+   "winner": {
+    "name": "Ronny Jackson",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-14": {
+   "margin": -37.38,
+   "kind": "DR",
+   "d": {
+    "name": "Rhonda Hart",
+    "pct": 31.3
+   },
+   "r": {
+    "name": "Randy Weber",
+    "pct": 68.7
+   },
+   "winner": {
+    "name": "Randy Weber",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-15": {
+   "margin": -14.23,
+   "kind": "DR",
+   "d": {
+    "name": "Michelle Vallejo",
+    "pct": 42.9
+   },
+   "r": {
+    "name": "Monica De La Cruz",
+    "pct": 57.1
+   },
+   "winner": {
+    "name": "Monica De La Cruz",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-16": {
+   "margin": 19.07,
+   "kind": "DR",
+   "d": {
+    "name": "Veronica Escobar",
+    "pct": 59.5
+   },
+   "r": {
+    "name": "Irene Armendariz Jackson",
+    "pct": 40.4
+   },
+   "winner": {
+    "name": "Veronica Escobar",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-17": {
+   "margin": -32.7,
+   "kind": "DR",
+   "d": {
+    "name": "Mark Lorenzen",
+    "pct": 33.7
+   },
+   "r": {
+    "name": "Pete Sessions",
+    "pct": 66.3
+   },
+   "winner": {
+    "name": "Pete Sessions",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-18": {
+   "margin": 38.87,
+   "kind": "DR",
+   "d": {
+    "name": "Sylvester Turner",
+    "pct": 69.4
+   },
+   "r": {
+    "name": "Lana Centonze",
+    "pct": 30.5
+   },
+   "winner": {
+    "name": "Sylvester Turner",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-19": {
+   "margin": null,
+   "kind": "R-noD",
+   "d": null,
+   "r": {
+    "name": "Jodey Arrington",
+    "pct": 80.7
+   },
+   "winner": {
+    "name": "Jodey Arrington",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "TX-H-20": {
+   "margin": null,
+   "kind": "D-unopposed",
+   "d": {
+    "name": "Joaquin Castro",
+    "pct": 100
+   },
+   "r": null,
+   "winner": {
+    "name": "Joaquin Castro",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-21": {
+   "margin": -25.79,
+   "kind": "DR",
+   "d": {
+    "name": "Kristin Hook",
+    "pct": 36.1
+   },
+   "r": {
+    "name": "Chip Roy",
+    "pct": 61.9
+   },
+   "winner": {
+    "name": "Chip Roy",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-22": {
+   "margin": -24.25,
+   "kind": "DR",
+   "d": {
+    "name": "Marquette Greene-Scott",
+    "pct": 37.9
+   },
+   "r": {
+    "name": "Troy Nehls",
+    "pct": 62.1
+   },
+   "winner": {
+    "name": "Troy Nehls",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-23": {
+   "margin": -24.59,
+   "kind": "DR",
+   "d": {
+    "name": "Santos Limon",
+    "pct": 37.7
+   },
+   "r": {
+    "name": "Tony Gonzales",
+    "pct": 62.3
+   },
+   "winner": {
+    "name": "Tony Gonzales",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-24": {
+   "margin": -20.6,
+   "kind": "DR",
+   "d": {
+    "name": "Sam Eppler",
+    "pct": 39.7
+   },
+   "r": {
+    "name": "Beth Van Duyne",
+    "pct": 60.3
+   },
+   "winner": {
+    "name": "Beth Van Duyne",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-25": {
+   "margin": null,
+   "kind": "R-unopposed",
+   "d": null,
+   "r": {
+    "name": "Roger Williams",
+    "pct": 99.4
+   },
+   "winner": {
+    "name": "Roger Williams",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-26": {
+   "margin": -26.4,
+   "kind": "DR",
+   "d": {
+    "name": "Ernest Lineberger",
+    "pct": 35.7
+   },
+   "r": {
+    "name": "Brandon Gill",
+    "pct": 62.1
+   },
+   "winner": {
+    "name": "Brandon Gill",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-27": {
+   "margin": -32.09,
+   "kind": "DR",
+   "d": {
+    "name": "Tanya Lloyd",
+    "pct": 34
+   },
+   "r": {
+    "name": "Michael Cloud",
+    "pct": 66
+   },
+   "winner": {
+    "name": "Michael Cloud",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-28": {
+   "margin": 5.59,
+   "kind": "DR",
+   "d": {
+    "name": "Henry Cuellar",
+    "pct": 52.8
+   },
+   "r": {
+    "name": "Jay Furman",
+    "pct": 47.2
+   },
+   "winner": {
+    "name": "Henry Cuellar",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-29": {
+   "margin": 30.58,
+   "kind": "DR",
+   "d": {
+    "name": "Sylvia Garcia",
+    "pct": 65.3
+   },
+   "r": {
+    "name": "Alan Garza",
+    "pct": 34.7
+   },
+   "winner": {
+    "name": "Sylvia Garcia",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-30": {
+   "margin": null,
+   "kind": "D-noR",
+   "d": {
+    "name": "Jasmine Crockett",
+    "pct": 84.9
+   },
+   "r": null,
+   "winner": {
+    "name": "Jasmine Crockett",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-31": {
+   "margin": -28.86,
+   "kind": "DR",
+   "d": {
+    "name": "Stuart Whitlow",
+    "pct": 35.6
+   },
+   "r": {
+    "name": "John Carter",
+    "pct": 64.4
+   },
+   "winner": {
+    "name": "John Carter",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-32": {
+   "margin": 23.49,
+   "kind": "DR",
+   "d": {
+    "name": "Julie Johnson",
+    "pct": 60.5
+   },
+   "r": {
+    "name": "Darrell Day",
+    "pct": 37
+   },
+   "winner": {
+    "name": "Julie Johnson",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-33": {
+   "margin": 37.57,
+   "kind": "DR",
+   "d": {
+    "name": "Marc Veasey",
+    "pct": 68.8
+   },
+   "r": {
+    "name": "Patrick Gillespie",
+    "pct": 31.2
+   },
+   "winner": {
+    "name": "Marc Veasey",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-34": {
+   "margin": 2.58,
+   "kind": "DR",
+   "d": {
+    "name": "Vicente Gonzalez",
+    "pct": 51.3
+   },
+   "r": {
+    "name": "Mayra Flores",
+    "pct": 48.7
+   },
+   "winner": {
+    "name": "Vicente Gonzalez",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-35": {
+   "margin": 34.73,
+   "kind": "DR",
+   "d": {
+    "name": "Greg Casar",
+    "pct": 67.4
+   },
+   "r": {
+    "name": "Steven Wright",
+    "pct": 32.6
+   },
+   "winner": {
+    "name": "Greg Casar",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-36": {
+   "margin": -38.72,
+   "kind": "DR",
+   "d": {
+    "name": "Dayna Steele",
+    "pct": 30.6
+   },
+   "r": {
+    "name": "Brian Babin",
+    "pct": 69.4
+   },
+   "winner": {
+    "name": "Brian Babin",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "TX-H-37": {
+   "margin": 50.64,
+   "kind": "DR",
+   "d": {
+    "name": "Lloyd Doggett",
+    "pct": 74.2
+   },
+   "r": {
+    "name": "Jenny Garcia Sharon",
+    "pct": 23.6
+   },
+   "winner": {
+    "name": "Lloyd Doggett",
+    "party": "D"
+   },
+   "linesChanged": true
+  },
+  "TX-H-38": {
+   "margin": -25.5,
+   "kind": "DR",
+   "d": {
+    "name": "Melissa McDonough",
+    "pct": 37.2
+   },
+   "r": {
+    "name": "Wesley Hunt",
+    "pct": 62.7
+   },
+   "winner": {
+    "name": "Wesley Hunt",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "UT-H-1": {
+   "margin": -31.06,
+   "kind": "DR",
+   "d": {
+    "name": "Bill Campbell",
+    "pct": 32.1
+   },
+   "r": {
+    "name": "Blake Moore",
+    "pct": 63.1
+   },
+   "winner": {
+    "name": "Blake Moore",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "UT-H-2": {
+   "margin": -23.77,
+   "kind": "DR",
+   "d": {
+    "name": "Nathaniel Woodward",
+    "pct": 34.2
+   },
+   "r": {
+    "name": "Celeste Maloy",
+    "pct": 58
+   },
+   "winner": {
+    "name": "Celeste Maloy",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "UT-H-3": {
+   "margin": -32.77,
+   "kind": "DR",
+   "d": {
+    "name": "Glenn Wright",
+    "pct": 33.6
+   },
+   "r": {
+    "name": "Mike Kennedy",
+    "pct": 66.4
+   },
+   "winner": {
+    "name": "Mike Kennedy",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "UT-H-4": {
+   "margin": -33.21,
+   "kind": "DR",
+   "d": {
+    "name": "Katrina Fallick-Wang",
+    "pct": 30.2
+   },
+   "r": {
+    "name": "Burgess Owens",
+    "pct": 63.4
+   },
+   "winner": {
+    "name": "Burgess Owens",
+    "party": "R"
+   },
+   "linesChanged": true
+  },
+  "VA-H-1": {
+   "margin": -12.8,
+   "kind": "DR",
+   "d": {
+    "name": "Leslie Mehta",
+    "pct": 43.6
+   },
+   "r": {
+    "name": "Rob Wittman",
+    "pct": 56.4
+   },
+   "winner": {
+    "name": "Rob Wittman",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "VA-H-2": {
+   "margin": -3.85,
+   "kind": "DR",
+   "d": {
+    "name": "Missy Cotter Smasal",
+    "pct": 47
+   },
+   "r": {
+    "name": "Jen Kiggans",
+    "pct": 50.8
+   },
+   "winner": {
+    "name": "Jen Kiggans",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "VA-H-3": {
+   "margin": 40.2,
+   "kind": "DR",
+   "d": {
+    "name": "Bobby Scott",
+    "pct": 70.1
+   },
+   "r": {
+    "name": "John Sitka",
+    "pct": 29.9
+   },
+   "winner": {
+    "name": "Bobby Scott",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "VA-H-4": {
+   "margin": 34.98,
+   "kind": "DR",
+   "d": {
+    "name": "Jennifer McClellan",
+    "pct": 67.5
+   },
+   "r": {
+    "name": "Bill Moher",
+    "pct": 32.5
+   },
+   "winner": {
+    "name": "Jennifer McClellan",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "VA-H-5": {
+   "margin": -15.06,
+   "kind": "DR",
+   "d": {
+    "name": "Gloria Witt",
+    "pct": 42.5
+   },
+   "r": {
+    "name": "John McGuire",
+    "pct": 57.5
+   },
+   "winner": {
+    "name": "John McGuire",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "VA-H-6": {
+   "margin": -28.66,
+   "kind": "DR",
+   "d": {
+    "name": "Ken Mitchell",
+    "pct": 34.7
+   },
+   "r": {
+    "name": "Ben Cline",
+    "pct": 63.3
+   },
+   "winner": {
+    "name": "Ben Cline",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "VA-H-7": {
+   "margin": 2.65,
+   "kind": "DR",
+   "d": {
+    "name": "Eugene Vindman",
+    "pct": 51.3
+   },
+   "r": {
+    "name": "Derrick Anderson",
+    "pct": 48.7
+   },
+   "winner": {
+    "name": "Eugene Vindman",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "VA-H-8": {
+   "margin": 46.99,
+   "kind": "DR",
+   "d": {
+    "name": "Donald Beyer",
+    "pct": 71.7
+   },
+   "r": {
+    "name": "Jerry Torres",
+    "pct": 24.7
+   },
+   "winner": {
+    "name": "Donald Beyer",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "VA-H-9": {
+   "margin": -45.24,
+   "kind": "DR",
+   "d": {
+    "name": "Karen Baker",
+    "pct": 27.4
+   },
+   "r": {
+    "name": "Morgan Griffith",
+    "pct": 72.6
+   },
+   "winner": {
+    "name": "Morgan Griffith",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "VA-H-10": {
+   "margin": 4.57,
+   "kind": "DR",
+   "d": {
+    "name": "Suhas Subramanyam",
+    "pct": 52.3
+   },
+   "r": {
+    "name": "Mike Clancy",
+    "pct": 47.7
+   },
+   "winner": {
+    "name": "Suhas Subramanyam",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "VA-H-11": {
+   "margin": 33.97,
+   "kind": "DR",
+   "d": {
+    "name": "Gerry Connolly",
+    "pct": 67
+   },
+   "r": {
+    "name": "Mike Van Meter",
+    "pct": 33
+   },
+   "winner": {
+    "name": "Gerry Connolly",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "VT-H-1": {
+   "margin": 32.5,
+   "kind": "DR",
+   "d": {
+    "name": "Becca Balint",
+    "pct": 62.3
+   },
+   "r": {
+    "name": "Mark Coester",
+    "pct": 29.8
+   },
+   "winner": {
+    "name": "Becca Balint",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "WA-H-1": {
+   "margin": 26.32,
+   "kind": "DR",
+   "d": {
+    "name": "Suzan DelBene",
+    "pct": 63.2
+   },
+   "r": {
+    "name": "Jeb Brewer",
+    "pct": 36.8
+   },
+   "winner": {
+    "name": "Suzan DelBene",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "WA-H-2": {
+   "margin": 28.06,
+   "kind": "DR",
+   "d": {
+    "name": "Rick Larsen",
+    "pct": 64
+   },
+   "r": {
+    "name": "Cody Hart",
+    "pct": 36
+   },
+   "winner": {
+    "name": "Rick Larsen",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "WA-H-3": {
+   "margin": 3.89,
+   "kind": "DR",
+   "d": {
+    "name": "Marie Gluesenkamp Perez",
+    "pct": 51.9
+   },
+   "r": {
+    "name": "Joe Kent",
+    "pct": 48.1
+   },
+   "winner": {
+    "name": "Marie Gluesenkamp Perez",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "WA-H-4": {
+   "margin": null,
+   "kind": "RR",
+   "d": null,
+   "r": {
+    "name": "Dan Newhouse",
+    "pct": 53
+   },
+   "winner": {
+    "name": "Dan Newhouse",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "WA-H-5": {
+   "margin": -21.31,
+   "kind": "DR",
+   "d": {
+    "name": "Carmela Conroy",
+    "pct": 39.3
+   },
+   "r": {
+    "name": "Michael Baumgartner",
+    "pct": 60.7
+   },
+   "winner": {
+    "name": "Michael Baumgartner",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "WA-H-6": {
+   "margin": 13.63,
+   "kind": "DR",
+   "d": {
+    "name": "Emily Randall",
+    "pct": 56.8
+   },
+   "r": {
+    "name": "Drew MacEwen",
+    "pct": 43.2
+   },
+   "winner": {
+    "name": "Emily Randall",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "WA-H-7": {
+   "margin": 68.35,
+   "kind": "DR",
+   "d": {
+    "name": "Pramila Jayapal",
+    "pct": 84.2
+   },
+   "r": {
+    "name": "Dan Alexander",
+    "pct": 15.8
+   },
+   "winner": {
+    "name": "Pramila Jayapal",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "WA-H-8": {
+   "margin": 8.17,
+   "kind": "DR",
+   "d": {
+    "name": "Kim Schrier",
+    "pct": 54.1
+   },
+   "r": {
+    "name": "Carmen Goers",
+    "pct": 45.9
+   },
+   "winner": {
+    "name": "Kim Schrier",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "WA-H-9": {
+   "margin": null,
+   "kind": "DD",
+   "d": {
+    "name": "Adam Smith",
+    "pct": 66.9
+   },
+   "r": null,
+   "winner": {
+    "name": "Adam Smith",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "WA-H-10": {
+   "margin": 17.35,
+   "kind": "DR",
+   "d": {
+    "name": "Marilyn Strickland",
+    "pct": 58.7
+   },
+   "r": {
+    "name": "Don Hewett",
+    "pct": 41.3
+   },
+   "winner": {
+    "name": "Marilyn Strickland",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "WI-H-1": {
+   "margin": -10.2,
+   "kind": "DR",
+   "d": {
+    "name": "Peter Barca",
+    "pct": 43.9
+   },
+   "r": {
+    "name": "Bryan Steil",
+    "pct": 54.1
+   },
+   "winner": {
+    "name": "Bryan Steil",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "WI-H-2": {
+   "margin": 40.28,
+   "kind": "DR",
+   "d": {
+    "name": "Mark Pocan",
+    "pct": 70.1
+   },
+   "r": {
+    "name": "Erik Olsen",
+    "pct": 29.9
+   },
+   "winner": {
+    "name": "Mark Pocan",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "WI-H-3": {
+   "margin": -2.73,
+   "kind": "DR",
+   "d": {
+    "name": "Rebecca Cooke",
+    "pct": 48.6
+   },
+   "r": {
+    "name": "Derrick Van Orden",
+    "pct": 51.4
+   },
+   "winner": {
+    "name": "Derrick Van Orden",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "WI-H-4": {
+   "margin": 52.46,
+   "kind": "DR",
+   "d": {
+    "name": "Gwen Moore",
+    "pct": 74.9
+   },
+   "r": {
+    "name": "Tim Rogers",
+    "pct": 22.5
+   },
+   "winner": {
+    "name": "Gwen Moore",
+    "party": "D"
+   },
+   "linesChanged": false
+  },
+  "WI-H-5": {
+   "margin": -28.93,
+   "kind": "DR",
+   "d": {
+    "name": "Ben Steinhoff",
+    "pct": 35.5
+   },
+   "r": {
+    "name": "Scott Fitzgerald",
+    "pct": 64.5
+   },
+   "winner": {
+    "name": "Scott Fitzgerald",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "WI-H-6": {
+   "margin": -22.59,
+   "kind": "DR",
+   "d": {
+    "name": "John Zarbano",
+    "pct": 38.7
+   },
+   "r": {
+    "name": "Glenn Grothman",
+    "pct": 61.3
+   },
+   "winner": {
+    "name": "Glenn Grothman",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "WI-H-7": {
+   "margin": -27.21,
+   "kind": "DR",
+   "d": {
+    "name": "Kyle Kilbourn",
+    "pct": 36.4
+   },
+   "r": {
+    "name": "Tom Tiffany",
+    "pct": 63.6
+   },
+   "winner": {
+    "name": "Tom Tiffany",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "WI-H-8": {
+   "margin": -14.66,
+   "kind": "DR",
+   "d": {
+    "name": "Kristin Lyerly",
+    "pct": 42.7
+   },
+   "r": {
+    "name": "Tony Wied",
+    "pct": 57.3
+   },
+   "winner": {
+    "name": "Tony Wied",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "WV-H-1": {
+   "margin": -40.23,
+   "kind": "DR",
+   "d": {
+    "name": "Chris Reed",
+    "pct": 26.2
+   },
+   "r": {
+    "name": "Carol Miller",
+    "pct": 66.4
+   },
+   "winner": {
+    "name": "Carol Miller",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "WV-H-2": {
+   "margin": -41.54,
+   "kind": "DR",
+   "d": {
+    "name": "Steven Wendelin",
+    "pct": 29.2
+   },
+   "r": {
+    "name": "Riley  Moore",
+    "pct": 70.8
+   },
+   "winner": {
+    "name": "Riley  Moore",
+    "party": "R"
+   },
+   "linesChanged": false
+  },
+  "WY-H-1": {
+   "margin": -47.65,
+   "kind": "DR",
+   "d": {
+    "name": "Kyle Cameron",
+    "pct": 23.4
+   },
+   "r": {
+    "name": "Harriet Hageman",
+    "pct": 71
+   },
+   "winner": {
+    "name": "Harriet Hageman",
+    "party": "R"
+   },
+   "linesChanged": false
+  }
+ },
+ "houseVote": {
+  "2022": {
+   "national": {
+    "D": 51469321,
+    "R": 54507807,
+    "total": 107670657,
+    "margin": -2.82
+   },
+   "byState": {
+    "AK": {
+     "D": 137263,
+     "R": 112471,
+     "total": 249734,
+     "margin": 9.93
+    },
+    "AL": {
+     "D": 318540,
+     "R": 942393,
+     "total": 1343710,
+     "margin": -46.43
+    },
+    "AR": {
+     "D": 271771,
+     "R": 598000,
+     "total": 895102,
+     "margin": -36.45
+    },
+    "AZ": {
+     "D": 1004462,
+     "R": 1324961,
+     "total": 2361009,
+     "margin": -13.57
+    },
+    "CA": {
+     "D": 6743737,
+     "R": 3859666,
+     "total": 10656368,
+     "margin": 27.06
+    },
+    "CO": {
+     "D": 1365427,
+     "R": 1050959,
+     "total": 2472138,
+     "margin": 12.72
+    },
+    "CT": {
+     "D": 721526,
+     "R": 526372,
+     "total": 1261351,
+     "margin": 15.47
+    },
+    "DE": {
+     "D": 178416,
+     "R": 138201,
+     "total": 321667,
+     "margin": 12.5
+    },
+    "FL": {
+     "D": 2905702,
+     "R": 4271196,
+     "total": 7332304,
+     "margin": -18.62
+    },
+    "GA": {
+     "D": 1863870,
+     "R": 2044102,
+     "total": 3907986,
+     "margin": -4.61
+    },
+    "HI": {
+     "D": 271953,
+     "R": 124091,
+     "total": 401174,
+     "margin": 36.86
+    },
+    "IA": {
+     "D": 526460,
+     "R": 677857,
+     "total": 1211700,
+     "margin": -12.49
+    },
+    "ID": {
+     "D": 180997,
+     "R": 395351,
+     "total": 583628,
+     "margin": -36.73
+    },
+    "IL": {
+     "D": 2271361,
+     "R": 1768782,
+     "total": 4049405,
+     "margin": 12.41
+    },
+    "IN": {
+     "D": 716412,
+     "R": 1108575,
+     "total": 1856849,
+     "margin": -21.12
+    },
+    "KS": {
+     "D": 425322,
+     "R": 569567,
+     "total": 1002071,
+     "margin": -14.39
+    },
+    "KY": {
+     "D": 490921,
+     "R": 953296,
+     "total": 1463409,
+     "margin": -31.6
+    },
+    "LA": {
+     "D": 318932,
+     "R": 773701,
+     "total": 1133124,
+     "margin": -40.13
+    },
+    "MA": {
+     "D": 1636400,
+     "R": 706790,
+     "total": 2357997,
+     "margin": 39.42
+    },
+    "MD": {
+     "D": 1291446,
+     "R": 690463,
+     "total": 1995728,
+     "margin": 30.11
+    },
+    "ME": {
+     "D": 384889,
+     "R": 275405,
+     "total": 660454,
+     "margin": 16.58
+    },
+    "MI": {
+     "D": 2184504,
+     "R": 2083361,
+     "total": 4375537,
+     "margin": 2.31
+    },
+    "MN": {
+     "D": 1250518,
+     "R": 1200855,
+     "total": 2495832,
+     "margin": 1.99
+    },
+    "MO": {
+     "D": 794978,
+     "R": 1223617,
+     "total": 2060089,
+     "margin": -20.81
+    },
+    "MS": {
+     "D": 251202,
+     "R": 454329,
+     "total": 709100,
+     "margin": -28.65
+    },
+    "MT": {
+     "D": 158745,
+     "R": 245081,
+     "total": 463632,
+     "margin": -18.62
+    },
+    "NC": {
+     "D": 1795170,
+     "R": 1956906,
+     "total": 3760753,
+     "margin": -4.3
+    },
+    "ND": {
+     "D": 0,
+     "R": 148399,
+     "total": 238586,
+     "margin": -62.2
+    },
+    "NE": {
+     "D": 235572,
+     "R": 414599,
+     "total": 663187,
+     "margin": -26.99
+    },
+    "NH": {
+     "D": 339027,
+     "R": 277808,
+     "total": 617546,
+     "margin": 9.91
+    },
+    "NJ": {
+     "D": 1416422,
+     "R": 1160260,
+     "total": 2611953,
+     "margin": 9.81
+    },
+    "NM": {
+     "D": 387665,
+     "R": 316352,
+     "total": 704126,
+     "margin": 10.13
+    },
+    "NV": {
+     "D": 480774,
+     "R": 515535,
+     "total": 1009503,
+     "margin": -3.44
+    },
+    "NY": {
+     "D": 3199496,
+     "R": 2525335,
+     "total": 5762257,
+     "margin": 11.7
+    },
+    "OH": {
+     "D": 1790614,
+     "R": 2318993,
+     "total": 4109711,
+     "margin": -12.86
+    },
+    "OK": {
+     "D": 356988,
+     "R": 760639,
+     "total": 1146311,
+     "margin": -35.21
+    },
+    "OR": {
+     "D": 1012725,
+     "R": 851991,
+     "total": 1906940,
+     "margin": 8.43
+    },
+    "PA": {
+     "D": 2436919,
+     "R": 2702262,
+     "total": 5152001,
+     "margin": -5.15
+    },
+    "RI": {
+     "D": 201750,
+     "R": 150024,
+     "total": 357823,
+     "margin": 14.46
+    },
+    "SC": {
+     "D": 517129,
+     "R": 1056078,
+     "total": 1602341,
+     "margin": -33.64
+    },
+    "SD": {
+     "D": 0,
+     "R": 253821,
+     "total": 327841,
+     "margin": -77.42
+    },
+    "TN": {
+     "D": 581902,
+     "R": 1099462,
+     "total": 1710425,
+     "margin": -30.26
+    },
+    "TX": {
+     "D": 2999053,
+     "R": 4559280,
+     "total": 7751761,
+     "margin": -20.13
+    },
+    "UT": {
+     "D": 342078,
+     "R": 670924,
+     "total": 1063258,
+     "margin": -30.93
+    },
+    "VA": {
+     "D": 1572296,
+     "R": 1462049,
+     "total": 3047729,
+     "margin": 3.62
+    },
+    "VT": {
+     "D": 176494,
+     "R": 78397,
+     "total": 282026,
+     "margin": 34.78
+    },
+    "WA": {
+     "D": 1751582,
+     "R": 1261961,
+     "total": 3026173,
+     "margin": 16.18
+    },
+    "WI": {
+     "D": 1012955,
+     "R": 1403080,
+     "total": 2531324,
+     "margin": -15.41
+    },
+    "WV": {
+     "D": 149706,
+     "R": 312004,
+     "total": 472082,
+     "margin": -34.38
+    },
+    "WY": {
+     "D": 47250,
+     "R": 132206,
+     "total": 193902,
+     "margin": -43.81
+    }
+   }
+  },
+  "2024": {
+   "national": {
+    "D": 70785767,
+    "R": 74823618,
+    "total": 147919843,
+    "margin": -2.73
+   },
+   "byState": {
+    "AK": {
+     "D": 156245,
+     "R": 159550,
+     "total": 329555,
+     "margin": -1
+    },
+    "AL": {
+     "D": 518197,
+     "R": 1508754,
+     "total": 2048663,
+     "margin": -48.35
+    },
+    "AR": {
+     "D": 358749,
+     "R": 764367,
+     "total": 1144800,
+     "margin": -35.43
+    },
+    "AZ": {
+     "D": 1551085,
+     "R": 1680841,
+     "total": 3253920,
+     "margin": -3.99
+    },
+    "CA": {
+     "D": 9138709,
+     "R": 5928084,
+     "total": 15111243,
+     "margin": 21.25
+    },
+    "CO": {
+     "D": 1667213,
+     "R": 1306086,
+     "total": 3073391,
+     "margin": 11.75
+    },
+    "CT": {
+     "D": 1001554,
+     "R": 688107,
+     "total": 1701702,
+     "margin": 18.42
+    },
+    "DE": {
+     "D": 287830,
+     "R": 209606,
+     "total": 497436,
+     "margin": 15.73
+    },
+    "FL": {
+     "D": 4339733,
+     "R": 5975435,
+     "total": 10327922,
+     "margin": -15.84
+    },
+    "GA": {
+     "D": 2434984,
+     "R": 2702118,
+     "total": 5147373,
+     "margin": -5.19
+    },
+    "HI": {
+     "D": 330488,
+     "R": 139844,
+     "total": 478766,
+     "margin": 39.82
+    },
+    "IA": {
+     "D": 696033,
+     "R": 904563,
+     "total": 1605977,
+     "margin": -12.98
+    },
+    "ID": {
+     "D": 244885,
+     "R": 581168,
+     "total": 873694,
+     "margin": -38.49
+    },
+    "IL": {
+     "D": 2829169,
+     "R": 2517389,
+     "total": 5357262,
+     "margin": 5.82
+    },
+    "IN": {
+     "D": 1103484,
+     "R": 1668618,
+     "total": 2868107,
+     "margin": -19.7
+    },
+    "KS": {
+     "D": 526153,
+     "R": 749375,
+     "total": 1305649,
+     "margin": -17.1
+    },
+    "KY": {
+     "D": 511998,
+     "R": 1392354,
+     "total": 1904352,
+     "margin": -46.23
+    },
+    "LA": {
+     "D": 650836,
+     "R": 1248101,
+     "total": 1905718,
+     "margin": -31.34
+    },
+    "MA": {
+     "D": 2386143,
+     "R": 304460,
+     "total": 2976163,
+     "margin": 69.95
+    },
+    "MD": {
+     "D": 1863416,
+     "R": 1017654,
+     "total": 2928826,
+     "margin": 28.88
+    },
+    "ME": {
+     "D": 446137,
+     "R": 349106,
+     "total": 816552,
+     "margin": 11.88
+    },
+    "MI": {
+     "D": 2634228,
+     "R": 2702653,
+     "total": 5516870,
+     "margin": -1.24
+    },
+    "MN": {
+     "D": 1579742,
+     "R": 1550499,
+     "total": 3139733,
+     "margin": 0.93
+    },
+    "MO": {
+     "D": 1125671,
+     "R": 1711050,
+     "total": 2924861,
+     "margin": -20.01
+    },
+    "MS": {
+     "D": 350353,
+     "R": 812799,
+     "total": 1163152,
+     "margin": -39.76
+    },
+    "MT": {
+     "D": 237496,
+     "R": 350361,
+     "total": 597811,
+     "margin": -18.88
+    },
+    "NC": {
+     "D": 2349621,
+     "R": 2889999,
+     "total": 5483155,
+     "margin": -9.86
+    },
+    "ND": {
+     "D": 109231,
+     "R": 249101,
+     "total": 358332,
+     "margin": -39.03
+    },
+    "NE": {
+     "D": 338154,
+     "R": 591238,
+     "total": 929392,
+     "margin": -27.23
+    },
+    "NH": {
+     "D": 430218,
+     "R": 373746,
+     "total": 804626,
+     "margin": 7.02
+    },
+    "NJ": {
+     "D": 2115843,
+     "R": 1828853,
+     "total": 4041088,
+     "margin": 7.1
+    },
+    "NM": {
+     "D": 493722,
+     "R": 402776,
+     "total": 896498,
+     "margin": 10.14
+    },
+    "NV": {
+     "D": 534115,
+     "R": 692714,
+     "total": 1427077,
+     "margin": -11.11
+    },
+    "NY": {
+     "D": 4527087,
+     "R": 3364296,
+     "total": 7913018,
+     "margin": 14.69
+    },
+    "OH": {
+     "D": 2382078,
+     "R": 3104290,
+     "total": 5570784,
+     "margin": -12.96
+    },
+    "OK": {
+     "D": 397856,
+     "R": 834553,
+     "total": 1282106,
+     "margin": -34.06
+    },
+    "OR": {
+     "D": 1151394,
+     "R": 912337,
+     "total": 2153668,
+     "margin": 11.1
+    },
+    "PA": {
+     "D": 3338371,
+     "R": 3481113,
+     "total": 6819484,
+     "margin": -2.09
+    },
+    "RI": {
+     "D": 292791,
+     "R": 180123,
+     "total": 483377,
+     "margin": 23.31
+    },
+    "SC": {
+     "D": 964448,
+     "R": 1475329,
+     "total": 2470736,
+     "margin": -20.68
+    },
+    "SD": {
+     "D": 117818,
+     "R": 303630,
+     "total": 421448,
+     "margin": -44.09
+    },
+    "TN": {
+     "D": 977870,
+     "R": 1884691,
+     "total": 2926955,
+     "margin": -30.98
+    },
+    "TX": {
+     "D": 4310913,
+     "R": 6234918,
+     "total": 10673912,
+     "margin": -18.03
+    },
+    "UT": {
+     "D": 471051,
+     "R": 909332,
+     "total": 1448677,
+     "margin": -30.25
+    },
+    "VA": {
+     "D": 2273409,
+     "R": 2107366,
+     "total": 4411544,
+     "margin": 3.76
+    },
+    "VT": {
+     "D": 218398,
+     "R": 104451,
+     "total": 350616,
+     "margin": 32.5
+    },
+    "WA": {
+     "D": 2155907,
+     "R": 1592599,
+     "total": 3748506,
+     "margin": 15.03
+    },
+    "WI": {
+     "D": 1603350,
+     "R": 1701860,
+     "total": 3322193,
+     "margin": -2.97
+    },
+    "WV": {
+     "D": 200813,
+     "R": 496681,
+     "total": 723110,
+     "margin": -40.92
+    },
+    "WY": {
+     "D": 60778,
+     "R": 184680,
+     "total": 260043,
+     "margin": -47.65
+    }
+   }
+  }
+ },
+ "pres2024": {
+  "national": {
+   "D": 75017613,
+   "R": 77302580,
+   "total": 155228947,
+   "margin": -1.47
+  },
+  "byState": {
+   "AK": -13.14,
+   "AL": -30.47,
+   "AR": -30.64,
+   "AZ": -5.53,
+   "CA": 20.13,
+   "CO": 10.98,
+   "CT": 14.5,
+   "DC": 83.81,
+   "DE": 14.7,
+   "FL": -13.1,
+   "GA": -2.19,
+   "HI": 23.1,
+   "IA": -13.21,
+   "ID": -36.49,
+   "IL": 10.9,
+   "IN": -18.96,
+   "KS": -16.12,
+   "KY": -30.53,
+   "LA": -22.01,
+   "MA": 25.2,
+   "MD": 28.54,
+   "ME": 6.94,
+   "MI": -1.41,
+   "MN": 4.24,
+   "MO": -18.41,
+   "MS": -22.89,
+   "MT": -19.93,
+   "NC": -3.21,
+   "ND": -36.45,
+   "NE": -20.46,
+   "NH": 2.78,
+   "NJ": 5.89,
+   "NM": 6,
+   "NV": -3.1,
+   "NY": 12.59,
+   "OH": -11.21,
+   "OK": -34.26,
+   "OR": 14.31,
+   "PA": -1.71,
+   "RI": 13.78,
+   "SC": -17.87,
+   "SD": -29.19,
+   "TN": -29.72,
+   "TX": -13.68,
+   "UT": -21.58,
+   "VA": 5.77,
+   "VT": 31.51,
+   "WA": 18.22,
+   "WI": -0.86,
+   "WV": -41.85,
+   "WY": -45.76
+  },
+  "byRace": {
+   "AL-S": -30.59,
+   "AK-S": -13.14,
+   "AR-S": -30.64,
+   "CO-S": 10.99,
+   "DE-S": 14.74,
+   "FL-S": -13.1,
+   "GA-S": -2.19,
+   "ID-S": -36.5,
+   "IL-S": 10.97,
+   "IA-S": -13.26,
+   "KS-S": -16.12,
+   "KY-S": -30.55,
+   "LA-S": -22,
+   "ME-S": 6.94,
+   "MA-S": 25.34,
+   "MI-S": -1.42,
+   "MN-S": 4.26,
+   "MS-S": -22.89,
+   "MT-S": -19.93,
+   "NE-S": -20.57,
+   "NH-S": 2.79,
+   "NJ-S": 5.91,
+   "NM-S": 6,
+   "NC-S": -3.22,
+   "OH-S": -11.21,
+   "OK-S": -34.26,
+   "OR-S": 14.4,
+   "RI-S": 13.86,
+   "SC-S": -17.87,
+   "SD-S": -29.2,
+   "TN-S": -29.72,
+   "TX-S": -13.69,
+   "VA-S": 5.81,
+   "WV-S": -41.87,
+   "WY-S": -46.22,
+   "AL-G": -30.59,
+   "AK-G": -13.14,
+   "AZ-G": -5.53,
+   "AR-G": -30.64,
+   "CA-G": 20.14,
+   "CO-G": 10.99,
+   "CT-G": 14.51,
+   "FL-G": -13.1,
+   "GA-G": -2.19,
+   "HI-G": 23.11,
+   "ID-G": -36.5,
+   "IL-G": 10.97,
+   "IA-G": -13.26,
+   "KS-G": -16.12,
+   "ME-G": 6.94,
+   "MD-G": 28.75,
+   "MA-G": 25.34,
+   "MI-G": -1.42,
+   "MN-G": 4.26,
+   "NE-G": -20.57,
+   "NV-G": -3.1,
+   "NH-G": 2.79,
+   "NM-G": 6,
+   "NY-G": 12.69,
+   "OH-G": -11.21,
+   "OK-G": -34.26,
+   "OR-G": 14.4,
+   "PA-G": -1.71,
+   "RI-G": 13.86,
+   "SC-G": -17.87,
+   "SD-G": -29.2,
+   "TN-G": -29.72,
+   "TX-G": -13.69,
+   "VT-G": 31.77,
+   "WI-G": -0.86,
+   "WY-G": -46.22,
+   "AL-H-1": -36.01,
+   "AL-H-2": -14.36,
+   "AL-H-3": -46.66,
+   "AL-H-4": -66.5,
+   "AL-H-5": -29.12,
+   "AL-H-6": -34.45,
+   "AL-H-7": 17.88,
+   "AK-H-1": -13.14,
+   "AZ-H-1": -3.11,
+   "AZ-H-2": -14.97,
+   "AZ-H-3": 39.75,
+   "AZ-H-4": 6.67,
+   "AZ-H-5": -19.98,
+   "AZ-H-6": -0.75,
+   "AZ-H-7": 22.04,
+   "AZ-H-8": -16.33,
+   "AZ-H-9": -31.08,
+   "AR-H-1": -45.29,
+   "AR-H-2": -15.53,
+   "AR-H-3": -24.82,
+   "AR-H-4": -39.91,
+   "CA-H-1": 12.22,
+   "CA-H-2": 24.64,
+   "CA-H-3": 10.16,
+   "CA-H-4": 14.5,
+   "CA-H-5": -20.63,
+   "CA-H-6": 8.51,
+   "CA-H-7": 12.7,
+   "CA-H-8": 34.05,
+   "CA-H-9": 11.45,
+   "CA-H-10": 33.59,
+   "CA-H-11": 67.72,
+   "CA-H-12": 73.9,
+   "CA-H-13": 0.42,
+   "CA-H-14": 34.79,
+   "CA-H-15": 47.89,
+   "CA-H-16": 48.13,
+   "CA-H-17": 38.97,
+   "CA-H-18": 28.43,
+   "CA-H-19": 34.39,
+   "CA-H-20": -32.16,
+   "CA-H-21": 6.04,
+   "CA-H-22": -1.8,
+   "CA-H-23": -19.36,
+   "CA-H-24": 24.96,
+   "CA-H-25": 5.83,
+   "CA-H-26": 15.28,
+   "CA-H-27": 9.78,
+   "CA-H-28": 25.3,
+   "CA-H-29": 33.61,
+   "CA-H-30": 40.06,
+   "CA-H-31": 12.23,
+   "CA-H-32": 25.02,
+   "CA-H-33": 9.85,
+   "CA-H-34": 50.64,
+   "CA-H-35": 7.76,
+   "CA-H-36": 39.11,
+   "CA-H-37": 60.39,
+   "CA-H-38": 12.36,
+   "CA-H-39": 9.55,
+   "CA-H-40": -12.22,
+   "CA-H-41": 14.18,
+   "CA-H-42": 13.14,
+   "CA-H-43": 48.97,
+   "CA-H-44": 35.16,
+   "CA-H-45": 3.95,
+   "CA-H-46": 16.16,
+   "CA-H-47": 10.08,
+   "CA-H-48": 3.42,
+   "CA-H-49": 12.12,
+   "CA-H-50": 18.21,
+   "CA-H-51": 18.24,
+   "CA-H-52": 17.54,
+   "CO-H-1": 56.07,
+   "CO-H-2": 39.78,
+   "CO-H-3": -9.73,
+   "CO-H-4": -18.25,
+   "CO-H-5": -9.08,
+   "CO-H-6": 19.77,
+   "CO-H-7": 14.98,
+   "CO-H-8": -1.83,
+   "CT-H-1": 22.88,
+   "CT-H-2": 7.73,
+   "CT-H-3": 14.06,
+   "CT-H-4": 23.36,
+   "CT-H-5": 5.59,
+   "DE-H-1": 14.74,
+   "FL-H-1": -37.21,
+   "FL-H-2": -17.98,
+   "FL-H-3": -21.11,
+   "FL-H-4": -11.84,
+   "FL-H-5": -21.44,
+   "FL-H-6": -30.1,
+   "FL-H-7": -12.47,
+   "FL-H-8": -16.23,
+   "FL-H-9": -17.86,
+   "FL-H-10": 24.01,
+   "FL-H-11": -15.72,
+   "FL-H-12": -15.39,
+   "FL-H-13": -13.32,
+   "FL-H-14": -10.54,
+   "FL-H-15": -19.82,
+   "FL-H-16": -13.7,
+   "FL-H-17": -22.1,
+   "FL-H-18": -16.92,
+   "FL-H-19": -30.23,
+   "FL-H-20": 37.21,
+   "FL-H-21": -16.27,
+   "FL-H-22": -10.47,
+   "FL-H-23": 13.81,
+   "FL-H-24": 38.62,
+   "FL-H-25": -9.15,
+   "FL-H-26": -17.84,
+   "FL-H-27": -14.83,
+   "FL-H-28": -25.52,
+   "GA-H-1": -15.81,
+   "GA-H-2": 7.64,
+   "GA-H-3": -29.68,
+   "GA-H-4": 52.46,
+   "GA-H-5": 71.58,
+   "GA-H-6": 49.94,
+   "GA-H-7": -22.04,
+   "GA-H-8": -30.62,
+   "GA-H-9": -34.06,
+   "GA-H-10": -20.77,
+   "GA-H-11": -23.3,
+   "GA-H-12": -14.16,
+   "GA-H-13": 42.33,
+   "GA-H-14": -36.8,
+   "HI-H-1": 24.73,
+   "HI-H-2": 21.59,
+   "ID-H-1": -45.07,
+   "ID-H-2": -26.73,
+   "IL-H-1": 31.89,
+   "IL-H-2": 33.14,
+   "IL-H-3": 31.36,
+   "IL-H-4": 28.34,
+   "IL-H-5": 37.11,
+   "IL-H-6": 5.51,
+   "IL-H-7": 65.35,
+   "IL-H-8": 6.9,
+   "IL-H-9": 36.61,
+   "IL-H-10": 22.04,
+   "IL-H-11": 11.36,
+   "IL-H-12": -43.46,
+   "IL-H-13": 10.45,
+   "IL-H-14": 5.19,
+   "IL-H-15": -39.76,
+   "IL-H-16": -22.71,
+   "IL-H-17": 4.73,
+   "IN-H-1": 0.4,
+   "IN-H-2": -26.5,
+   "IN-H-3": -31.19,
+   "IN-H-4": -29.35,
+   "IN-H-5": -16.8,
+   "IN-H-6": -32.52,
+   "IN-H-7": 41.46,
+   "IN-H-8": -35.88,
+   "IN-H-9": -29.88,
+   "IA-H-1": -8.47,
+   "IA-H-2": -9.99,
+   "IA-H-3": -4.41,
+   "IA-H-4": -31.48,
+   "KS-H-1": -31.27,
+   "KS-H-2": -19.68,
+   "KS-H-3": 4.1,
+   "KS-H-4": -23.29,
+   "KY-H-1": -47.3,
+   "KY-H-2": -41.33,
+   "KY-H-3": 18.94,
+   "KY-H-4": -35.56,
+   "KY-H-5": -63.88,
+   "KY-H-6": -15.03,
+   "LA-H-1": -38.38,
+   "LA-H-2": 47.39,
+   "LA-H-3": -36.18,
+   "LA-H-4": -34.04,
+   "LA-H-5": -34.05,
+   "LA-H-6": -29.81,
+   "ME-H-1": 21.83,
+   "ME-H-2": -9.53,
+   "MD-H-1": -16.91,
+   "MD-H-2": 18.46,
+   "MD-H-3": 23.76,
+   "MD-H-4": 73.62,
+   "MD-H-5": 33.3,
+   "MD-H-6": 5.77,
+   "MD-H-7": 58.94,
+   "MD-H-8": 56.45,
+   "MA-H-1": 13.62,
+   "MA-H-2": 23.68,
+   "MA-H-3": 18.98,
+   "MA-H-4": 19.73,
+   "MA-H-5": 45.17,
+   "MA-H-6": 20.68,
+   "MA-H-7": 63.1,
+   "MA-H-8": 26.42,
+   "MA-H-9": 10.76,
+   "MI-H-1": -21.21,
+   "MI-H-2": -30.09,
+   "MI-H-3": 7.84,
+   "MI-H-4": -5.54,
+   "MI-H-5": -27.03,
+   "MI-H-6": 23.31,
+   "MI-H-7": -1.28,
+   "MI-H-8": -1.99,
+   "MI-H-9": -32.33,
+   "MI-H-10": -6.55,
+   "MI-H-11": 16.08,
+   "MI-H-12": 37.97,
+   "MI-H-13": 41.06,
+   "MN-H-1": -12,
+   "MN-H-2": 5.83,
+   "MN-H-3": 21.26,
+   "MN-H-4": 35.68,
+   "MN-H-5": 61.87,
+   "MN-H-6": -19.67,
+   "MN-H-7": -36.48,
+   "MN-H-8": -14.29,
+   "MS-H-1": -37.03,
+   "MS-H-2": 20.4,
+   "MS-H-3": -29.29,
+   "MS-H-4": -42.53,
+   "MT-H-1": -11.55,
+   "MT-H-2": -29.54,
+   "NE-H-1": -13.04,
+   "NE-H-2": 4.62,
+   "NE-H-3": -53.8,
+   "NV-H-1": 2.3,
+   "NV-H-2": -13.94,
+   "NV-H-3": -0.73,
+   "NV-H-4": 2.3,
+   "NH-H-1": 2,
+   "NH-H-2": 3.59,
+   "NJ-H-1": 18.73,
+   "NJ-H-2": -12.57,
+   "NJ-H-3": 8.36,
+   "NJ-H-4": -30.23,
+   "NJ-H-5": 1.48,
+   "NJ-H-6": 6.41,
+   "NJ-H-7": -1.19,
+   "NJ-H-8": 24.22,
+   "NJ-H-9": -1.14,
+   "NJ-H-10": 50.75,
+   "NJ-H-11": 8.7,
+   "NJ-H-12": 23.93,
+   "NM-H-1": 12.67,
+   "NM-H-2": -1.81,
+   "NM-H-3": 5.13,
+   "NY-H-1": -10.19,
+   "NY-H-2": -14.08,
+   "NY-H-3": -4.36,
+   "NY-H-4": 1.3,
+   "NY-H-5": 42.8,
+   "NY-H-6": 6.53,
+   "NY-H-7": 47.19,
+   "NY-H-8": 44.7,
+   "NY-H-9": 41.46,
+   "NY-H-10": 61.89,
+   "NY-H-11": -24.83,
+   "NY-H-12": 64.9,
+   "NY-H-13": 60.27,
+   "NY-H-14": 32.37,
+   "NY-H-15": 48.81,
+   "NY-H-16": 33.31,
+   "NY-H-17": 0.56,
+   "NY-H-18": 3.35,
+   "NY-H-19": 1.8,
+   "NY-H-20": 14.32,
+   "NY-H-21": -20.76,
+   "NY-H-22": 7.7,
+   "NY-H-23": -21.19,
+   "NY-H-24": -23.24,
+   "NY-H-25": 18.65,
+   "NY-H-26": 19.56,
+   "NC-H-1": -11.55,
+   "NC-H-2": 33.84,
+   "NC-H-3": -13.63,
+   "NC-H-4": 45.3,
+   "NC-H-5": -17.78,
+   "NC-H-6": -17.17,
+   "NC-H-7": -13.83,
+   "NC-H-8": -19.36,
+   "NC-H-9": -15.84,
+   "NC-H-10": -17.73,
+   "NC-H-11": -9.51,
+   "NC-H-12": 46.24,
+   "NC-H-13": -16.53,
+   "NC-H-14": -15.06,
+   "ND-H-1": -36.76,
+   "OH-H-1": -2.61,
+   "OH-H-2": -42.16,
+   "OH-H-3": 40.24,
+   "OH-H-4": -42.64,
+   "OH-H-5": -23.75,
+   "OH-H-6": -34.61,
+   "OH-H-7": -11.07,
+   "OH-H-8": -15.62,
+   "OH-H-9": -10.58,
+   "OH-H-10": -7.79,
+   "OH-H-11": 55.06,
+   "OH-H-12": -30.09,
+   "OH-H-13": 3.29,
+   "OH-H-14": -20.36,
+   "OH-H-15": -10,
+   "OK-H-1": -21.53,
+   "OK-H-2": -55.62,
+   "OK-H-3": -45.53,
+   "OK-H-4": -33.23,
+   "OK-H-5": -17.74,
+   "OR-H-1": 37.79,
+   "OR-H-2": -27.14,
+   "OR-H-3": 45.97,
+   "OR-H-4": 12.06,
+   "OR-H-5": 8.56,
+   "OR-H-6": 11.37,
+   "PA-H-1": 0.32,
+   "PA-H-2": 35.71,
+   "PA-H-3": 77.27,
+   "PA-H-4": 15.82,
+   "PA-H-5": 28.62,
+   "PA-H-6": 11.41,
+   "PA-H-7": -3.18,
+   "PA-H-8": -8.52,
+   "PA-H-9": -37.92,
+   "PA-H-10": -5.23,
+   "PA-H-11": -21.36,
+   "PA-H-12": 19.18,
+   "PA-H-13": -45.53,
+   "PA-H-14": -33.35,
+   "PA-H-15": -37.97,
+   "PA-H-16": -22.78,
+   "PA-H-17": 5.51,
+   "RI-H-1": 21.8,
+   "RI-H-2": 6.5,
+   "SC-H-1": -13.08,
+   "SC-H-2": -13.95,
+   "SC-H-3": -43.07,
+   "SC-H-4": -23.64,
+   "SC-H-5": -22.77,
+   "SC-H-6": 22.83,
+   "SC-H-7": -26.34,
+   "SD-H-1": -29.19,
+   "TN-H-1": -57.84,
+   "TN-H-2": -33.86,
+   "TN-H-3": -35.72,
+   "TN-H-4": -23.95,
+   "TN-H-5": -23.04,
+   "TN-H-6": -26.4,
+   "TN-H-7": -22.53,
+   "TN-H-8": -20.15,
+   "TN-H-9": -21.13,
+   "TX-H-1": -49.54,
+   "TX-H-2": -22.91,
+   "TX-H-3": -23.53,
+   "TX-H-4": -24.75,
+   "TX-H-5": -21.48,
+   "TX-H-6": -22.98,
+   "TX-H-7": 23.44,
+   "TX-H-8": -27.6,
+   "TX-H-9": -19.93,
+   "TX-H-10": -22.72,
+   "TX-H-11": -34.32,
+   "TX-H-12": -23.88,
+   "TX-H-13": -46.23,
+   "TX-H-14": -24.38,
+   "TX-H-15": -17.83,
+   "TX-H-16": 16.45,
+   "TX-H-17": -21.63,
+   "TX-H-18": 54.94,
+   "TX-H-19": -51.69,
+   "TX-H-20": 28.55,
+   "TX-H-21": -21.93,
+   "TX-H-22": -22.14,
+   "TX-H-23": -14.87,
+   "TX-H-24": -16.14,
+   "TX-H-25": -24.06,
+   "TX-H-26": -23.78,
+   "TX-H-27": -21.27,
+   "TX-H-28": -10.38,
+   "TX-H-29": 30.37,
+   "TX-H-30": 47.18,
+   "TX-H-31": -21.93,
+   "TX-H-32": -17.76,
+   "TX-H-33": 32.77,
+   "TX-H-34": -10.14,
+   "TX-H-35": -10.56,
+   "TX-H-36": -24.94,
+   "TX-H-37": 56.6,
+   "TX-H-38": -20.98,
+   "UT-H-1": 23.63,
+   "UT-H-2": -29,
+   "UT-H-3": -41.42,
+   "UT-H-4": -32.54,
+   "VT-H-1": 31.77,
+   "VA-H-1": -4.94,
+   "VA-H-2": -0.29,
+   "VA-H-3": 34.68,
+   "VA-H-4": 32.71,
+   "VA-H-5": -12.29,
+   "VA-H-6": -23.88,
+   "VA-H-7": 2.86,
+   "VA-H-8": 49.75,
+   "VA-H-9": -44.06,
+   "VA-H-10": 8.36,
+   "VA-H-11": 34.29,
+   "WA-H-1": 28.73,
+   "WA-H-2": 23.67,
+   "WA-H-3": -3.3,
+   "WA-H-4": -20.65,
+   "WA-H-5": -10.79,
+   "WA-H-6": 19.27,
+   "WA-H-7": 74.99,
+   "WA-H-8": 5.78,
+   "WA-H-9": 41.21,
+   "WA-H-10": 18.01,
+   "WV-H-1": -44.36,
+   "WV-H-2": -39.6,
+   "WI-H-1": -4.5,
+   "WI-H-2": 40.15,
+   "WI-H-3": -7.4,
+   "WI-H-4": 51.55,
+   "WI-H-5": -22.15,
+   "WI-H-6": -16.47,
+   "WI-H-7": -22.5,
+   "WI-H-8": -16.26,
+   "WY-H-1": -46.22
+  }
+ },
+ "midterms": [
+  {
+   "year": 1994,
+   "presParty": "D",
+   "houseSeatChange": -54,
+   "senateSeatChange": -8,
+   "houseMargin": -6.8,
+   "prevHouseMargin": 5
+  },
+  {
+   "year": 1998,
+   "presParty": "D",
+   "houseSeatChange": 5,
+   "senateSeatChange": 0,
+   "houseMargin": -1.1,
+   "prevHouseMargin": 0.1
+  },
+  {
+   "year": 2002,
+   "presParty": "R",
+   "houseSeatChange": 8,
+   "senateSeatChange": 2,
+   "houseMargin": -4.8,
+   "prevHouseMargin": -0.5
+  },
+  {
+   "year": 2006,
+   "presParty": "R",
+   "houseSeatChange": -30,
+   "senateSeatChange": -6,
+   "houseMargin": 8,
+   "prevHouseMargin": -2.6
+  },
+  {
+   "year": 2010,
+   "presParty": "D",
+   "houseSeatChange": -63,
+   "senateSeatChange": -6,
+   "houseMargin": -6.8,
+   "prevHouseMargin": 10.5
+  },
+  {
+   "year": 2014,
+   "presParty": "D",
+   "houseSeatChange": -13,
+   "senateSeatChange": -9,
+   "houseMargin": -5.7,
+   "prevHouseMargin": 1.1
+  },
+  {
+   "year": 2018,
+   "presParty": "R",
+   "houseSeatChange": -42,
+   "senateSeatChange": 2,
+   "houseMargin": 8.6,
+   "prevHouseMargin": -1
+  },
+  {
+   "year": 2022,
+   "presParty": "D",
+   "houseSeatChange": -9,
+   "senateSeatChange": 1,
+   "houseMargin": -2.7,
+   "prevHouseMargin": 3.1
+  }
+ ],
+ "linesChangedStates": [
+  "AL",
+  "CA",
+  "FL",
+  "LA",
+  "MO",
+  "NC",
+  "OH",
+  "TN",
+  "TX",
+  "UT"
+ ]
+}

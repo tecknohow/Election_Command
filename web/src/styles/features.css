@@ -357,6 +357,25 @@
   padding: 0.7rem 0.9rem;
   gap: 0.55rem;
 }
+/* Candidates + count on the left, the seat's history and tonight's shift on the right. */
+.rv-body-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.8rem 1.6rem;
+  flex-wrap: wrap;
+}
+.rv-body-row .rv-cands {
+  flex: 1 1 36rem;
+  min-width: 0;
+  grid-template-columns: repeat(var(--n, 4), minmax(8rem, 17rem)) minmax(12rem, 22rem);
+}
+.rv-head .prev-strip {
+  flex: 0 1 30rem;
+  grid-template-columns: repeat(3, minmax(7rem, 1fr));
+  border-top: 0;
+  border-left: 1px solid var(--border);
+  padding: 0 0 0.1rem 1.2rem;
+}
 .rv-title-row {
   display: flex;
   align-items: center;
@@ -529,8 +548,14 @@
     grid-template-areas: 'head' 'map' 'side' 'table';
     height: auto;
   }
-  .rv-cands {
+  .rv-cands,
+  .rv-body-row .rv-cands {
     grid-template-columns: 1fr 1fr;
+  }
+  .rv-head .prev-strip {
+    flex-basis: 100%;
+    border-left: 0;
+    padding-left: 0;
   }
 }
 
@@ -541,11 +566,28 @@
   gap: var(--gap);
   padding: var(--gap);
   grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr);
   grid-template-areas:
     'head head'
-    'cards side'
-    'foot side';
+    'cards side';
+}
+/* Summary tiles on one line: number with its label beside it. */
+.mr-tiles .tile {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.35rem 0.85rem;
+}
+.mr-tiles .tile b {
+  font-size: 1.75rem;
+}
+.mr-tiles .tile > span {
+  line-height: 1.15;
+}
+.mr-tip {
+  margin-left: auto;
+  align-self: center;
+  text-align: right;
 }
 .mr-head {
   grid-area: head;
@@ -651,10 +693,6 @@
 .mr-side > .panel {
   flex: 1;
 }
-.mr-footnote {
-  grid-area: foot;
-}
-
 /* ---- My races bar: empty state + buttons */
 .watch-dock.empty {
   min-height: 2.6rem;
@@ -750,4 +788,51 @@ button.dock-label {
 .settings-pop,
 .settings .modal-backdrop {
   white-space: normal;
+}
+
+/* ---- dense race card (My Races grid): two rows of cards fit on one screen */
+.race-card.dense {
+  gap: 0.4rem;
+  padding: 0.6rem 0.8rem;
+}
+.race-card.dense .rc-title {
+  font-size: 1.15rem;
+}
+.race-card.dense .rc-cands td {
+  padding: 0.16rem 0.2rem;
+}
+.race-card.dense .rc-photo {
+  width: 2.2rem;
+}
+.race-card.dense .headshot {
+  width: 1.9rem;
+  height: 1.9rem;
+}
+.race-card.dense .rc-hist-row,
+.race-card.dense .rc-foot {
+  padding-top: 0.35rem;
+}
+.race-card.dense .rc-sub,
+.race-card.dense .rc-note.dense {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.race-card.dense .rc-head > div:first-child {
+  min-width: 0;
+}
+.race-card.dense .rc-head-right {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+.race-card.dense .rc-note.dense {
+  padding-top: 0.15rem;
+  padding-bottom: 0.15rem;
+}
+.race-card.dense .rc-hist-row .rc-details {
+  max-width: none;
+  white-space: nowrap;
+}
+.race-card.dense .prev-strip > div > b {
+  font-size: 0.86rem;
 }

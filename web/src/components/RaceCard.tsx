@@ -1,6 +1,7 @@
 import type { Candidate, Race } from '../../../shared/src/types';
 import { PARTY_COLOR } from '../lib/colors';
 import { useWatchlist } from '../lib/watchlist';
+import { PrevResults } from './PrevResults';
 import { WatchStar } from './Watch';
 import { fmtEt, fmtNum, fmtPct, fmtProb, raceName, safeHref, stateName, statusText } from '../lib/format';
 
@@ -17,19 +18,27 @@ function Headshot({ c }: { c: Candidate }) {
   );
 }
 
-/** The detail card shown on hover / pin in map views and on the dashboard. */
-export function RaceCard({ race, onClose, onOpen, showStar }: { race: Race; onClose?: () => void; onOpen?: () => void; showStar?: boolean }) {
+/**
+ * The detail card shown on hover / pin in map views and on the dashboard. `dense` (My Races grid)
+ * trims repetition: top 3 candidates, no separate poll-closing lines (the header badge has it), and
+ * the source line moves into the card's tooltip.
+ */
+export function RaceCard({ race, onClose, onOpen, showStar, dense = false }: { race: Race; onClose?: () => void; onOpen?: () => void; showStar?: boolean; dense?: boolean }) {
   const watched = useWatchlist((s) => s.ids.includes(race.id));
   const counted = race.totalVotes > 0;
-  const shown = race.candidates.filter((c, i) => i < 4 || c.winner);
+  // Dense: the top two, plus a third only if it's a real contender (10%+); the rest fold into one line.
+  const shown = race.candidates.filter((c, i) => c.winner || (dense ? i < 2 || (i === 2 && counted && c.pct >= 10) : i < 4));
   const hidden = race.candidates.length - shown.length;
+  const hiddenPct = race.candidates.filter((c) => !shown.includes(c)).reduce((s, c) => s + c.pct, 0);
   const priorTxt = race.priorParty ? `${race.priorParty} held` : 'Prior party unknown';
   const incTxt = race.incumbentRunning ? `Incumbent: ${race.incumbentName}` : `Open seat${race.incumbentName ? ` (${race.incumbentName} not running)` : ''}`;
   const forecast = race.forecast;
   const bp = race.market?.byParty;
 
+  const sourceTxt = `Source: ${race.source}${race.updatedAt ? ` · updated ${fmtEt(race.updatedAt)} ET` : ''}`;
+
   return (
-    <div className="race-card">
+    <div className={`race-card ${dense ? 'dense' : ''}`} title={dense ? sourceTxt : undefined}>
       <div className="rc-head">
         <div>
           <div className="rc-title">
@@ -55,6 +64,7 @@ export function RaceCard({ race, onClose, onOpen, showStar }: { race: Race; onCl
         </div>
       </div>
 
+      {dense && !counted && race.status === 'upcoming' ? null : (
       <div className="rc-progress">
         <div className="rc-progress-bar">
           <div style={{ width: `${Math.min(100, race.eevp ?? 0)}%` }} />
@@ -73,10 +83,22 @@ export function RaceCard({ race, onClose, onOpen, showStar }: { race: Race; onCl
           )}
         </div>
       </div>
+      )}
 
-      {race.expectedLater ? <div className="rc-note">{race.expectedLater}.</div> : null}
-      {race.rcv && !race.expectedLater ? <div className="rc-note">Ranked-choice race: first-choice votes shown. If no one passes 50%, the final result can take days.</div> : null}
-      {race.runoffRule && !race.winner ? <div className="rc-note">{race.runoffRule}.</div> : null}
+      {dense ? (
+        // One line in dense cards; the full text is in the tooltip.
+        race.expectedLater || (race.runoffRule && !race.winner) ? (
+          <div className="rc-note dense" title={[race.expectedLater, race.runoffRule].filter(Boolean).join('. ')}>
+            {race.expectedLater ?? race.runoffRule}.
+          </div>
+        ) : null
+      ) : (
+        <>
+          {race.expectedLater ? <div className="rc-note">{race.expectedLater}.</div> : null}
+          {race.rcv && !race.expectedLater ? <div className="rc-note">Ranked-choice race: first-choice votes shown. If no one passes 50%, the final result can take days.</div> : null}
+          {race.runoffRule && !race.winner ? <div className="rc-note">{race.runoffRule}.</div> : null}
+        </>
+      )}
 
       <table className="rc-cands">
         <tbody>
@@ -107,7 +129,21 @@ export function RaceCard({ race, onClose, onOpen, showStar }: { race: Race; onCl
           ))}
         </tbody>
       </table>
-      {hidden > 0 ? <div className="rc-more">+{hidden} other candidate{hidden > 1 ? 's' : ''}</div> : null}
+      {hidden > 0 ? (
+        <div className="rc-more">
+          +{hidden} other candidate{hidden > 1 ? 's' : ''}
+          {dense && counted ? ` · ${hiddenPct.toFixed(1)}%` : ''}
+        </div>
+      ) : null}
+
+      <div className="rc-hist-row">
+        <PrevResults race={race} compact={dense} />
+        {onOpen ? (
+          <button className="rc-details" onClick={onOpen} title="County results & details">
+            {dense ? 'County results →' : <>County results &amp; details →</>}
+          </button>
+        ) : null}
+      </div>
 
       <div className="rc-foot">
         <div>
@@ -133,20 +169,14 @@ export function RaceCard({ race, onClose, onOpen, showStar }: { race: Race; onCl
               : '—'}
           </span>
         </div>
-        <div>
-          <label>Polls close</label>
-          <span>{fmtEt(race.pollClose)} ET</span>
-        </div>
+        {dense ? null : (
+          <div>
+            <label>Polls close</label>
+            <span>{fmtEt(race.pollClose)} ET</span>
+          </div>
+        )}
       </div>
-      {onOpen ? (
-        <button className="rc-details" onClick={onOpen}>
-          County results &amp; details →
-        </button>
-      ) : null}
-      <div className="rc-source">
-        Source: {race.source}
-        {race.updatedAt ? ` · updated ${fmtEt(race.updatedAt)} ET` : ''}
-      </div>
+      {dense ? null : <div className="rc-source">{sourceTxt}</div>}
     </div>
   );
 }

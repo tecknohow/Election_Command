@@ -224,13 +224,14 @@ export function MyRacesView() {
               </button>
             ))}
           </div>
+          {list.length ? <span className="mr-tip muted small">Each card’s “County results &amp; details →” opens the county drill-down · manage the bottom bar in ⚙ Settings</span> : null}
         </div>
       </div>
 
       <section className="mr-cards">
         {sorted.map((r) => (
           <div key={r.id} className={`mr-card status-${r.status} ${currentParty(r) ? `lean-${currentParty(r)}` : ''}`}>
-            <RaceCard race={r} showStar onOpen={() => navigate(`/race/${r.id}`)} />
+            <RaceCard race={r} showStar dense onOpen={() => navigate(`/race/${r.id}`)} />
           </div>
         ))}
         {!list.length ? (
@@ -271,7 +272,6 @@ export function MyRacesView() {
         <MyFeed list={list} />
       </div>
 
-      {list.length ? <div className="mr-footnote muted small">Tip: each card's “County results &amp; details →” opens the county drill-down. Manage the bottom bar in ⚙ Settings.</div> : null}
     </div>
   );
 }

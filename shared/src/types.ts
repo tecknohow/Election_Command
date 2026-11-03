@@ -203,6 +203,8 @@ export interface SimStatus {
   enabled: boolean;
   allowed: boolean;
   running: boolean;
+  /** Simulated time frozen (admin pressed Pause). */
+  paused?: boolean;
   speed: number;
   simTime: string | null;
 }

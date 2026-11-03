@@ -142,6 +142,12 @@ app.post('/api/admin/sim/stop', { preHandler: simGuard }, async () => {
   simulator.stop();
   return simStatus(true);
 });
+app.post('/api/admin/sim/pause', { preHandler: simGuard }, async (req, reply) => {
+  const body = (req.body ?? {}) as { paused?: boolean };
+  if (!simulator.running) return reply.code(409).send({ error: 'not running' });
+  simulator.setPaused(body.paused !== false);
+  return simStatus(true);
+});
 app.post('/api/admin/sim/speed', { preHandler: simGuard }, async (req, reply) => {
   const body = (req.body ?? {}) as { speed?: number };
   if (!simulator.running) return reply.code(409).send({ error: 'not running' });

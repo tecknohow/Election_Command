@@ -4,10 +4,12 @@
  * link and normalized headline, then merged with the system-generated race-call alerts.
  *
  * Feeds can be overridden with NEWS_FEEDS="Name|url|filter;Name2|url2" (filter = 1 to apply
- * the election keyword filter, for general-news feeds).
+ * the election keyword filter, for general-news feeds; filter = issues to keep only
+ * election-day trouble stories).
  */
 import { XMLParser } from 'fast-xml-parser';
 import { createHash } from 'node:crypto';
+import { isIssue } from '../../../shared/src/issues.js';
 import type { NewsItem } from '../../../shared/src/types.js';
 import { config } from '../config.js';
 import { fetchText } from '../lib/http.js';
@@ -18,8 +20,8 @@ import { store } from '../store/store.js';
 interface Feed {
   name: string;
   url: string;
-  /** Apply the election keyword filter (general news feeds). */
-  filter: boolean;
+  /** true = keep only election stories (general news feeds); 'issues' = only election-day trouble stories. */
+  filter: boolean | 'issues';
 }
 
 const DEFAULT_FEEDS: Feed[] = [
@@ -37,6 +39,13 @@ const DEFAULT_FEEDS: Feed[] = [
     url: 'https://news.google.com/rss/search?q=(election+results+OR+projected+winner+OR+race+call)+when:1d&hl=en-US&gl=US&ceid=US:en',
     filter: true,
   },
+  {
+    // Election-day trouble (lawsuits, extended hours, machine failures, shortages, threats). The
+    // search also returns "find your polling place" guides, so only matching stories are kept.
+    name: 'Google News · voting issues',
+    url: 'https://news.google.com/rss/search?q=(%22polling+hours%22+OR+%22polls+extended%22+OR+%22stay+open%22+OR+%22voting+machines%22+OR+%22election+lawsuit%22+OR+%22polling+place%22+OR+%22ballot+shortage%22+OR+%22long+lines%22+OR+%22bomb+threat%22+OR+%22poll+workers%22)+election+when:1d&hl=en-US&gl=US&ceid=US:en',
+    filter: 'issues',
+  },
 ];
 
 const KEYWORDS = /\b(elect|vote|voter|ballot|senat|governor|gubernatorial|house|congress|poll|campaign|midterm|gop|democrat|republican|race|wins?|projected|concede|turnout|amendment|measure|runoff|recount)/i;
@@ -50,7 +59,7 @@ function feedsFromEnv(): Feed[] {
     .filter(Boolean)
     .map((s) => {
       const [name, url, filter] = s.split('|');
-      return { name, url, filter: filter === '1' };
+      return { name, url, filter: filter === 'issues' ? ('issues' as const) : filter === '1' };
     });
 }
 
@@ -83,7 +92,7 @@ export function parseFeed(feed: Feed, xml: string): NewsItem[] {
     if (!title) continue;
     let source = feed.name;
     // Google News appends " - Publisher" to titles.
-    if (feed.name === 'Google News') {
+    if (/^https:\/\/news\.google\.com\//.test(feed.url)) {
       const m = title.match(/^(.*) - ([^-]+)$/);
       if (m) {
         title = m[1].trim();
@@ -98,7 +107,7 @@ export function parseFeed(feed: Feed, xml: string): NewsItem[] {
     if (!Number.isFinite(ts) || ts < cutoff || ts > Date.now() + 3600_000) continue;
     const published = new Date(ts).toISOString();
     const summary = stripHtml(text(it.description ?? it.summary)).slice(0, 300);
-    if (feed.filter && !KEYWORDS.test(`${title} ${summary}`)) continue;
+    if (feed.filter === 'issues' ? !isIssue(`${title} ${summary}`) : feed.filter && !KEYWORDS.test(`${title} ${summary}`)) continue;
     const id = createHash('sha1').update(normTitle(title)).digest('hex').slice(0, 16);
     out.push({ id: `n-${id}`, kind: 'news', source, title, summary: summary || undefined, link: safeUrl(link) ?? undefined, published });
   }

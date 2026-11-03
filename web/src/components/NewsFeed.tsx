@@ -1,10 +1,14 @@
 import { useMemo, useState } from 'react';
+import { isIssue } from '../../../shared/src/issues';
 import type { NewsItem, Office } from '../../../shared/src/types';
 import { PARTY_COLOR } from '../lib/colors';
 import { fmtEt, relTime, safeHref } from '../lib/format';
 import { useElection, useNow } from '../store/election';
 
-type Filter = 'all' | 'alerts' | 'news';
+type Filter = 'all' | 'alerts' | 'news' | 'issues';
+
+/** Headlines about election-day trouble: lawsuits, extended hours, machine failures, shortages, threats. */
+const issueItem = (n: NewsItem) => n.kind === 'news' && isIssue(`${n.title} ${n.summary ?? ''}`);
 
 const KIND_LABEL: Record<NewsItem['kind'], string> = {
   call: 'CALL',
@@ -46,10 +50,11 @@ export function NewsFeed({ office, title = 'Live feed' }: { office?: Office; tit
     };
     return news
       .filter(officeOk)
-      .filter((n) => (filter === 'all' ? true : filter === 'alerts' ? n.kind !== 'news' : n.kind === 'news'))
+      .filter((n) => (filter === 'all' ? true : filter === 'alerts' ? n.kind !== 'news' : filter === 'issues' ? issueItem(n) : n.kind === 'news'))
       .filter((n) => houseCalls || !isNoisy(n))
       .slice(0, 200);
   }, [news, filter, houseCalls, office]);
+  const issueCount = useMemo(() => news.filter(issueItem).length, [news]);
 
   return (
     <section className="panel news-panel">
@@ -58,9 +63,15 @@ export function NewsFeed({ office, title = 'Live feed' }: { office?: Office; tit
           <span className="live-dot" /> {title}
         </h2>
         <div className="chips">
-          {(['all', 'alerts', 'news'] as Filter[]).map((f) => (
-            <button key={f} className={`chip ${filter === f ? 'on' : ''}`} onClick={() => setFilter(f)}>
-              {f === 'all' ? 'All' : f === 'alerts' ? 'Race alerts' : 'Headlines'}
+          {(['all', 'alerts', 'news', 'issues'] as Filter[]).map((f) => (
+            <button
+              key={f}
+              className={`chip ${filter === f ? 'on' : ''} ${f === 'issues' ? 'chip-issues' : ''}`}
+              onClick={() => setFilter(f)}
+              title={f === 'issues' ? 'Lawsuits, polls kept open late, machine or poll-book failures, ballot shortages, long lines, threats' : undefined}
+            >
+              {f === 'all' ? 'All' : f === 'alerts' ? 'Race alerts' : f === 'news' ? 'Headlines' : '⚠ Voting issues'}
+              {f === 'issues' && issueCount ? <span className="muted"> {issueCount}</span> : null}
             </button>
           ))}
           {!office || office === 'H' ? (
@@ -76,11 +87,12 @@ export function NewsFeed({ office, title = 'Live feed' }: { office?: Office; tit
           const age = now - Date.parse(n.published);
           const breaking = n.kind === 'news' && age < 15 * 60_000;
           const color = n.party ? PARTY_COLOR[n.party] : undefined;
+          const issue = issueItem(n);
           return (
-            <li key={n.id} className={`news-item kind-${n.kind} ${isFresh ? 'fresh' : ''}`} style={color ? { borderLeftColor: color } : undefined}>
+            <li key={n.id} className={`news-item kind-${n.kind} ${issue ? 'issue' : ''} ${isFresh ? 'fresh' : ''}`} style={color ? { borderLeftColor: color } : undefined}>
               <div className="news-meta">
-                <span className={`kind kind-${n.kind}`} style={color && n.kind !== 'news' ? { background: color } : undefined}>
-                  {KIND_LABEL[n.kind]}
+                <span className={`kind kind-${issue ? 'issue' : n.kind}`} style={color && n.kind !== 'news' ? { background: color } : undefined}>
+                  {issue ? 'ISSUE' : KIND_LABEL[n.kind]}
                 </span>
                 {breaking ? <span className="breaking">NEW</span> : null}
                 {n.sim ? <span className="sim-tag">SIM</span> : null}

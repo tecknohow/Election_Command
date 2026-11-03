@@ -34,6 +34,7 @@ interface NytRU {
   name?: string;
   fips_state?: string | null;
   fips_county?: string | null;
+  fips_suffix?: string | null;
   state_postal: string;
   level: string;
   eevp: number | null;
@@ -56,13 +57,7 @@ interface NytRace {
   rating: string | null;
   updated_at: string | null;
   candidate_metadata: Record<string, NytCandMeta>;
-  outcome: {
-    won: string[];
-    advanced_to_runoff: string[];
-    called_by: string[] | null;
-    winner_accepted_at: (string | null)[] | null;
-    gained: string | null;
-  };
+  outcome: { won: string[]; advanced_to_runoff: string[]; called_by: string[] | null; winner_accepted_at: (string | null)[] | null; gained: string | null };
   top_reporting_unit: NytRU;
   reporting_units?: NytRU[];
   url: string | null;
@@ -137,19 +132,33 @@ export function normalizeNytRace(r: NytRace): RaceInput | null {
 
 /** Sub-state reporting units (counties, AK state-house districts, county parts of House districts). */
 function countyUnits(r: NytRace): CountyUnit[] {
-  return (r.reporting_units ?? [])
-    .filter((u) => u.level !== 'state' && u.level !== 'national')
-    .map((u) => ({
-      id: u.nyt_id ?? `${u.state_postal}-${u.name}`,
-      fips: u.level === 'county' && u.fips_state && u.fips_county ? `${u.fips_state}${u.fips_county}` : null,
-      name: u.name ?? '?',
-      level: u.level,
-      eevp: u.eevp ?? null,
-      totalVotes: u.total_votes ?? 0,
-      expectedVotes: u.total_expected_vote ?? null,
-      votes: Object.fromEntries(u.candidates.map((c) => [c.nyt_id, c.votes?.total ?? 0])),
-      baselineMargin: Object.values(u.historical_comparison_race_data ?? {})[0]?.margin ?? null,
-    }));
+  const units = (r.reporting_units ?? []).filter((u) => u.level !== 'state' && u.level !== 'national');
+  const hasCounties = units.some((u) => u.level === 'county');
+  return (
+    units
+      // House files add city / "rest of county" / ward units (Chicago, Detroit, Kansas City,
+      // Hartford wards...) that are *subsets* of counties also listed; counting both would double
+      // the vote. They carry a county code. Units without one (e.g. "Overseas absentee") are
+      // separate pieces and stay.
+      .filter((u) => u.level === 'county' || u.level === 'state_house_district' || !(hasCounties && u.fips_county))
+      .map((u) => ({
+        id: u.nyt_id ?? `${u.state_postal}-${u.name}`,
+        // Shape key: county FIPS, or "02HD001"-style for Alaska's state house districts.
+        fips:
+          u.level === 'county' && u.fips_state && u.fips_county
+            ? `${u.fips_state}${u.fips_county}`
+            : u.level === 'state_house_district' && u.fips_state && u.fips_suffix
+              ? `${u.fips_state}HD${u.fips_suffix}`
+              : null,
+        name: u.name ?? '?',
+        level: u.level,
+        eevp: u.eevp ?? null,
+        totalVotes: u.total_votes ?? 0,
+        expectedVotes: u.total_expected_vote ?? null,
+        votes: Object.fromEntries(u.candidates.map((c) => [c.nyt_id, c.votes?.total ?? 0])),
+        baselineMargin: Object.values(u.historical_comparison_race_data ?? {})[0]?.margin ?? null,
+      }))
+  );
 }
 
 /** Store county units for every race in a file/feed that carries them. */

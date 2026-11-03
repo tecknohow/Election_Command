@@ -1,0 +1,299 @@
+/* ------------------------------------------------------------------ Swing dashboard */
+.swing-view {
+  height: 100%;
+  display: grid;
+  gap: var(--gap);
+  padding: var(--gap);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 0.95fr);
+  grid-template-rows: auto minmax(0, 1.15fr) minmax(0, 1fr) auto;
+  grid-template-areas:
+    'tiles   tiles  tiles'
+    'scatter map    hist'
+    'scatter table  movers'
+    'attrib  attrib attrib';
+}
+.swing-view .sw-attrib {
+  grid-area: attrib;
+  margin: 0;
+}
+
+.sw-tiles {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.sw-tile b {
+  font-variant-numeric: normal;
+}
+.sw-tile small {
+  color: var(--text-2);
+  font-size: 0.74rem;
+  margin-top: 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.seg-control.mini {
+  padding: 0.1rem;
+}
+.seg-control.mini button {
+  font-size: 0.76rem;
+  padding: 0.2rem 0.55rem;
+}
+
+/* scatter */
+.sw-scatter-body,
+.sw-map-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  padding: 0.4rem 0.6rem;
+}
+.sw-scatter-body svg,
+.sw-map-body svg {
+  width: 100%;
+  height: 100%;
+}
+.sw-grid line {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+.sw-grid text,
+.sw-axis-label {
+  fill: var(--muted);
+  font-size: 10px;
+}
+.sw-axis-label {
+  fill: var(--text-2);
+  font-size: 11px;
+}
+.sw-corner {
+  fill: var(--text-2);
+  font-size: 10.5px;
+}
+.sw-diag {
+  stroke: #6b7488;
+  stroke-width: 1.5;
+}
+.sw-uniform {
+  stroke: var(--text);
+  stroke-width: 2;
+  opacity: 0.85;
+}
+.sw-hit {
+  fill: transparent;
+}
+.sw-dot {
+  stroke: var(--panel);
+  stroke-width: 1.5;
+  pointer-events: none;
+}
+g:hover > .sw-dot {
+  stroke: #fff;
+}
+.sw-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  pointer-events: none;
+  font-size: 0.9rem;
+}
+.sw-foot {
+  padding: 0.45rem 0.85rem 0.6rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-2);
+}
+
+/* state map */
+.sw-map .state.no-race {
+  cursor: default;
+}
+.sw-label {
+  fill: #e8ebf2;
+  font-size: 11px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: rgba(11, 14, 20, 0.7);
+  stroke-width: 2.5px;
+  pointer-events: none;
+}
+.sw-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.8rem;
+  padding: 0.4rem 0.85rem 0.6rem;
+  font-size: 0.72rem;
+  color: var(--text-2);
+}
+.sw-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.sw-legend i {
+  width: 0.85rem;
+  height: 0.65rem;
+  border-radius: 2px;
+}
+.sw-tip {
+  position: fixed;
+  z-index: 60;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.7rem;
+  font-size: 0.82rem;
+  pointer-events: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  display: grid;
+  gap: 0.15rem;
+}
+
+/* midterm history */
+.sw-hist-head,
+.sw-hist-row {
+  display: grid;
+  grid-template-columns: 4.2rem minmax(0, 1fr) 6.5rem 3.2rem;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0 0.85rem;
+}
+.sw-hist-head {
+  padding-top: 0.45rem;
+  padding-bottom: 0.2rem;
+}
+.sw-hist-head span:nth-child(n + 3) {
+  text-align: right;
+}
+.sw-hist-rows {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-bottom: 0.3rem;
+}
+.sw-hist-row {
+  font-size: 0.86rem;
+  min-height: 1.45rem;
+  border-radius: 4px;
+}
+.sw-hist-row.closest {
+  background: var(--panel-3);
+}
+.sw-hist-row.now {
+  border-top: 1px solid var(--border);
+  padding-top: 0.25rem;
+  font-weight: 700;
+}
+.sw-year {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+.sw-track {
+  position: relative;
+  height: 0.8rem;
+}
+.sw-zero {
+  position: absolute;
+  left: 50%;
+  top: -0.2rem;
+  bottom: -0.2rem;
+  width: 1px;
+  background: var(--muted);
+}
+.sw-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 4px;
+}
+.sw-val {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* biggest movers */
+.sw-movers-body {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  padding: 0.5rem 0.85rem;
+  overflow: auto;
+}
+.sw-movers-col h3 {
+  margin: 0 0 0.3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.sw-mover {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.84rem;
+}
+.sw-mover > span:first-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1100px) {
+  .swing-view {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-rows: minmax(22rem, auto);
+    grid-template-areas: 'tiles' 'scatter' 'map' 'hist' 'table' 'movers' 'attrib';
+    height: auto;
+  }
+  .sw-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .swing-view .cv-area:first-child {
+    min-height: 0;
+  }
+}
+
+/* office + baseline switches in panel headers */
+.sw-switches {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.sw-scatter .panel-head,
+.sw-map .panel-head,
+.sw-table .panel-head {
+  flex-wrap: wrap;
+  row-gap: 0.35rem;
+}
+.sw-note-txt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 22rem;
+}
+.sw-dot-label {
+  fill: var(--text-2);
+  font-size: 9px;
+  font-weight: 700;
+  pointer-events: none;
+}
