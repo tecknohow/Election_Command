@@ -1,0 +1,432 @@
+/* House district map, custom map builder, ballot measures dashboard */
+
+/* ---- House district map */
+.district-map {
+  cursor: grab;
+  touch-action: none;
+}
+.district-map:active {
+  cursor: grabbing;
+}
+.district {
+  stroke: #0b0e14;
+  stroke-width: 0.5;
+  vector-effect: non-scaling-stroke;
+  cursor: pointer;
+  transition: fill 0.5s ease;
+}
+.district.flash {
+  animation: stateFlash 1.8s ease-out;
+}
+.dstate {
+  transition: opacity 0.35s ease;
+}
+.dstate.dimmed {
+  opacity: 0.18;
+}
+.dstate-base {
+  pointer-events: none;
+}
+.district-map .state-borders,
+.district-map .nation-outline,
+.district-map .state-highlight,
+.district-map .callout-line,
+.district-map .flip-dot {
+  vector-effect: non-scaling-stroke;
+}
+.state-borders.thick {
+  stroke-width: 1.6;
+  stroke: #05070b;
+}
+.district-label {
+  font-weight: 800;
+  pointer-events: none;
+}
+.state-label.haloed {
+  fill: #e8ebf2;
+  paint-order: stroke;
+  stroke: rgba(11, 14, 20, 0.85);
+  stroke-width: 2.5px;
+  opacity: 0.85;
+}
+.map-overlay.top-center {
+  top: var(--gap);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background: rgba(18, 23, 34, 0.92);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.5rem 1.1rem 0.6rem;
+}
+.back-btn {
+  background: var(--accent);
+  color: #0b0e14;
+  border: 0;
+  border-radius: 0.35rem;
+  padding: 0.25rem 0.8rem;
+  font-weight: 700;
+}
+.focus-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+.focus-sub b.d {
+  color: var(--d);
+}
+.focus-sub b.r {
+  color: var(--r);
+}
+
+/* ---- custom map */
+.seg-control button.custom-mode {
+  color: var(--accent);
+}
+.seg-control button.custom-mode.on {
+  background: var(--accent);
+  color: #0b0e14;
+}
+.custom-toolbar {
+  background: rgba(18, 23, 34, 0.95);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: min(58rem, 62vw);
+}
+.ct-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.ct-title {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+.ct-brushes {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+.ct-brush {
+  border: 2px solid transparent;
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.55rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.ct-brush.on {
+  border-color: #fff;
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.ct-brush.eraser {
+  background: var(--panel-3);
+  color: var(--text-2);
+  border-style: dashed;
+  border-color: var(--border-strong);
+}
+.ct-brush.eraser.on {
+  border-color: #fff;
+  border-style: solid;
+}
+.ct-tools button,
+.ct-tools select,
+.bv-select,
+.bv-search {
+  background: var(--panel-3);
+  border: 1px solid var(--border-strong);
+  border-radius: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+}
+.ct-tools button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.ct-tools button.danger {
+  border-color: var(--bad);
+  color: var(--bad);
+}
+.ct-msg {
+  color: var(--ok);
+  font-size: 0.85rem;
+}
+
+/* ---- ballot measures view */
+.ballot-view {
+  height: 100%;
+  display: grid;
+  gap: var(--gap);
+  padding: var(--gap);
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 2.05fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    'head head'
+    'side cards'
+    'foot foot';
+}
+.bv-head {
+  grid-area: head;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--gap);
+}
+.tile {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.55rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+}
+.tile b {
+  font-size: 2rem;
+  line-height: 1.05;
+  font-weight: 800;
+}
+.tile b small {
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+.tile > span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.bv-filters {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.bv-search {
+  min-width: 16rem;
+}
+.topic-chips {
+  justify-content: flex-start;
+}
+.bv-side {
+  grid-area: side;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--gap);
+  min-height: 0;
+}
+.ballot-map {
+  width: 100%;
+  height: auto;
+  padding: 0.3rem 0.5rem 0.6rem;
+}
+.ballot-map .state.selected {
+  filter: brightness(1.35);
+}
+.ballot-map .state-label {
+  font-size: 10px;
+}
+.measure-call .cl-name {
+  font-size: 0.85rem;
+}
+.bv-cards {
+  grid-area: cards;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  gap: var(--gap);
+  align-content: start;
+  padding-right: 0.25rem;
+}
+.measure-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.measure-card.catalog {
+  border-style: dashed;
+  background: #0f131c;
+}
+.measure-card.passed {
+  box-shadow: inset 3px 0 0 #26a08c;
+}
+.measure-card.failed {
+  box-shadow: inset 3px 0 0 #c97a26;
+}
+.measure-card.flash {
+  animation: flash 1.6s ease-out;
+}
+.mc-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem 0.5rem;
+  flex-wrap: wrap;
+}
+.mc-state {
+  font-family: var(--mono);
+  font-weight: 800;
+  background: var(--panel-3);
+  border-radius: 0.2rem;
+  padding: 0.05rem 0.35rem;
+}
+.mc-code {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mc-tags {
+  display: flex;
+  gap: 0.3rem;
+  margin-left: auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.tag {
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.08rem 0.35rem;
+  border-radius: 0.2rem;
+  border: 1px solid var(--border-strong);
+  color: var(--text-2);
+  white-space: nowrap;
+}
+.tag.amend {
+  border-color: #8a95b0;
+  color: #dfe5f2;
+}
+.tag.origin {
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.badge.m-passed,
+.badge.m-failed {
+  color: #0b0e14;
+}
+.mc-title {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+.mc-title a {
+  color: inherit;
+  text-decoration: none;
+}
+.mc-title a:hover,
+.mc-title a:focus-visible {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.mc-ext {
+  font-size: 0.8em;
+  color: var(--text-2);
+}
+.mc-desc {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.yn-labels {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-bottom: 0.2rem;
+}
+.yn-bar {
+  position: relative;
+  height: 1rem;
+  background: #1b2232;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+.yn-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transition: width 0.6s ease;
+}
+.yn-fill.yes {
+  left: 0;
+}
+.yn-fill.no {
+  right: 0;
+}
+.yn-threshold {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 2px;
+  background: #fff;
+  transform: translateX(-1px);
+}
+.yn-note {
+  font-size: 0.7rem;
+  color: var(--accent);
+  margin-top: 0.15rem;
+}
+.mc-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-2);
+}
+.mc-foot.catalog-note {
+  color: var(--muted);
+}
+.hover-measures {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+}
+.news-item.kind-measure {
+  background: #10181a;
+  border-left-color: #26a08c;
+}
+.kind.kind-measure {
+  background: #26a08c;
+  color: #0b0e14;
+}
+
+@media (max-width: 1100px) {
+  .ballot-view {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'head' 'side' 'cards' 'foot';
+    height: auto;
+  }
+  .tiles {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

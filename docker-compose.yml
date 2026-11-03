@@ -1,0 +1,76 @@
+# Local:   docker compose up -d --build                    -> http://localhost:8080
+# Public:  DOMAIN=example.com docker compose --profile public up -d --build
+#          (adds Caddy with automatic HTTPS in front, configured by deploy/Caddyfile;
+#           set DOMAIN, TRUST_PROXY=1 and later HSTS=true in .env)
+services:
+  election-command:
+    build: .
+    image: election-command:latest
+    container_name: election-command
+    restart: unless-stopped
+    ports:
+      # Bound to localhost by default. Set EC_BIND=0.0.0.0 to reach it from other machines on
+      # your LAN directly; for the public site, traffic should come through Caddy instead.
+      - "${EC_BIND:-127.0.0.1}:${EC_PORT:-8080}:8080"
+    volumes:
+      # Docker-managed volume: initialized from the image's /data (owned by the non-root
+      # `node` user), so persistence works on any Linux host (incl. Proxmox LXC) without chown.
+      # Inspect/backup: docker compose cp election-command:/data/state.json ./state-backup.json
+      - ec_data:/data
+    env_file:
+      # ADMIN_TOKEN (and any overrides) live here; never commit this file.
+      - path: .env
+        required: false
+    environment:
+      TZ: America/New_York
+      LOG_LEVEL: info
+      # Behind Caddy: trust one proxy hop so client IPs / https are read from X-Forwarded-*.
+      # Use 2 if Cloudflare (or another proxy) also sits in front.
+      TRUST_PROXY: "${TRUST_PROXY:-}"
+      HSTS: "${HSTS:-false}"
+      SIM_ALLOWED: "${SIM_ALLOWED:-true}"
+      NYT_INTERVAL_S: "${NYT_INTERVAL_S:-20}"
+      NYT_HOUSE_INTERVAL_S: "${NYT_HOUSE_INTERVAL_S:-45}"
+      CNN_INTERVAL_S: "${CNN_INTERVAL_S:-30}"
+      POLYMARKET_INTERVAL_S: "${POLYMARKET_INTERVAL_S:-30}"
+      NEWS_INTERVAL_S: "${NEWS_INTERVAL_S:-90}"
+    # Hardening: immutable root filesystem, no Linux capabilities, no privilege escalation.
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 768m
+    pids_limit: 256
+
+  caddy:
+    profiles: ["public"]
+    image: caddy:2.8.4-alpine
+    container_name: election-command-caddy
+    restart: unless-stopped
+    depends_on:
+      - election-command
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      # Set DOMAIN in .env for the public profile (defaults to localhost with a local CA cert).
+      DOMAIN: "${DOMAIN:-localhost}"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  ec_data:
+  caddy_data:
+  caddy_config:
