@@ -1,6 +1,6 @@
 # Election Command
 
-**A self-hosted election-night command center for the November 3, 2026 U.S. midterms.** Every Senate, House and Governor race, plus 150+ statewide ballot measures. It's designed to run full-screen across several monitors at once.
+**A self-hosted election-night command center for the November 3, 2026 U.S. midterms.** Every Senate, House and Governor race, plus 140+ statewide ballot measures. It's designed to run full-screen across several monitors at once.
 
 ![Overview dashboard on election night](docs/screenshots/overview.webp)
 
