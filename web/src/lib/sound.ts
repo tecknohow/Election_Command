@@ -3,7 +3,7 @@ import { create } from 'zustand';
 /**
  * Alert chimes synthesized with Web Audio (no audio files, CSP-friendly).
  * Browsers only allow audio after a user gesture, so the context is created/resumed on the
- * first click or keypress; until then `blocked` is true and the UI shows a hint.
+ * first click or keypress; until then `blocked` is true (Settings explains this next to the sound toggle).
  */
 let ctx: AudioContext | null = null;
 

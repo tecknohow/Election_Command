@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { NavLink } from 'react-router';
 import { fmtEt, fmtEtClock } from '../lib/format';
 import { simPause, useAdmin, useElection, useNow } from '../store/election';
-import { usePrefs } from '../lib/prefs';
-import { useAudioState } from '../lib/sound';
 import { KioskChip } from './Kiosk';
 import { SettingsMenu } from './SettingsMenu';
 import { SourcesPanel } from './SourcesPanel';
@@ -40,8 +38,6 @@ export function TopBar() {
   const sources = useElection((s) => s.sources);
   const [panel, setPanel] = useState(false);
   const admin = useAdmin((s) => s.admin);
-  const soundOn = usePrefs((s) => s.alertsSound);
-  const audioBlocked = useAudioState((s) => s.blocked);
   const enabled = sources.filter((s) => s.enabled);
   // Sources that haven't run their first poll yet count as pending, not failing.
   const okCount = enabled.filter((s) => s.ok || !s.lastAttempt).length;
@@ -82,11 +78,6 @@ export function TopBar() {
         <div className="topbar-right">
           <span className={`mode-badge ${mode}`}>{mode === 'simulation' ? 'SIMULATION' : 'LIVE'}</span>
           <KioskChip />
-          {soundOn && audioBlocked ? (
-            <span className="sound-hint" title="Browsers block audio until you interact with the page">
-              🔇 click to enable sound
-            </span>
-          ) : null}
           {admin ? (
             <button className={`health health-${health}`} onClick={() => setPanel(true)} title="Data sources & simulator">
               <i />

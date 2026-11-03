@@ -142,11 +142,11 @@ Open **http://localhost:8080**, once per monitor. The app works immediately; the
 | `Esc` | Unpin a card / leave a zoomed state / close menus |
 | `F` | Fullscreen |
 
-Map settings live in the URL (e.g. `/map/house?fill=market&state=TX`), so each monitor can be bookmarked to its own view. Add `?kiosk=1` to make a window rotate.
+Map settings live in the URL (e.g. `/map/house?fill=market&state=TX`), so each monitor can be bookmarked to its own view. Each window also remembers the color mode you last used on each map, so leaving and coming back restores it. Add `?kiosk=1` to make a window rotate.
 
 The **⚙ Settings** menu (top right) controls:
 
-- the alert banner (on by default) and sound (off by default);
+- the alert banner (on by default) and sound (off by default; browsers allow it after your first click or keypress on the page);
 - kiosk mode for that window (off by default);
 - the My races bar (on by default);
 - admin sign-in.

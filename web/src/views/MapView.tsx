@@ -33,6 +33,26 @@ interface Pointer {
   clientY: number;
 }
 
+/**
+ * Each window remembers the color-by mode last chosen on each map (sessionStorage: per window, so
+ * every monitor keeps its own, and it survives reloads), so returning to a map restores it.
+ */
+const FILL_KEY = (o: Office) => `ec-map-fill-${o}`;
+function rememberedFill(o: Office): string | null {
+  try {
+    return sessionStorage.getItem(FILL_KEY(o));
+  } catch {
+    return null;
+  }
+}
+function rememberFill(o: Office, m: FillMode) {
+  try {
+    sessionStorage.setItem(FILL_KEY(o), m);
+  } catch {
+    /* storage unavailable: fall back to the default next time */
+  }
+}
+
 export function MapView() {
   const { office: slug = 'senate' } = useParams();
   const office = OFFICE_BY_SLUG[slug] ?? 'S';
@@ -61,7 +81,13 @@ export function MapView() {
   }
   const requested = params.get('fill') as FillMode | null;
   const available = modesFor(office);
-  const mode: FillMode = requested && available.some((m) => m.id === requested) ? requested : defaultMode.current || 'forecast';
+  const valid = (m: string | null): m is FillMode => !!m && available.some((x) => x.id === m);
+  // A ?fill= link wins; otherwise the mode this window last used on this map; otherwise the default.
+  const remembered = rememberedFill(office);
+  const mode: FillMode = valid(requested) ? requested : valid(remembered) ? remembered : defaultMode.current || 'forecast';
+  useEffect(() => {
+    if (valid(requested)) rememberFill(office, requested);
+  }, [office, requested]);
   const focus = office === 'H' ? params.get('state') : null;
 
   const setParam = useCallback(

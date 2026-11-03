@@ -17,7 +17,11 @@ export function competitiveness(r: Race): number {
   return 1;
 }
 
+/** Races always treated as key, whatever their ratings or odds say. */
+export const ALWAYS_KEY = new Set(['GA-S', 'FL-S', 'NC-S', 'MS-S', 'NH-G']);
+
 export function isKeyRace(r: Race): boolean {
+  if (ALWAYS_KEY.has(r.id)) return true;
   const ratings = [r.forecast.flipr, r.forecast.cook, r.forecast.nyt].filter(Boolean);
   const close = ratings.some((x) => LEVEL_STRENGTH[x!.level] <= LEVEL_STRENGTH.lean);
   return close || competitiveness(r) < 0.7 || (r.status === 'counting' && (r.margin ?? 100) < 4);
@@ -139,7 +143,7 @@ export function KeyRaces({ office, title, onHover }: { office: Office; title: st
       <div className="panel-head">
         <h2>{title}</h2>
         <span className="muted small">
-          {list.length} competitive · sorted by closeness · FLIPR / Polymarket
+          {list.length} races · sorted by closeness · FLIPR / Polymarket
         </span>
       </div>
       <div className="race-rows">

@@ -20,10 +20,6 @@
   color: var(--accent);
   border-color: #6b4e12;
 }
-.sound-hint {
-  font-size: 0.78rem;
-  color: var(--accent);
-}
 
 /* ---- settings */
 .settings {

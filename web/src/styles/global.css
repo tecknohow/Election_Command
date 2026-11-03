@@ -1449,3 +1449,42 @@ a.news-title:hover {
 .sim-paused {
   letter-spacing: 0.08em;
 }
+
+/* ---- top bar on narrower screens: compact the nav so settings / fullscreen never fall off */
+.topbar-right {
+  flex-shrink: 0;
+}
+.views {
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.views::-webkit-scrollbar {
+  display: none;
+}
+@media (max-width: 1750px) {
+  .topbar {
+    gap: 0.9rem;
+  }
+  .brand-date {
+    display: none;
+  }
+  .view-tab {
+    padding: 0.45rem 0.55rem;
+    gap: 0.35rem;
+  }
+  .topbar-right {
+    gap: 0.6rem;
+  }
+}
+@media (max-width: 1500px) {
+  .view-tab kbd {
+    display: none;
+  }
+  .brand-name {
+    display: none;
+  }
+}
+.views .nav-item {
+  flex-shrink: 0;
+}
