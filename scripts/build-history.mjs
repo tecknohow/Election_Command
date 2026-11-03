@@ -272,6 +272,98 @@ for (const slug of ['senate', 'governor', 'house']) {
   }
 }
 
+// ------------------------------------------------------------ County baselines: the seat's last race
+// For Senate and governor races, the drill-down compares each county with the same seat's previous
+// contest (not the 2024 presidential race). CNN serves those contests' county results at
+// .../county-races/{ecKey}.json. New England reports by town (CNN's 8-digit town codes); towns are
+// rolled up to counties (CT: planning regions) via Census county subdivisions. Alaska reports by
+// state house district; only contests held on today's district lines (2022+) are mapped.
+const NE_STATES = { 23: 'ME', 33: 'NH', 50: 'VT', 25: 'MA', '09': 'CT', 44: 'RI' };
+const townKey = (s) =>
+  String(s)
+    .toLowerCase()
+    .replace(/\b(town|city|plantation|plt)\b\.?/g, '')
+    .replace(/[^a-z]/g, '');
+// CNN spellings that differ from the Census name.
+const TOWN_ALIAS = { ferrisburg: 'ferrisburgh', manchester: 'manchesterbythesea', waterville: 'watervillevalley' };
+const townToCounty = {};
+async function townCrosswalk(stFips) {
+  if (townToCounty[stFips]) return townToCounty[stFips];
+  const zip = await cached(`cb_2024_${stFips}_cousub_500k.zip`, `https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_${stFips}_cousub_500k.zip`, true);
+  const dir = path.join(cache, `cousub-${stFips}`);
+  if (!existsSync(dir)) {
+    mkdirSync(dir, { recursive: true });
+    execFileSync('unzip', ['-o', '-q', zip, '-d', dir]);
+  }
+  const src = await shapefile.openDbf(path.join(dir, readdirSync(dir).find((f) => f.endsWith('.dbf'))));
+  const map = new Map();
+  for (;;) {
+    const { done, value } = await src.read();
+    if (done) break;
+    const k = townKey(value.NAME);
+    // A town name used in two counties is ambiguous: drop it rather than guess.
+    map.set(k, map.has(k) && map.get(k) !== value.COUNTYFP ? null : value.COUNTYFP);
+    // Maine groups unorganized areas as "Aroostook Cty Townships": key them by county name too.
+    map.set(`county:${townKey(String(value.NAMELSADCO).replace(/ County$/, ''))}`, value.COUNTYFP);
+  }
+  townToCounty[stFips] = map;
+  return map;
+}
+
+const countyHistory = {};
+for (const [id, prev] of [...Object.entries(senate), ...Object.entries(gov)]) {
+  if (prev.kind !== 'DR' || !prev.cnnKey) continue;
+  const st = id.slice(0, 2);
+  if (st === 'AK' && prev.year < 2022) continue; // old state house district lines
+  const list = JSON.parse(await cached(`cnn-county-${prev.cnnKey}.json`, `https://politics.api.cnn.io/results/county-races/${prev.cnnKey}.json`));
+  // The two main candidates: top DEM and top REP by total votes across the state.
+  const byCand = new Map();
+  for (const u of list) for (const c of u.candidates ?? []) byCand.set(c.candidateId, { party: c.majorParty, votes: (byCand.get(c.candidateId)?.votes ?? 0) + (c.voteNum ?? 0) });
+  const top = (p) => [...byCand.entries()].filter(([, v]) => v.party === p).sort((a, b) => b[1].votes - a[1].votes)[0]?.[0];
+  const dId = top('DEM');
+  const rId = top('REP');
+  const sums = new Map();
+  let unmatched = 0;
+  let unmatchedVotes = 0;
+  for (const u of list) {
+    const f = String(u.countyFipsCode);
+    let key = null;
+    if (f.length === 5 && st === 'AK') key = `02HD${String(Number(f.slice(2)) - 900).padStart(3, '0')}`;
+    else if (f.length === 5) key = f;
+    else if (f.length === 8 && st === 'IL') continue; // "Chicago" / "Cook Suburbs": a split of Cook County, which is also listed whole
+    else if (f.length === 8) {
+      const stFips = f.slice(1, 3);
+      const cw = await townCrosswalk(stFips);
+      const cty = String(u.countyName).match(/^(.+?) Cty Townships$/);
+      const t = townKey(u.countyName);
+      const cf = cty ? cw.get(`county:${townKey(cty[1])}`) : (cw.get(t) ?? cw.get(TOWN_ALIAS[t]));
+      key = cf ? `${stFips}${cf}` : null;
+    }
+    if (!key) {
+      unmatched++;
+      unmatchedVotes += u.totalVote ?? 0;
+      continue;
+    }
+    const s = sums.get(key) ?? { D: 0, R: 0, total: 0 };
+    for (const c of u.candidates ?? []) {
+      if (c.candidateId === dId) s.D += c.voteNum ?? 0;
+      if (c.candidateId === rId) s.R += c.voteNum ?? 0;
+    }
+    s.total += Math.max(u.totalVote ?? 0, (u.candidates ?? []).reduce((a, c) => a + (c.voteNum ?? 0), 0));
+    sums.set(key, s);
+  }
+  const units = Object.fromEntries([...sums].filter(([, s]) => s.total > 0).map(([k, s]) => [k, round(((s.D - s.R) / s.total) * 100, 1)]));
+  countyHistory[id] = { label: prev.label, units };
+  if (unmatched) {
+    const all = list.reduce((a, u) => a + (u.totalVote ?? 0), 0);
+    console.log(`  ${id}: ${unmatched} of ${list.length} reporting units not mapped (${((unmatchedVotes / all) * 100).toFixed(2)}% of votes)`);
+  }
+}
+const countyFile = path.join(root, 'web', 'public', 'baselines', 'county-history.json');
+mkdirSync(path.dirname(countyFile), { recursive: true });
+writeFileSync(countyFile, JSON.stringify({ generated: new Date().toISOString().slice(0, 10), source: 'CNN county results for each seat’s previous contest', races: countyHistory }));
+console.log(`county baselines: ${Object.keys(countyHistory).length} races → ${countyFile} (${(JSON.stringify(countyHistory).length / 1024).toFixed(0)} KB)`);
+
 // ------------------------------------------------------------ Midterm history (Wikipedia)
 const PRES_PARTY = { 1994: 'D', 1998: 'D', 2002: 'R', 2006: 'R', 2010: 'D', 2014: 'D', 2018: 'R', 2022: 'D' };
 async function infobox(title) {

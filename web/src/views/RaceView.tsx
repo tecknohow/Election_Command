@@ -13,6 +13,33 @@ import { loadDistricts } from '../map/geo';
 import { useElection, wantsSimView } from '../store/election';
 
 type Mode = 'margin' | 'swing' | 'counted' | 'baseline';
+
+/** County-level results of each Senate / governor seat's previous contest (scripts/build-history.mjs). */
+interface CountyHistory {
+  races: Record<string, { label: string; units: Record<string, number> }>;
+}
+let countyHistoryPromise: Promise<CountyHistory | null> | null = null;
+function loadCountyHistory(): Promise<CountyHistory | null> {
+  countyHistoryPromise ??= fetch('/baselines/county-history.json')
+    .then((r) => (r.ok ? (r.json() as Promise<CountyHistory>) : null))
+    .catch(() => {
+      countyHistoryPromise = null;
+      return null;
+    });
+  return countyHistoryPromise;
+}
+
+/** What each county is compared against: the seat's last race when county data exists, else 2024 president. */
+interface Baseline {
+  /** "2020", "2021 runoff", "2024". */
+  year: string;
+  /** "'20" for compact labels. */
+  short: string;
+  /** "2020 Senate race", "2024 presidential race". */
+  name: string;
+}
+const PRES_BASELINE: Baseline = { year: '2024 pres', short: "'24", name: '2024 presidential race' };
+
 const MODES: { id: Mode; label: string }[] = [
   { id: 'margin', label: 'Current margin' },
   { id: 'swing', label: 'Shift vs 2024' },
@@ -108,6 +135,10 @@ export function RaceView() {
   const [mode, setMode] = useState<Mode | null>(null);
   const [hover, setHover] = useState<{ id: string; x: number; y: number } | null>(null);
   const [sort, setSort] = useState<{ key: string; dir: 1 | -1 }>({ key: 'expected', dir: -1 });
+  const [countyHistory, setCountyHistory] = useState<CountyHistory | null>(null);
+  useEffect(() => {
+    void loadCountyHistory().then(setCountyHistory);
+  }, []);
 
   useEffect(() => {
     void loadCounties().then(setShapes);
@@ -121,7 +152,19 @@ export function RaceView() {
     if (!race) return { d: undefined, r: undefined };
     return { d: race.candidates.find((c) => c.party === 'D'), r: race.candidates.find((c) => c.party === 'R') };
   }, [race]);
-  const rows = useMemo(() => (race && data ? data.units.map((u) => stats(u, race, main.d, main.r)) : []), [race, data, main]);
+  // Senate and governor races compare each county with the same seat's previous contest; House
+  // races (and seats without county data for it) use the 2024 presidential margin from NYT.
+  const prevCounty = race && race.office !== 'H' ? countyHistory?.races[race.id] : undefined;
+  const base: Baseline = prevCounty
+    ? { year: prevCounty.label, short: `'${prevCounty.label.slice(2, 4)}`, name: `${prevCounty.label} ${race!.office === 'S' ? 'Senate' : 'governor'} race` }
+    : PRES_BASELINE;
+  const rows = useMemo(
+    () =>
+      race && data
+        ? data.units.map((u) => stats(prevCounty ? { ...u, baselineMargin: u.fips != null ? (prevCounty.units[u.fips] ?? null) : null } : u, race, main.d, main.r))
+        : [],
+    [race, data, main, prevCounty],
+  );
   const anyVotes = rows.some((s) => s.u.totalVotes > 0);
   const activeMode: Mode = mode ?? (anyVotes ? 'margin' : 'baseline');
 
@@ -244,7 +287,7 @@ export function RaceView() {
           <div className="chips">
             {MODES.map((m) => (
               <button key={m.id} className={`chip ${activeMode === m.id ? 'on' : ''}`} onClick={() => setMode(m.id)}>
-                {m.label}
+                {m.id === 'swing' ? `Shift vs ${base.year}` : m.id === 'baseline' ? `${base.year} result` : m.label}
               </button>
             ))}
           </div>
@@ -286,7 +329,7 @@ export function RaceView() {
             </svg>
           )}
         </div>
-        <MapLegend mode={activeMode} />
+        <MapLegend mode={activeMode} base={base} />
       </section>
 
       <aside className="rv-side">
@@ -300,7 +343,7 @@ export function RaceView() {
             {outstandingTotal ? (
               <>
                 {' '}
-                · <b style={{ color: PARTY_COLOR.D }}>{Math.round((outstandingDLean / outstandingTotal) * 100)}%</b> in {unitWord} the Democrat carried in 2024
+                · <b style={{ color: PARTY_COLOR.D }}>{Math.round((outstandingDLean / outstandingTotal) * 100)}%</b> in {unitWord} the Democrat carried in the {base.name}
               </>
             ) : null}
           </div>
@@ -313,7 +356,7 @@ export function RaceView() {
                 </span>
                 <span className="rl-num">{fmtNum(s.outstanding)}</span>
                 <span className="rl-lean" style={{ color: s.u.baselineMargin != null ? PARTY_COLOR[s.u.baselineMargin >= 0 ? 'D' : 'R'] : undefined }}>
-                  '24 {signed(s.u.baselineMargin, 0)}
+                  {base.short} {signed(s.u.baselineMargin, 0)}
                 </span>
               </li>
             ))}
@@ -321,7 +364,7 @@ export function RaceView() {
         </section>
         <section className="panel">
           <div className="panel-head">
-            <h2>Biggest shifts from 2024</h2>
+            <h2>Biggest shifts from {base.year}</h2>
             <span className="muted small">{unitWord} ≥20% counted</span>
           </div>
           <ul className="rv-list">
@@ -329,7 +372,9 @@ export function RaceView() {
               <li key={s.u.id} onMouseEnter={(e) => setHover({ id: s.u.id, x: e.clientX, y: e.clientY })} onMouseLeave={() => setHover(null)}>
                 <span className="rl-name">{s.u.name}</span>
                 <span className="rl-num">now {signed(s.dMargin, 0)}</span>
-                <span className="rl-lean muted">'24 {signed(s.u.baselineMargin, 0)}</span>
+                <span className="rl-lean muted">
+                  {base.short} {signed(s.u.baselineMargin, 0)}
+                </span>
                 <b style={{ color: PARTY_COLOR[s.swing! >= 0 ? 'D' : 'R'] }}>{signed(s.swing)}</b>
               </li>
             ))}
@@ -359,7 +404,7 @@ export function RaceView() {
                 {main.d ? th('d', main.d.lastName) : null}
                 {main.r ? th('r', main.r.lastName) : null}
                 {th('margin', 'Margin')}
-                {th('base', '2024')}
+                {th('base', base.year)}
                 {th('swing', 'Shift')}
               </tr>
             </thead>
@@ -418,7 +463,7 @@ export function RaceView() {
                 <span>{signed(hoverStats.dMargin)}</span>
               </div>
               <div>
-                <label>2024 pres.</label>
+                <label>{prevCounty ? base.name : '2024 pres.'}</label>
                 <span>{signed(hoverStats.u.baselineMargin)}</span>
               </div>
               <div>
@@ -437,7 +482,7 @@ export function RaceView() {
   );
 }
 
-function MapLegend({ mode }: { mode: Mode }) {
+function MapLegend({ mode, base }: { mode: Mode; base: Baseline }) {
   const levels = ['solid', 'likely', 'lean', 'tilt'] as const;
   const labels: Record<Mode, string[]> = {
     margin: ['15+', '7', '3', '<3', '', '<3', '3', '7', '15+'],
@@ -468,7 +513,7 @@ function MapLegend({ mode }: { mode: Mode }) {
           <i key={`r${l}`} className="sw" style={{ background: RAMP.R[l] }} />
         ))}
       </span>
-      <span>{mode === 'swing' ? 'Shift in D–R margin vs 2024 presidential (pts)' : mode === 'margin' ? 'Leader’s margin (pts)' : '2024 presidential margin (pts)'}</span>
+      <span>{mode === 'swing' ? `Shift in D–R margin vs the ${base.name} (pts)` : mode === 'margin' ? 'Leader’s margin (pts)' : `${base.name} margin (pts)`}</span>
       <span className="muted">{labels[mode].filter(Boolean).join(' · ')}</span>
     </div>
   );

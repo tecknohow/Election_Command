@@ -43,7 +43,7 @@ The House map draws all **435 districts from the Census Bureau's 2026 boundaries
 Click any race to open its drill-down. You get:
 
 - the seat's previous result and the 2024 presidential margin, with tonight's shift from each;
-- a county map you can switch between current margin, shift since 2024, % counted, and the 2024 baseline (Connecticut draws its nine planning regions and Alaska its 40 house districts, the units they report by);
+- a county map you can switch between current margin, the shift from the baseline, % counted, and the baseline itself. For Senate and governor races the baseline is the same seat's previous race, county by county (Kentucky's Senate race against 2020, Georgia's against its 2021 runoff); House races use the 2024 presidential margin. Connecticut draws its nine planning regions and Alaska its 40 house districts, the units they report by;
 - **where the outstanding vote is**, ranked by NYT's expected-vote estimates against each county's 2024 lean, so you can see whether the trailing candidate still has a path;
 - the counties moving furthest from 2024;
 - a sortable table of every county.
@@ -57,7 +57,7 @@ House races show the counties inside the district, clipped to its shape.
 The Senate, House and Governors each get a full-screen desk with:
 
 - the path to a majority: how many of the remaining races each party still needs;
-- a seats-over-the-night timeline;
+- a seats-over-the-night timeline of seats actually secured (called races plus seats not up);
 - races to watch: the closest counts, upsets against the betting favorite, and toss-ups;
 - every seat changing hands;
 - a sortable, filterable table of every race.
@@ -86,7 +86,7 @@ A tenth view compares tonight with the last midterm and the last presidential el
 - a **like-for-like shift**: each district against its own 2024 presidential margin *inside its 2026 lines*, so partial counts don't skew it;
 - a scatter of races, before against tonight, and a state map of the shift, each switchable between House, Senate and Governor, and between the 2024 presidential margin and the seat's previous result;
 - every race in a sortable table against the previous result for the same seat (House, Senate or Governor);
-- Democratic House seats gained or lost, counted as net seats flipped so races not yet reporting don't distort it;
+- Democratic House seats gained or lost: net seats flipped in called races, with the total including current leads underneath;
 - the president's party's midterm record since 1994, with tonight's seat change and swing alongside, and the closest historical match.
 
 ![Swing dashboard](docs/screenshots/swing.webp)
@@ -219,6 +219,7 @@ npm run typecheck
 npm run build:districts   # regenerate House districts from Census TIGER/Line (~45 MB download)
 npm run build:units       # regenerate CT planning-region and AK house-district shapes
 npm run build:history     # regenerate shared/src/history.json (past results, redrawn districts, midterms)
+                          # and web/public/baselines/county-history.json (county results of each seat's last race)
 ```
 
 The stack is TypeScript throughout: Fastify on the server; React, Vite, Zustand and d3-geo in the browser.

@@ -194,9 +194,12 @@ export interface PollClosing {
 
 export interface BopHistoryPoint {
   t: string;
+  /** Expected seats (not up + won + leading). */
   S: { D: number; R: number; I: number };
   H: { D: number; R: number; I: number };
   G: { D: number; R: number; I: number };
+  /** Secured seats (not up + called). Missing on points recorded before it was added. */
+  called?: { S: { D: number; R: number; I: number }; H: { D: number; R: number; I: number }; G: { D: number; R: number; I: number } };
 }
 
 export interface SimStatus {

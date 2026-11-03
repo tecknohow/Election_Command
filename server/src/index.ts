@@ -170,7 +170,7 @@ if (existsSync(webDist)) {
     setHeaders: (reply: { header: (k: string, v: string) => unknown }, filePath: string) => {
       const p = filePath.replace(/\\/g, '/');
       if (p.includes('/assets/')) reply.header('Cache-Control', 'public, max-age=31536000, immutable');
-      else if (p.includes('/geo/')) reply.header('Cache-Control', 'public, max-age=86400');
+      else if (p.includes('/geo/') || p.includes('/baselines/')) reply.header('Cache-Control', 'public, max-age=86400');
       else reply.header('Cache-Control', 'no-cache');
     },
   });

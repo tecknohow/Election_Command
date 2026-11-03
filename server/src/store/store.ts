@@ -562,10 +562,11 @@ export class ElectionStore extends EventEmitter {
       S: projected(this.chambers.S),
       H: projected(this.chambers.H),
       G: projected(this.chambers.G),
+      called: { S: secured(this.chambers.S), H: secured(this.chambers.H), G: secured(this.chambers.G) },
     };
     const hist = sim ? this.simHistory : this.bopHistory;
     const last = hist[hist.length - 1];
-    if (last && JSON.stringify([last.S, last.H, last.G]) === JSON.stringify([point.S, point.H, point.G])) return null;
+    if (last && JSON.stringify([last.S, last.H, last.G, last.called]) === JSON.stringify([point.S, point.H, point.G, point.called])) return null;
     // Only start recording once something is actually counting.
     const anyActivity = OFFICES.some((o) => this.chambers[o].racesCalled + sumCounts(this.chambers[o].leading) > 0);
     if (!anyActivity) return null;
@@ -689,6 +690,11 @@ function applyVotes(base: RaceInput, src: RaceInput): RaceInput {
     }
   }
   return out;
+}
+
+/** Seats actually secured: not up this cycle plus races called. */
+function secured(c: ChamberSummary): { D: number; R: number; I: number } {
+  return { D: c.notUp.D + c.won.D, R: c.notUp.R + c.won.R, I: c.notUp.I + c.won.I };
 }
 
 function projected(c: ChamberSummary): { D: number; R: number; I: number } {

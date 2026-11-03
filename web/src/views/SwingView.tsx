@@ -64,7 +64,9 @@ function SwingTiles({ races }: { races: Race[] }) {
   const statewide = races.filter((r) => r.office !== 'H');
   const seat = likeForLike(statewide, (r) => prevFor(r)?.margin ?? null);
   // Framed from the out-party's side so the expected midterm gain reads as a positive number.
-  const hc = netSeatChange(races, 'H', 'D');
+  // Called races only for the headline; the with-leads projection is the small print.
+  const hc = netSeatChange(races, 'H', 'D', true);
+  const hcExpected = netSeatChange(races, 'H', 'D');
   const tile = (label: string, value: ReactNode, sub: ReactNode, color?: string) => (
     <div className="tile sw-tile">
       <b style={{ color }}>{value}</b>
@@ -106,7 +108,11 @@ function SwingTiles({ races }: { races: Race[] }) {
       {tile(
         'DEM House seats vs before',
         hc ? `${hc.change > 0 ? '+' : ''}${hc.change}` : '—',
-        hc ? `net seats flipped, won + leading · ${hc.decided} races reporting` : 'net seats flipped; appears with results',
+        hc
+          ? `net seats flipped, called · ${hcExpected ? `${hcExpected.change > 0 ? '+' : ''}${hcExpected.change} expected with leads` : ''}`
+          : hcExpected
+            ? `none called yet · ${hcExpected.change > 0 ? '+' : ''}${hcExpected.change} expected with leads`
+            : 'net seats flipped; appears with calls',
         hc ? (hc.change > 0 ? PARTY_COLOR.D : hc.change < 0 ? PARTY_COLOR.R : undefined) : undefined,
       )}
     </div>
@@ -425,7 +431,7 @@ function MidtermHistory({ races }: { races: Race[] }) {
         <div className="sw-hist-row now">
           <span className="sw-year">
             <i className="party-chip" style={{ background: PARTY_COLOR[PRES_PARTY_2026] }} />
-            2026
+            2026 <small className="muted" title="Won + leading, so it can be compared with past midterms' final results">proj.</small>
           </span>
           <span className="sw-track">
             <i className="sw-zero" />
@@ -444,7 +450,7 @@ function MidtermHistory({ races }: { races: Race[] }) {
           </>
         ) : (
           <>
-            Bars: House seats gained or lost by the president’s party. Swing: change in the national House vote from the presidential year before, toward the out-party. 2026 fills in live.
+            Bars: House seats gained or lost by the president’s party. Swing: change in the national House vote from the presidential year before, toward the out-party. 2026 fills in live, projected from races won or led.
           </>
         )}
       </div>

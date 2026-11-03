@@ -17,8 +17,9 @@ function useSize<T extends HTMLElement>() {
 }
 
 /**
- * Projected seats (secured + currently leading) over the night, one line per party, with the
- * control threshold. Hover for a crosshair readout.
+ * Seats secured over the night (called races + seats not up), one line per party, with the
+ * control threshold. Hover for a crosshair readout. Points recorded before called counts were
+ * stored are skipped rather than mixed in.
  */
 export function BopTimeline({ office, chamber }: { office: Office; chamber: ChamberSummary }) {
   const history = useElection((s) => s.bopHistory);
@@ -29,9 +30,9 @@ export function BopTimeline({ office, chamber }: { office: Office; chamber: Cham
 
   const pts = useMemo(
     () =>
-      history.map((p) => {
-        const v = p[office];
-        return { t: Date.parse(p.t), D: v.D + (isSenate ? v.I : 0), R: v.R };
+      history.flatMap((p) => {
+        const v = p.called?.[office];
+        return v ? [{ t: Date.parse(p.t), D: v.D + (isSenate ? v.I : 0), R: v.R }] : [];
       }),
     [history, office, isSenate],
   );
@@ -65,13 +66,13 @@ export function BopTimeline({ office, chamber }: { office: Office; chamber: Cham
     <section className="panel timeline-panel">
       <div className="panel-head">
         <h2>Seats over the night</h2>
-        <span className="muted small">secured + leading · {threshold} for {office === 'G' ? 'majority' : 'control'}</span>
+        <span className="muted small">called + not up · {threshold} for {office === 'G' ? 'majority' : 'control'}</span>
       </div>
       <div className="timeline-body" ref={ref}>
         {pts.length < 2 ? (
           <div className="empty">The timeline starts when the first votes are counted.</div>
         ) : (
-          <svg width={w} height={h} onMouseMove={onMove} onMouseLeave={() => setHoverIdx(null)} role="img" aria-label="Projected seats over time">
+          <svg width={w} height={h} onMouseMove={onMove} onMouseLeave={() => setHoverIdx(null)} role="img" aria-label="Seats secured over time">
             {ticks.map((v) => (
               <g key={v}>
                 <line x1={pad.l} x2={pad.l + iw} y1={y(v)} y2={y(v)} className="grid-line" />
