@@ -1,8 +1,9 @@
 {
- "generated": "2026-11-03",
+ "generated": "2026-11-13",
  "sources": {
   "results": "CNN results API (politics.api.cnn.io), 2020-2024 national race files",
-  "lines": "US Census Bureau TIGER/Line, congressional districts cd119 (2024) vs cd120 (2026)",
+  "lines": "US Census Bureau TIGER/Line, congressional districts cd119 (2024) vs cd120 (2026); MO kept on cd119 (new map not used in the general)",
+  "pres2024Approx": "Wikipedia district articles (Dave's Redistricting), whole percents, where NYT has no presidential comparison",
   "midterms": "Wikipedia election infoboxes, 1994-2022 (CC BY-SA 4.0)"
  },
  "senate": {
@@ -4464,13 +4465,17 @@
    "linesChanged": true
   },
   "MA-H-1": {
-   "margin": null,
-   "kind": "D-noR",
+   "margin": 25.07,
+   "kind": "DR",
    "d": {
     "name": "Richard Neal",
     "pct": 62.4
    },
-   "r": null,
+   "r": {
+    "name": "Nadia Milleron",
+    "pct": 37.3
+   },
+   "indep": "R",
    "winner": {
     "name": "Richard Neal",
     "party": "D"
@@ -4478,13 +4483,17 @@
    "linesChanged": false
   },
   "MA-H-2": {
-   "margin": null,
-   "kind": "D-noR",
+   "margin": 37.5,
+   "kind": "DR",
    "d": {
     "name": "Jim McGovern",
     "pct": 68.6
    },
-   "r": null,
+   "r": {
+    "name": "Cornelius Shea",
+    "pct": 31.1
+   },
+   "indep": "R",
    "winner": {
     "name": "Jim McGovern",
     "party": "D"
@@ -5137,7 +5146,7 @@
     "name": "Wesley Bell",
     "party": "D"
    },
-   "linesChanged": true
+   "linesChanged": false
   },
   "MO-H-2": {
    "margin": -12,
@@ -5154,7 +5163,7 @@
     "name": "Ann Wagner",
     "party": "R"
    },
-   "linesChanged": true
+   "linesChanged": false
   },
   "MO-H-3": {
    "margin": -26.01,
@@ -5171,7 +5180,7 @@
     "name": "Bob Onder",
     "party": "R"
    },
-   "linesChanged": true
+   "linesChanged": false
   },
   "MO-H-4": {
    "margin": -44.66,
@@ -5188,7 +5197,7 @@
     "name": "Mark Alford",
     "party": "R"
    },
-   "linesChanged": true
+   "linesChanged": false
   },
   "MO-H-5": {
    "margin": 23.78,
@@ -5205,7 +5214,7 @@
     "name": "Emanuel Cleaver",
     "party": "D"
    },
-   "linesChanged": true
+   "linesChanged": false
   },
   "MO-H-6": {
    "margin": -43.77,
@@ -5222,7 +5231,7 @@
     "name": "Sam Graves",
     "party": "R"
    },
-   "linesChanged": true
+   "linesChanged": false
   },
   "MO-H-7": {
    "margin": -45.28,
@@ -7796,13 +7805,17 @@
    "linesChanged": true
   },
   "TX-H-19": {
-   "margin": null,
-   "kind": "R-noD",
-   "d": null,
+   "margin": -70.39,
+   "kind": "DR",
+   "d": {
+    "name": "Nathan Lewis",
+    "pct": 10.3
+   },
    "r": {
     "name": "Jodey Arrington",
     "pct": 80.7
    },
+   "indep": "D",
    "winner": {
     "name": "Jodey Arrington",
     "party": "R"
@@ -9927,8 +9940,26 @@
    "WI-H-6": -16.47,
    "WI-H-7": -22.5,
    "WI-H-8": -16.26,
-   "WY-H-1": -46.22
-  }
+   "WY-H-1": -46.22,
+   "MO-H-1": 57,
+   "MO-H-2": -8,
+   "MO-H-3": -27,
+   "MO-H-4": -42,
+   "MO-H-5": 24,
+   "MO-H-6": -39,
+   "MO-H-7": -43,
+   "MO-H-8": -53
+  },
+  "approxByRace": [
+   "MO-H-1",
+   "MO-H-2",
+   "MO-H-3",
+   "MO-H-4",
+   "MO-H-5",
+   "MO-H-6",
+   "MO-H-7",
+   "MO-H-8"
+  ]
  },
  "midterms": [
   {
@@ -10001,7 +10032,6 @@
   "CA",
   "FL",
   "LA",
-  "MO",
   "NC",
   "OH",
   "TN",

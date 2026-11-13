@@ -9,9 +9,9 @@
  * - Rich metadata: candidates, incumbency, headshots, NYT ratings, expected vote (EEVP),
  *   AP race calls, poll-closing times and chamber control.
  */
-import type { Candidate, CountyUnit, Office, Party } from '../../../shared/src/types.js';
+import type { Candidate, CountyUnit, Office, Party, RaceCounties } from '../../../shared/src/types.js';
 import { parseNytRating } from '../../../shared/src/ratings.js';
-import { OFFICE_LABEL, raceId } from '../../../shared/src/states.js';
+import { OFFICE_LABEL, STATES, raceId } from '../../../shared/src/states.js';
 import { config, NYT_BASE } from '../config.js';
 import { fetchJson } from '../lib/http.js';
 import { Poller } from '../lib/poller.js';
@@ -19,6 +19,7 @@ import { store } from '../store/store.js';
 import type { RaceInput } from '../store/types.js';
 import { safeUrl } from '../lib/safe.js';
 import { countyStore } from '../store/counties.js';
+import { countyLabel, townCounty } from '../geo/places.js';
 
 interface NytCandMeta {
   nyt_id: string;
@@ -45,6 +46,7 @@ interface NytRU {
   provider_updated_at: string | null;
   candidates: { nyt_id: string; votes: { total: number }; leader: boolean }[];
   historical_comparison_race_data?: Record<string, { margin?: number }>;
+  nyt_model_estimates?: { margin_quantile?: number[] } | null;
 }
 interface NytRace {
   nyt_id: string;
@@ -122,7 +124,8 @@ export function normalizeNytRace(r: NytRace): RaceInput | null {
     pollClose: null,
     uncontested: !!r.uncontested,
     rating: parseNytRating(r.rating),
-    baselineMargin: Object.values(ru.historical_comparison_race_data ?? {})[0]?.margin ?? null,
+    model: ru.nyt_model_estimates?.margin_quantile?.length === 5 ? { quantiles: ru.nyt_model_estimates.margin_quantile } : null,
+    baselineMargin: comparison(ru.historical_comparison_race_data).margin,
     ...(r.tabulation_method ? { rcv: r.tabulation_method !== 'single-round' } : {}),
     url: safeUrl(r.url),
     updatedAt: ru.provider_updated_at ?? r.updated_at,
@@ -130,10 +133,25 @@ export function normalizeNytRace(r: NytRace): RaceInput | null {
   };
 }
 
+/**
+ * The comparison NYT attaches to a reporting unit: the 2024 presidential race when present (keys like
+ * "NC-G-P-2024-11-05"), else the seat's own 2024 House race ("MO-G-H-5-2024-11-05"), which NYT uses
+ * for districts whose lines didn't change.
+ */
+function comparison(data: Record<string, { margin?: number }> | undefined): { margin: number | null; kind: 'pres2024' | 'house2024' | null } {
+  const entries = Object.entries(data ?? {});
+  const pres = entries.find(([k]) => /-P-2024-/.test(k));
+  if (pres) return { margin: pres[1].margin ?? null, kind: 'pres2024' };
+  const house = entries.find(([k]) => /-H-\d+-2024-/.test(k));
+  if (house) return { margin: house[1].margin ?? null, kind: 'house2024' };
+  return { margin: entries[0]?.[1].margin ?? null, kind: null };
+}
+
 /** Sub-state reporting units (counties, AK state-house districts, county parts of House districts). */
 function countyUnits(r: NytRace): CountyUnit[] {
   const units = (r.reporting_units ?? []).filter((u) => u.level !== 'state' && u.level !== 'national');
   const hasCounties = units.some((u) => u.level === 'county');
+  if (!hasCounties && units.some((u) => u.level === 'township' && u.fips_county)) return townsToCounties(units);
   return (
     units
       // House files add city / "rest of county" / ward units (Chicago, Detroit, Kansas City,
@@ -156,9 +174,52 @@ function countyUnits(r: NytRace): CountyUnit[] {
         totalVotes: u.total_votes ?? 0,
         expectedVotes: u.total_expected_vote ?? null,
         votes: Object.fromEntries(u.candidates.map((c) => [c.nyt_id, c.votes?.total ?? 0])),
-        baselineMargin: Object.values(u.historical_comparison_race_data ?? {})[0]?.margin ?? null,
+        baselineMargin: comparison(u.historical_comparison_race_data).margin,
       }))
   );
+}
+
+/**
+ * New England House districts in NYT's per-district files come by town only (the national file had
+ * county units). Sum the towns into counties (Connecticut: planning regions) so the drill-down map
+ * can draw them. Ward / "other" units with a county code are subsets of towns and are dropped;
+ * units without one ("Overseas absentee") stay as they are.
+ */
+function townsToCounties(units: NytRU[]): CountyUnit[] {
+  const out = new Map<string, CountyUnit & { w: number; wSum: number; eSum: number; eW: number }>();
+  const rest: CountyUnit[] = [];
+  for (const u of units) {
+    if (u.level !== 'township' || !u.fips_state || !u.fips_county) {
+      if (!u.fips_county) rest.push({ id: u.nyt_id ?? `${u.state_postal}-${u.name}`, fips: null, name: u.name ?? '?', level: u.level, eevp: u.eevp ?? null, totalVotes: u.total_votes ?? 0, expectedVotes: u.total_expected_vote ?? null, votes: Object.fromEntries(u.candidates.map((c) => [c.nyt_id, c.votes?.total ?? 0])), baselineMargin: comparison(u.historical_comparison_race_data).margin });
+      continue;
+    }
+    const fips = townCounty(u.state_postal, u.fips_state, u.fips_county, u.name ?? '');
+    let c = out.get(fips);
+    if (!c) {
+      c = { id: `${u.state_postal}-county-${fips}`, fips, name: countyLabel(u.state_postal, fips) ?? fips, level: 'county', eevp: null, totalVotes: 0, expectedVotes: 0, votes: {}, baselineMargin: null, w: 0, wSum: 0, eSum: 0, eW: 0 };
+      out.set(fips, c);
+    }
+    const votes = u.total_votes ?? 0;
+    const expected = u.total_expected_vote ?? null;
+    c.totalVotes += votes;
+    c.expectedVotes = c.expectedVotes == null || expected == null ? null : c.expectedVotes + expected;
+    for (const cand of u.candidates) c.votes[cand.nyt_id] = (c.votes[cand.nyt_id] ?? 0) + (cand.votes?.total ?? 0);
+    // Baseline margin and EEVP: weighted by each town's size (expected vote, else votes counted).
+    const weight = expected ?? votes;
+    const base = comparison(u.historical_comparison_race_data).margin;
+    if (base != null && weight > 0) {
+      c.w += weight;
+      c.wSum += base * weight;
+    }
+    if (u.eevp != null && weight > 0) {
+      c.eW += weight;
+      c.eSum += u.eevp * weight;
+    }
+  }
+  return [
+    ...[...out.values()].map(({ w, wSum, eSum, eW, ...c }) => ({ ...c, baselineMargin: w ? +(wSum / w).toFixed(2) : null, eevp: eW ? +(eSum / eW).toFixed(1) : null })),
+    ...rest,
+  ];
 }
 
 /** Store county units for every race in a file/feed that carries them. */
@@ -172,7 +233,10 @@ function ingestCounties(races: NytRace[]) {
     // Prefer the general-election contest when a seat has several race types.
     const existing = countyStore.get(r.id);
     if (existing && raw.race_type_id !== 'G' && existing.source === 'NYT/AP (G)') continue;
-    countyStore.set({ raceId: r.id, updatedAt: now, source: raw.race_type_id === 'G' ? 'NYT/AP (G)' : 'NYT/AP', units });
+    const kind = (raw.reporting_units ?? []).map((u) => comparison(u.historical_comparison_race_data).kind).find(Boolean);
+    const rc: RaceCounties = { raceId: r.id, updatedAt: now, source: raw.race_type_id === 'G' ? 'NYT/AP (G)' : 'NYT/AP', units };
+    if (kind === 'house2024') rc.baseline = 'house2024';
+    countyStore.set(rc);
   }
 }
 
@@ -222,9 +286,56 @@ async function pull(slug: string, office: Office): Promise<boolean> {
   const races = normalizeFile(res.data!);
   store.ingest({ provider: 'nyt', offices: [office], fetchedAt: Date.now(), races });
   discoverCountyFeeds(res.data!);
-  // The House file already carries each district's county parts.
-  if (office === 'H') ingestCounties(res.data!.races ?? []);
+  // The House file carried each district's county parts through election night; NYT later strips
+  // them (Nov 9, 2026), leaving them only in the per-district files (see pullDistrict).
+  if (office === 'H') {
+    const races = res.data!.races ?? [];
+    houseFileHasCounties = races.some((r) => (r.reporting_units ?? []).some((u) => u.level === 'county'));
+    ingestCounties(races);
+  }
   return true;
+}
+
+// ------------------------------------------------- per-district House files (county parts)
+let houseFileHasCounties = true;
+const districtFetched = new Map<string, number>();
+/** How often to re-check a district's file: often while it's still counting, rarely once done. */
+const DISTRICT_RECHECK_COUNTING_MS = 10 * 60_000;
+const DISTRICT_RECHECK_DONE_MS = 6 * 60 * 60_000;
+
+/** "results-missouri-us-house-5.json", "results-alaska-us-house-at-large.json". */
+function districtUrl(state: string, district: number, atLarge: boolean): string | null {
+  const name = STATES.find((s) => s.postal === state)?.name;
+  if (!name) return null;
+  return `${NYT_BASE}/results-${name.toLowerCase().replace(/\s+/g, '-')}-us-house-${atLarge ? 'at-large' : district}.json`;
+}
+
+/**
+ * Once the national House file no longer carries county parts, fetch one district's own file per
+ * run: districts never fetched first, then ones still counting (every 10 min), then the rest
+ * (every 6 h). ETags make unchanged files a 304.
+ */
+async function pullDistrict(): Promise<string | false> {
+  if (houseFileHasCounties) return false;
+  const house = [...store.races.values()].filter((r) => r.office === 'H');
+  const perState = new Map<string, number>();
+  for (const r of house) perState.set(r.state, (perState.get(r.state) ?? 0) + 1);
+  const now = Date.now();
+  const due = (r: (typeof house)[number]) => {
+    const last = districtFetched.get(r.id);
+    if (last == null) return -Infinity;
+    const counting = r.status !== 'called' || (r.eevp ?? 100) < 99;
+    return last + (counting ? DISTRICT_RECHECK_COUNTING_MS : DISTRICT_RECHECK_DONE_MS);
+  };
+  const next = house.filter((r) => due(r) <= now).sort((a, b) => due(a) - due(b))[0];
+  if (!next) return false;
+  const url = districtUrl(next.state, next.district ?? 1, perState.get(next.state) === 1);
+  districtFetched.set(next.id, now);
+  if (!url) return false;
+  const res = await fetchJson<NytFile>(url, { conditional: true, timeoutMs: 30_000 });
+  if (!res.changed) return false;
+  ingestCounties((res.data?.races ?? []).filter((r) => r.office_id === 'H'));
+  return `${next.id} · ${[...districtFetched.keys()].length}/${house.length} districts checked`;
 }
 
 export function startNyt() {
@@ -263,8 +374,19 @@ export function startNyt() {
       return s || g ? `${countyStore.size} races with county data` : false;
     },
   });
+  const districts = new Poller({
+    id: 'nyt-house-districts',
+    name: 'NYT / AP House district files',
+    role: "County parts of House districts, one district file at a time, once NYT's national House file stops carrying them",
+    hotIntervalS: 4,
+    coldIntervalS: 4,
+    enabled: config.sources.nyt,
+    initialDelayMs: 20_000,
+    run: pullDistrict,
+  });
   statewide.start();
   house.start();
   counties.start();
-  return [statewide, house, counties];
+  districts.start();
+  return [statewide, house, counties, districts];
 }

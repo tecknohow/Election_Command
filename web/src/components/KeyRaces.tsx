@@ -3,6 +3,7 @@ import type { Candidate, Office, Party, Race } from '../../../shared/src/types';
 import { LEVEL_STRENGTH } from '../../../shared/src/ratings';
 import { PARTY_COLOR, RAMP } from '../lib/colors';
 import { fmtProb, statusText } from '../lib/format';
+import { sides } from '../lib/history';
 import { useElection } from '../store/election';
 
 /** How competitive a race looks pre-results (0 = coin flip, 1 = safe). */
@@ -30,8 +31,7 @@ export function isKeyRace(r: Race): boolean {
 /** The two candidates to show head-to-head. */
 export function headToHead(r: Race): [Candidate, Candidate | undefined] {
   if (r.totalVotes > 0) return [r.candidates[0], r.candidates[1]];
-  const d = r.candidates.find((c) => c.party === 'D');
-  const rep = r.candidates.find((c) => c.party === 'R');
+  const { d, r: rep } = sides(r);
   const others = r.candidates.filter((c) => c !== d && c !== rep);
   const pair = [d, rep, ...others].filter(Boolean) as Candidate[];
   return [pair[0], pair[1]];

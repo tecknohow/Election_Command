@@ -832,3 +832,9 @@ button.dock-label {
 .race-card.dense .prev-strip > div > b {
   font-size: 0.86rem;
 }
+
+.rv-standin {
+  margin: 0;
+  padding: 0.45rem 0.75rem 0.55rem;
+  border-top: 1px solid var(--border);
+}

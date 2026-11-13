@@ -55,7 +55,7 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
           <table className="about-table">
             <tbody>
               <tr>
-                <td>Results, race calls, expected vote, county results, candidate photos</td>
+                <td>Results, race calls, expected vote, county results, candidate photos, other statewide offices, state legislature and local races</td>
                 <td>
                   <A href="https://www.nytimes.com/interactive/2026/11/03/us/elections/results.html">The New York Times</A> (data from the Associated Press); candidate photos © The New
                   York Times

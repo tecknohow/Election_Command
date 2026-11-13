@@ -13,11 +13,13 @@ import { Dashboard } from './views/Dashboard';
 import './styles/chamber.css';
 import './styles/features.css';
 import './styles/swing.css';
+import './styles/statewide.css';
 import { BallotView } from './views/BallotView';
 import { ChamberView } from './views/ChamberView';
 import { MapView } from './views/MapView';
 import { MyRacesView } from './views/MyRacesView';
 import { SwingView } from './views/SwingView';
+import { StateView } from './views/StateView';
 import { RaceView } from './views/RaceView';
 
 /** Global shortcuts: 1-9 and 0 (view 10; typing "1" then "0" lands there too) switch views, F toggles fullscreen. */
@@ -78,6 +80,9 @@ function App() {
             <Route path="/race/:id" element={<RaceView />} />
             <Route path="/mine" element={<MyRacesView />} />
             <Route path="/swing" element={<SwingView />} />
+            <Route path="/state" element={<StateView />} />
+            <Route path="/state/:st" element={<StateView />} />
+            <Route path="/state/:st/county/:fips" element={<StateView />} />
             <Route path="/map" element={<Navigate to="/map/senate" replace />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

@@ -16,7 +16,8 @@
     "typecheck": "npm run typecheck --workspace server && npm run typecheck --workspace web",
     "build:districts": "node scripts/build-districts.mjs",
     "build:units": "node scripts/build-units.mjs",
-    "build:history": "node scripts/build-history.mjs"
+    "build:history": "node scripts/build-history.mjs",
+    "build:places": "node scripts/build-places.mjs"
   },
   "engines": {
     "node": ">=22"

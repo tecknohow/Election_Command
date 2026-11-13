@@ -1,4 +1,4 @@
-import type { Race } from '../../../shared/src/types';
+import type { Candidate, Race } from '../../../shared/src/types';
 import raw from '../../../shared/src/history.json';
 
 /**
@@ -18,6 +18,8 @@ export interface PrevResult {
   kind: string;
   d: PrevSide | null;
   r: PrevSide | null;
+  /** An independent stood in for this side's missing party (opposite the major-party candidate). */
+  indep?: 'D' | 'R';
   winner: { name: string; party: string | null } | null;
   /** House only: the district's lines changed after 2024, so the 2024 House result is on old lines. */
   linesChanged?: boolean;
@@ -95,11 +97,46 @@ export function prevText(p: PrevResult | null, short = false): string {
   }
 }
 
-/** Tonight's D-minus-R margin (top D vs top R share of all votes), or null without both / without votes. */
-export function dMargin(race: Race): number | null {
-  if (!race.totalVotes) return null;
+const INDEPENDENT = /independ|non-?partisan|no party|unaffiliated|unenrolled|no (party )?preference/i;
+/** An independent / nonpartisan candidate (not a minor party like Libertarian or Green). */
+export function isIndependent(c: Candidate): boolean {
+  return c.party !== 'D' && c.party !== 'R' && (c.party === 'I' || INDEPENDENT.test(c.partyName));
+}
+
+/**
+ * Independents reported to caucus with a party, by race id and last name. Anyone not listed is
+ * treated as the opposite party of the major-party candidate they're up against.
+ */
+const KNOWN_CAUCUS: Record<string, 'D' | 'R'> = {};
+
+/**
+ * The two candidates a race's margins and shifts compare, as the D side and the R side. Usually
+ * the top Democrat and top Republican; but when an independent is one of the top two (AK's
+ * at-large House seat, Nebraska's Senate race) or stands in for a missing party, they take the
+ * side of the party they caucus with, else the side opposite the major-party candidate they face.
+ * Otherwise a minor-party candidate in third place would set the margin.
+ */
+export function sides(race: Pick<Race, 'id' | 'candidates' | 'totalVotes'>): { d: Candidate | undefined; r: Candidate | undefined; standIn: 'd' | 'r' | null } {
   const d = race.candidates.find((c) => c.party === 'D');
   const r = race.candidates.find((c) => c.party === 'R');
+  const ranked = [...race.candidates].sort((a, b) => b.votes - a.votes);
+  const ind = ranked.find(isIndependent);
+  if (ind) {
+    const topTwo = race.totalVotes > 0 ? ranked.slice(0, 2) : [];
+    // The major-party candidate the independent is compared with.
+    const vs = !d ? r : !r ? d : topTwo.includes(ind) ? topTwo.find((c) => c !== ind && (c.party === 'D' || c.party === 'R')) : undefined;
+    if (vs) {
+      const side = KNOWN_CAUCUS[`${race.id}:${ind.lastName}`] ?? (vs.party === 'D' ? 'R' : 'D');
+      if (side !== vs.party) return side === 'D' ? { d: ind, r: vs, standIn: 'd' } : { d: vs, r: ind, standIn: 'r' };
+    }
+  }
+  return { d, r, standIn: null };
+}
+
+/** Tonight's D-minus-R margin (D side vs R side share of all votes; see sides()), or null without both / without votes. */
+export function dMargin(race: Race): number | null {
+  if (!race.totalVotes) return null;
+  const { d, r } = sides(race);
   if (!d || !r) return null;
   const total = race.candidates.reduce((s, c) => s + c.votes, 0) || race.totalVotes;
   return ((d.votes - r.votes) / total) * 100;

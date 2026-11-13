@@ -8,6 +8,7 @@ import { WatchStar } from '../components/Watch';
 import { NEUTRAL, PARTY_COLOR, RAMP, forecastFor, levelColor } from '../lib/colors';
 import { fmtEt, fmtNum, fmtProb, raceName, statusText } from '../lib/format';
 import { PrevResults } from '../components/PrevResults';
+import { sides } from '../lib/history';
 import { loadCounties, pathBounds, type CountyShape } from '../map/counties';
 import { loadDistricts } from '../map/geo';
 import { useElection, wantsSimView } from '../store/election';
@@ -39,6 +40,8 @@ interface Baseline {
   name: string;
 }
 const PRES_BASELINE: Baseline = { year: '2024 pres', short: "'24", name: '2024 presidential race' };
+/** Districts on unchanged lines (e.g. Missouri): NYT compares each county part with the seat's 2024 House race. */
+const HOUSE24_BASELINE: Baseline = { year: '2024 House', short: "'24 H", name: '2024 House race' };
 
 const MODES: { id: Mode; label: string }[] = [
   { id: 'margin', label: 'Current margin' },
@@ -149,15 +152,18 @@ export function RaceView() {
   }, [race?.office, race?.id]);
 
   const main = useMemo(() => {
-    if (!race) return { d: undefined, r: undefined };
-    return { d: race.candidates.find((c) => c.party === 'D'), r: race.candidates.find((c) => c.party === 'R') };
+    if (!race) return { d: undefined, r: undefined, standIn: null };
+    return sides(race); // an independent opponent stands in for the missing / trailing party
   }, [race]);
   // Senate and governor races compare each county with the same seat's previous contest; House
-  // races (and seats without county data for it) use the 2024 presidential margin from NYT.
+  // races (and seats without county data for it) use NYT's comparison: the 2024 presidential margin,
+  // or the seat's 2024 House race for districts whose lines didn't change.
   const prevCounty = race && race.office !== 'H' ? countyHistory?.races[race.id] : undefined;
   const base: Baseline = prevCounty
     ? { year: prevCounty.label, short: `'${prevCounty.label.slice(2, 4)}`, name: `${prevCounty.label} ${race!.office === 'S' ? 'Senate' : 'governor'} race` }
-    : PRES_BASELINE;
+    : data?.baseline === 'house2024'
+      ? HOUSE24_BASELINE
+      : PRES_BASELINE;
   const rows = useMemo(
     () =>
       race && data
@@ -380,6 +386,11 @@ export function RaceView() {
             ))}
             {!shifts.length ? <li className="empty">Appears once counties report</li> : null}
           </ul>
+          {main.standIn ? (
+            <p className="muted small rv-standin">
+              {main[main.standIn]!.name} ({main[main.standIn]!.partyName || 'independent'}) counted on the {main.standIn === 'd' ? 'Democratic' : 'Republican'} side
+            </p>
+          ) : null}
         </section>
       </aside>
 

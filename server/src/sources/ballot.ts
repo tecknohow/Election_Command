@@ -18,6 +18,7 @@ import { fetchJson, HttpError } from '../lib/http.js';
 import { logger } from '../lib/log.js';
 import { Poller } from '../lib/poller.js';
 import { codeToken, measureStore, sideOf, similarity, type CatalogEntry, type MeasureInput } from '../store/measures.js';
+import { stateRaceStore, type NytStateRace } from '../store/stateRaces.js';
 
 const log = logger('ballot');
 const year = config.electionDate.slice(0, 4);
@@ -147,7 +148,8 @@ function normalizeNyt(r: NytMeasureRace): MeasureInput | null {
 }
 
 async function pullNytStates(): Promise<string | boolean> {
-  const states = measureStore.catalogStates();
+  // Every state: the files feed ballot measures and the Statewide view (other offices, local races).
+  const states = [...new Set([...measureStore.catalogStates(), ...Object.keys(STATE_BY_POSTAL).filter((s) => s !== 'DC')])];
   const probeEvery = isHot() ? 10 * 60_000 : 60 * 60_000;
   let changed = false;
   let attempts = 0;
@@ -164,6 +166,8 @@ async function pullNytStates(): Promise<string | boolean> {
       const res = await fetchJson<{ races: NytMeasureRace[] }>(`${NYT_BASE}/results-${slug}.json`, { conditional: true, timeoutMs: 30_000 });
       nytMissing.delete(st);
       if (!res.changed) continue;
+      // Everything else in the file (statewide offices, legislature, local races) for the Statewide view.
+      stateRaceStore.ingest(st, (res.data?.races ?? []) as unknown as NytStateRace[]);
       // The state files also carry local measures (city/county); the dashboard is statewide only.
       const statewide = (r: NytMeasureRace) => r.office_id === 'I' && (r.coverage ?? 'state') === 'state' && !/local/i.test(r.office ?? '');
       const list = (res.data?.races ?? []).filter(statewide).map(normalizeNyt).filter((m): m is MeasureInput => !!m);

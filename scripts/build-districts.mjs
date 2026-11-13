@@ -24,6 +24,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { geoAlbersUsa, geoPath } from 'd3-geo';
 import * as shapefile from 'shapefile';
+import { OLD_LINES_2026 } from './district-lines.mjs';
 import { feature } from 'topojson-client';
 import { topology } from 'topojson-server';
 import { presimplify, quantile, simplify, sphericalTriangleArea } from 'topojson-simplify';
@@ -45,16 +46,18 @@ const STATES = {
 mkdirSync(cache, { recursive: true });
 mkdirSync(path.dirname(outFile), { recursive: true });
 
+/** cd120 (2026), except states whose general election used the 2024 lines (cd119). */
 async function download(fips) {
-  const zip = path.join(cache, `tl_2026_${fips}_cd120.zip`);
+  const [year, cong] = OLD_LINES_2026.has(STATES[fips]) ? [2024, 119] : [2026, 120];
+  const zip = path.join(cache, `tl_${year}_${fips}_cd${cong}.zip`);
   if (!existsSync(zip)) {
-    const url = `https://www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_${fips}_cd120.zip`;
+    const url = `https://www2.census.gov/geo/tiger/TIGER${year}/CD/tl_${year}_${fips}_cd${cong}.zip`;
     process.stdout.write(`  downloading ${url}\n`);
     const res = await fetch(url, { headers: { 'User-Agent': 'ElectionCommand/0.1 (district build script)' } });
     if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
     writeFileSync(zip, Buffer.from(await res.arrayBuffer()));
   }
-  const dir = path.join(cache, fips);
+  const dir = path.join(cache, `${fips}-cd${cong}`);
   if (!existsSync(dir)) {
     mkdirSync(dir, { recursive: true });
     execFileSync('unzip', ['-o', '-q', zip, '-d', dir]);
@@ -101,6 +104,6 @@ for (const f of simplified.features) {
   out.push({ id: f.id, st: f.properties.st, cd: f.properties.cd, d, c: [cx, cy] });
 }
 out.sort((a, b) => a.st.localeCompare(b.st) || a.cd - b.cd);
-const json = JSON.stringify({ source: 'US Census Bureau TIGER/Line 2026, 120th Congress (cd120)', keep: KEEP, districts: out });
+const json = JSON.stringify({ source: `US Census Bureau TIGER/Line 2026, 120th Congress (cd120); ${[...OLD_LINES_2026].join(', ')}: 2024 lines (cd119), used in the 2026 general`, keep: KEEP, districts: out });
 writeFileSync(outFile, json);
 console.log(`wrote ${outFile} (${(json.length / 1024).toFixed(0)} KB, ${out.length} districts)`);

@@ -130,8 +130,8 @@ kbd {
 .view-tab {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.45rem 0.8rem;
+  gap: 0.4rem;
+  padding: 0.45rem 0.58rem;
   border-radius: 0.4rem;
   text-decoration: none;
   color: var(--text-2);
@@ -863,8 +863,20 @@ a.news-title:hover {
 }
 .flip-dot {
   stroke: #0b0e14;
-  stroke-width: 1;
+  stroke-width: 1.4;
   pointer-events: none;
+}
+.flip-outline {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3.2; /* half of it shows: clipped to the inside of the state */
+  stroke-dasharray: 4 2.5;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+.flip-outline.callout-flip {
+  stroke-width: 1.3;
+  stroke-dasharray: 3 2;
 }
 .callout {
   cursor: pointer;
@@ -999,11 +1011,23 @@ a.news-title:hover {
 }
 .flip-dot-legend {
   display: inline-block;
-  width: 0.55rem;
-  height: 0.55rem;
+  width: 0.45rem;
+  height: 0.45rem;
   background: #fff;
   border-radius: 50%;
+  box-shadow: 0 0 0 1px #0b0e14;
+}
+/* Legend swatch for the flip marker: dashed outline with the dot */
+.flip-legend {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.85rem;
+  height: 0.85rem;
+  border: 1.5px dashed #fff;
+  border-radius: 2px;
   margin-right: 0.35rem;
+  vertical-align: -0.15rem;
 }
 .map-stats {
   display: flex;

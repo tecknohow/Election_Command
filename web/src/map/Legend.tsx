@@ -41,7 +41,7 @@ export function Legend({ mode, office }: { mode: FillMode; office: Office }) {
             <span><Sw c="" hatch="R" />R leading</span>
             <span><Sw c={NEUTRAL.closed} />Polls closed</span>
             <span><Sw c={NEUTRAL.upcoming} />Polls open</span>
-            <span><i className="flip-dot-legend" />Seat flipped</span>
+            <span><i className="flip-legend"><i className="flip-dot-legend" /></i>Seat flipped</span>
           </div>
         </>
       ) : mode === 'market' ? (
@@ -74,6 +74,7 @@ export function Legend({ mode, office }: { mode: FillMode; office: Office }) {
       )}
       {office !== 'H' ? (
         <div className="legend-items muted">
+          {mode !== 'leader' && mode !== 'custom' ? <span><i className="flip-legend"><i className="flip-dot-legend" /></i>Seat flipped (called)</span> : null}
           <span><Sw c={NEUTRAL.noRace} />No {office === 'S' ? 'Senate' : 'governor'} race</span>
         </div>
       ) : null}

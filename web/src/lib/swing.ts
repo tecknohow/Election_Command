@@ -149,7 +149,8 @@ export function netSeatChange(races: Race[], office: Office, party: 'D' | 'R', c
   let decided = 0;
   for (const r of races) {
     if (r.office !== office || !r.priorParty) continue;
-    const now = r.winner ?? (!calledOnly && r.totalVotes > 0 ? r.leader : null);
+    // Called races only, or every race's projected winner (call, NYT model, Polymarket…).
+    const now = r.winner ?? (!calledOnly ? (r.projected?.party ?? null) : null);
     if (!now) continue;
     decided++;
     if (now === party && r.priorParty !== party) change++;

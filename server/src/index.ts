@@ -28,6 +28,8 @@ import { startNyt } from './sources/nyt.js';
 import { startPolymarket } from './sources/polymarket.js';
 import { startWikipedia } from './sources/wikipedia.js';
 import { countyStore } from './store/counties.js';
+import { stateRaceStore } from './store/stateRaces.js';
+import { STATE_BY_POSTAL } from '../../shared/src/states.js';
 import { measureStore } from './store/measures.js';
 import { loadState, saveState, startAutosave } from './store/persist.js';
 import { store } from './store/store.js';
@@ -85,6 +87,24 @@ app.get('/api/races/:id/counties', async (req, reply) => {
     if (sim) return sim;
   }
   return live;
+});
+// Statewide view: every race in a state's NYT/AP file, and one county's slice of it.
+app.get('/api/states/:st', async (req, reply) => {
+  const st = (req.params as { st: string }).st.toUpperCase();
+  if (!STATE_BY_POSTAL[st]) return reply.code(404).send({ error: 'unknown state' });
+  return stateRaceStore.summary(st);
+});
+app.get('/api/states/:st/races/:id/counties', async (req, reply) => {
+  const { st, id } = req.params as { st: string; id: string };
+  const units = stateRaceStore.raceCounties(st.toUpperCase(), id);
+  if (!units) return reply.code(404).send({ error: 'no county results for this race' });
+  return { raceId: id, units };
+});
+app.get('/api/states/:st/counties/:fips', async (req, reply) => {
+  const { st, fips } = req.params as { st: string; fips: string };
+  const c = /^\d{5}$/.test(fips) ? stateRaceStore.county(st.toUpperCase(), fips) : null;
+  if (!c) return reply.code(404).send({ error: 'unknown county' });
+  return c;
 });
 app.get('/api/races/:id', async (req, reply) => {
   const r = store.races.get((req.params as { id: string }).id);

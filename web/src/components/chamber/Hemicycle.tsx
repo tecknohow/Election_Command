@@ -60,7 +60,9 @@ export function Hemicycle({ chamber, races, onHover }: { chamber: ChamberSummary
           <b className="hemi-num" style={{ color: PARTY_COLOR.D }} title="Seats secured (called)">
             {dWon}
           </b>
-          <span className="hemi-sub">{dWon + dLead} expected</span>
+          <span className="hemi-sub" title="Called seats plus the projected winner of each uncalled race (NYT model, else Polymarket)">
+            {chamber.expected?.D ?? dWon + dLead} expected
+          </span>
           <span className="hemi-sub">leading {dLead}</span>
         </div>
         <svg viewBox="-1.05 -1.05 2.1 1.1" preserveAspectRatio="xMidYMid meet" role="img" aria-label="House seats">
@@ -91,7 +93,9 @@ export function Hemicycle({ chamber, races, onHover }: { chamber: ChamberSummary
           <b className="hemi-num" style={{ color: PARTY_COLOR.R }} title="Seats secured (called)">
             {rWon}
           </b>
-          <span className="hemi-sub">{rWon + rLead} expected</span>
+          <span className="hemi-sub" title="Called seats plus the projected winner of each uncalled race (NYT model, else Polymarket)">
+            {chamber.expected?.R ?? rWon + rLead} expected
+          </span>
           <span className="hemi-sub">leading {rLead}</span>
         </div>
       </div>

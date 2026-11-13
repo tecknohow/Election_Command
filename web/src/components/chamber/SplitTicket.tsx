@@ -2,18 +2,11 @@ import { useMemo, useState } from 'react';
 import type { Race } from '../../../../shared/src/types';
 import { PARTY_COLOR } from '../../lib/colors';
 import { stateName } from '../../lib/format';
+import { dMargin } from '../../lib/history';
 import { probD } from '../../lib/odds';
 import type { HoverFn } from './useRaceHover';
 
 type Mode = 'margin' | 'odds';
-
-/** Democratic margin (D% - R%) from the top D and R candidates, or null before votes. */
-function dMargin(r: Race): number | null {
-  if (!r.totalVotes) return null;
-  const d = r.candidates.find((c) => c.party === 'D')?.pct ?? 0;
-  const rep = r.candidates.find((c) => c.party === 'R')?.pct ?? 0;
-  return d - rep;
-}
 
 /**
  * Ticket splitting in states with both a Senate and a Governor race: a dumbbell per state

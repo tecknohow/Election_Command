@@ -66,6 +66,11 @@ export function BalanceOfPower({ c, compact = false, custom = false, view }: { c
   // their own tally as the big number.
   const dBig = v ? dTotal : dCalled;
   const rBig = v ? rTotal : rCalled;
+  // Expected = seats not up + the projected winner of every race up (call, NYT model, Polymarket).
+  const exp = c.expected ?? { D: dTotal, R: rTotal, I: 0 };
+  const dExp = c.expected ? exp.D + (isSenate ? exp.I : 0) : dTotal;
+  const rExp = exp.R;
+  const expTip = 'expected: called races plus the projected winner of each uncalled race (NYT model, else Polymarket odds)';
   const thresholdPct = (c.toControl.D / c.total) * 100;
   const pm = c.market?.byParty;
   const dGain = c.flips.toD;
@@ -81,11 +86,11 @@ export function BalanceOfPower({ c, compact = false, custom = false, view }: { c
       </div>
       <div className="bop-nums">
         <div className="bop-side d">
-          <span className="bop-big" style={{ color: PARTY_COLOR.D }} title={v ? undefined : `${dCalled} secured · ${dTotal} expected (secured + currently leading)`}>
+          <span className="bop-big" style={{ color: PARTY_COLOR.D }} title={v ? undefined : `${dCalled} secured · ${dExp} ${expTip}`}>
             {dBig}
           </span>
           <span className="bop-small">
-            DEM{isSenate ? '+IND' : ''} · {v ? v.sideNote : `${dTotal} expected`}
+            DEM{isSenate ? '+IND' : ''} · {v ? v.sideNote : `${dExp} expected`}
           </span>
         </div>
         <div className="bop-mid">
@@ -98,13 +103,13 @@ export function BalanceOfPower({ c, compact = false, custom = false, view }: { c
           )}
         </div>
         <div className="bop-side r">
-          <span className="bop-big" style={{ color: PARTY_COLOR.R }} title={v ? undefined : `${rCalled} secured · ${rTotal} expected (secured + currently leading)`}>
+          <span className="bop-big" style={{ color: PARTY_COLOR.R }} title={v ? undefined : `${rCalled} secured · ${rExp} ${expTip}`}>
             {rBig}
           </span>
-          <span className="bop-small">GOP · {v ? v.sideNote : `${rTotal} expected`}</span>
+          <span className="bop-small">GOP · {v ? v.sideNote : `${rExp} expected`}</span>
         </div>
       </div>
-      <div className="bop-bar" role="img" aria-label={v ? `${c.label}: Democrats ${dTotal}, Republicans ${rTotal}, ${pending} uncalled` : `${c.label}: Democrats ${dCalled} secured (${dTotal} expected), Republicans ${rCalled} secured (${rTotal} expected), ${pending} uncalled`}>
+      <div className="bop-bar" role="img" aria-label={v ? `${c.label}: Democrats ${dTotal}, Republicans ${rTotal}, ${pending} uncalled` : `${c.label}: Democrats ${dCalled} secured (${dExp} expected), Republicans ${rCalled} secured (${rExp} expected), ${pending} uncalled`}>
         {segs
           .filter((s) => s.n > 0)
           .map((s) => (

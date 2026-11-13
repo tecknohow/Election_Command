@@ -23,6 +23,7 @@ export const VIEWS: { path: string; label: string; key: string; badge?: string; 
   { path: '/map/house', label: 'House', key: '8', group: 'Maps' },
   { path: '/ballot', label: 'Ballot Measures', key: '9', group: 'Measures' },
   { path: '/swing', label: 'Swing', key: '0', badge: '10', group: 'Analysis' },
+  { path: '/state', label: 'Statewide', key: '', group: 'Analysis' },
 ];
 
 export function toggleFullscreen() {
@@ -64,10 +65,10 @@ export function TopBar() {
                 <NavLink
                   to={v.path}
                   end={v.path === '/'}
-                  title={v.badge ? `Press ${v.key} (or 1 then ${v.key})` : `Press ${v.key}`}
+                  title={v.badge ? `Press ${v.key} (or 1 then ${v.key})` : v.key ? `Press ${v.key}` : v.label}
                   className={({ isActive }) => `view-tab ${isActive ? 'active' : ''} ${v.soon ? 'soon' : ''}`}
                 >
-                  <kbd>{v.badge ?? v.key}</kbd>
+                  {v.badge ?? v.key ? <kbd>{v.badge ?? v.key}</kbd> : null}
                   {v.label}
                   {v.soon ? <span className="soon-tag">soon</span> : null}
                 </NavLink>

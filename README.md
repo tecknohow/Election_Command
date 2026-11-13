@@ -30,7 +30,7 @@ Senate, Governor and House maps you can color four ways:
 - **FLIPR:** the forecast, with Cook as fallback.
 - **Current:** who held the seat going in.
 
-The balance-of-power tracker in the corner follows along, tallying seats the way the chosen view sees them. Under Results, the big numbers are seats actually **secured** (called races plus seats not up), with the **expected** total (secured plus races each side currently leads) underneath. Under the other three it counts seats favored or held. Hover any state for the race card: candidates, incumbency, vote counts, expected vote counted, forecasts, market odds. Click to pin it, then open the county results.
+The balance-of-power tracker in the corner follows along, tallying seats the way the chosen view sees them. Under Results, the big numbers are seats actually **secured** (called races plus seats not up), with the **expected** total underneath: secured seats plus the projected winner of every uncalled race, taken from NYT's live model where it has one (House and Senate), else the Polymarket favorite, rather than whoever happens to lead the count. Under the other three it counts seats favored or held. Hover any state for the race card: candidates, incumbency, vote counts, expected vote counted, forecasts, market odds. Click to pin it, then open the county results.
 
 ![Senate map with a pinned race card](docs/screenshots/senate-map.webp)
 
@@ -86,16 +86,24 @@ A tenth view compares tonight with the last midterm and the last presidential el
 - a **like-for-like shift**: each district against its own 2024 presidential margin *inside its 2026 lines*, so partial counts don't skew it;
 - a scatter of races, before against tonight, and a state map of the shift, each switchable between House, Senate and Governor, and between the 2024 presidential margin and the seat's previous result;
 - every race in a sortable table against the previous result for the same seat (House, Senate or Governor);
-- Democratic House seats gained or lost: net seats flipped in called races, with the total including current leads underneath;
+- Democratic House seats gained or lost: net seats flipped in called races, with the projected total underneath;
 - the president's party's midterm record since 1994, with tonight's seat change and swing alongside, and the closest historical match.
 
 ![Swing dashboard](docs/screenshots/swing.webp)
 
 Every race card, desk table and drill-down also shows the seat's previous result: the 2024 House race (flagged when the district was redrawn), the seat's last Senate race (matched by seat class, so Georgia uses its 2021 runoff and Nebraska its 2024 special), or the last governor's race, plus the 2024 presidential margin.
 
+### Statewide: every race in a state, down to the county
+
+Pick a state from the dropdown to see everything on its ballot, not just Senate, Governor and House: lieutenant governor, attorney general, secretary of state, treasurer and the other statewide offices; the state legislature's seat tally; ballot measures; every U.S. House district; and the local races AP tabulates, grouped by county. A county map can be colored by any statewide race with county results.
+
+Click a county for its own dashboard: how it voted in each statewide race, its share of each House district, and its county and city offices (mayor, council, sheriff, school board…) and local measures.
+
 ### Your races, and alerts that get your attention
 
 Star (☆) any race. It's pinned to a bar at the bottom of every screen and gets its own card on the **My Races** dashboard, alongside a feed of calls and headlines about its candidates.
+
+Flipped seats are marked the same way everywhere (a dashed white outline with a white dot): on the Senate and Governor maps in every color mode, the Path to 51 ladder and the Governorships tile map.
 
 When a key race is called, a seat flips, one of your races is decided, or a chamber is clinched, a **breaking banner** appears on every window. You can add an optional chime.
 
@@ -165,6 +173,7 @@ Sign in under **⚙ Settings → Admin**, then open **Data sources & simulator**
 | Prediction markets | Polymarket: every Senate, Governor and House race, plus chamber control |
 | Ballot measures | Wikipedia's 2026 ballot measures catalog for the list, numbers and descriptions; Ballotpedia for names and links; results from CNN and NYT/AP |
 | Previous results | CNN's results files for 2020–2024; 2024 presidential margins inside each 2026 district from NYT/AP; midterm history from Wikipedia |
+| Statewide offices, state legislature, local races | NYT/AP per-state results files; local races placed in counties using U.S. Census Bureau place and county lists |
 | House district boundaries | U.S. Census Bureau, TIGER/Line 2026 (120th Congress); CT planning regions and AK house districts from Census cartographic boundary files |
 | Headlines | RSS from NYT, NPR, Politico, The Hill, CBS, ABC, NBC, Fox, Axios and Google News, plus a Google News search for election-day problems |
 
@@ -207,7 +216,7 @@ All settings are environment variables, usually set in `.env`.
 | `MAX_STREAMS` / `MAX_STREAMS_PER_IP` | `150` / `16` | Live-connection caps |
 | `API_RATE_PER_MIN` | `120` | REST requests per IP per minute |
 
-State persists in the Docker volume `ec_data`. Back it up with `docker compose cp election-command:/data/state.json ./state-backup.json`.
+State persists in the Docker volume `ec_data`: `state.json` (races, news, history) and `counties.json` (county results). Back them up with `docker compose cp election-command:/data/state.json ./state-backup.json` (and the same for `counties.json`).
 
 ## Development
 
@@ -220,6 +229,7 @@ npm run build:districts   # regenerate House districts from Census TIGER/Line (~
 npm run build:units       # regenerate CT planning-region and AK house-district shapes
 npm run build:history     # regenerate shared/src/history.json (past results, redrawn districts, midterms)
                           # and web/public/baselines/county-history.json (county results of each seat's last race)
+npm run build:places      # regenerate server/src/geo/places.json (Census place → county lookup for local races)
 ```
 
 The stack is TypeScript throughout: Fastify on the server; React, Vite, Zustand and d3-geo in the browser.
@@ -231,6 +241,8 @@ The stack is TypeScript throughout: Fastify on the server; React, Vite, Zustand 
 - `GET /api/races/:id`: one race, e.g. `TX-S`, `OH-G`, `CA-H-22`
 - `GET /api/races/:id/counties`: county-level results for one race
 - `GET /api/measures`: all ballot measures
+- `GET /api/states/:st`: every other race in a state (statewide offices, legislature, local races and measures)
+- `GET /api/states/:st/counties/:fips`: one county's dashboard data; `GET /api/states/:st/races/:id/counties`: one statewide race by county
 - `GET /api/health`: liveness (per-source detail for admins)
 - `GET /api/admin/me`, `POST /api/admin/login|logout`: admin session (HttpOnly, SameSite=Strict cookie)
 - `POST /api/admin/sim/start|stop|speed|pause`: simulator control (`pause` takes `{ "paused": true|false }`). Requires an admin session, a same-origin request, the `X-EC-Request: 1` header and a JSON body

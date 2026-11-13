@@ -120,7 +120,13 @@ export class ElectionStore extends EventEmitter {
   }
 
   setPollClosings(list: PollClosing[]) {
-    for (const p of list) this.pollClosingMap.set(p.state, p.time);
+    // A closing time before election-day noon ET is a date slip (NYT lists Alaska's 05:00Z close
+    // on Nov 3 instead of Nov 4): polls close on election evening, so move it a day later.
+    const earliest = Date.parse(`${config.electionDate}T16:00:00Z`);
+    for (const p of list) {
+      const t = Date.parse(p.time);
+      this.pollClosingMap.set(p.state, Number.isFinite(t) && t < earliest ? new Date(t + 86_400_000).toISOString() : p.time);
+    }
     this.scheduleRecompute();
   }
 
@@ -166,7 +172,11 @@ export class ElectionStore extends EventEmitter {
   }
 
   setMarkets(map: Map<string, MarketData>, chambers: Partial<Record<Office, MarketData>>) {
+    // Markets drop out of discovery once they close or resolve; keep their last prices (marked
+    // closed) so race cards and the Polymarket map don't go blank after the night.
+    for (const [id, m] of this.markets) if (!map.has(id)) map.set(id, m.closed ? m : { ...m, closed: true });
     this.markets = map;
+    for (const [o, m] of Object.entries(this.chamberMarkets) as [Office, MarketData][]) if (!chambers[o] && m) chambers[o] = m.closed ? m : { ...m, closed: true };
     this.chamberMarkets = chambers;
     this.scheduleRecompute();
   }
@@ -376,6 +386,19 @@ export class ElectionStore extends EventEmitter {
     const flip = !!winner && (priorParty ? winner !== priorParty : !!inp.gainedBy);
     const market = this.markets.get(inp.id);
 
+    // Expected winner: the call, NYT's model, the Polymarket favorite, the forecast, the leader.
+    let projected: Race['projected'] = null;
+    const rating = enr.flipr ?? enr.cook ?? inp.rating;
+    const favorite = market?.byParty ? (Object.entries(market.byParty) as [Party, number][]).sort((a, b) => b[1] - a[1])[0] : undefined;
+    if (winner) projected = { party: winner, source: 'call' };
+    else if (inp.model && leaderC && total > 0) {
+      const median = inp.model.quantiles[2];
+      const p = median >= 0 ? leaderC.party : (second?.party ?? leaderC.party);
+      projected = { party: p, source: 'nyt' };
+    } else if (favorite && favorite[1] > 0) projected = { party: favorite[0], source: 'polymarket' };
+    else if (rating?.party) projected = { party: rating.party, source: 'forecast' };
+    else if (leaderC) projected = { party: leaderC.party, source: 'leader' };
+
     return {
       id: inp.id,
       office: inp.office,
@@ -413,6 +436,7 @@ export class ElectionStore extends EventEmitter {
         ...(inp.rating ? { nyt: inp.rating } : {}),
       },
       ...(market ? { market } : {}),
+      projected,
       source: inp.source,
       url: inp.url,
       updatedAt: inp.updatedAt,
@@ -431,6 +455,7 @@ export class ElectionStore extends EventEmitter {
         before,
         won: zero(),
         leading: zero(),
+        expected: { ...notUp },
         racesTotal: 0,
         racesCalled: 0,
         racesPending: 0,
@@ -442,6 +467,7 @@ export class ElectionStore extends EventEmitter {
       for (const r of this.races.values()) {
         if (r.office !== office) continue;
         s.racesTotal++;
+        if (r.projected) s.expected[r.projected.party]++;
         if (r.winner) {
           s.racesCalled++;
           s.won[r.winner]++;
@@ -698,11 +724,7 @@ function secured(c: ChamberSummary): { D: number; R: number; I: number } {
 }
 
 function projected(c: ChamberSummary): { D: number; R: number; I: number } {
-  return {
-    D: c.notUp.D + c.won.D + c.leading.D,
-    R: c.notUp.R + c.won.R + c.leading.R,
-    I: c.notUp.I + c.won.I + c.leading.I,
-  };
+  return { ...c.expected };
 }
 
 function sumCounts(c: PartyCounts) {

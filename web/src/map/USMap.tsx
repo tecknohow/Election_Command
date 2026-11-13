@@ -38,7 +38,7 @@ function USMapImpl({ office, mode, races, noRaceParty, hovered, pinned, flashed,
         continue;
       }
       const f = raceFill(race, mode, custom);
-      m[s.postal] = { fill: f.fill, hatch: f.hatch, race, flip: !!race?.flip && mode === 'leader' };
+      m[s.postal] = { fill: f.fill, hatch: f.hatch, race, flip: !!race?.flip && mode !== 'custom' };
     }
     return m;
   }, [races, office, mode, noRaceParty, custom]);
@@ -98,6 +98,18 @@ function USMapImpl({ office, mode, races, noRaceParty, hovered, pinned, flashed,
       <path d={STATE_BORDERS} className="state-borders" />
       <path d={NATION_OUTLINE} className="nation-outline" />
 
+      {/* Flipped seats: a dashed outline just inside the state (clipped to it) plus a dot at the label. */}
+      <g className="flip-outlines">
+        {STATE_SHAPES.filter((s) => fills[s.postal].flip).map((s) => (
+          <g key={`flip-${s.postal}`}>
+            <clipPath id={`flip-clip-${s.postal}`}>
+              <path d={s.d} />
+            </clipPath>
+            <path d={s.d} className="flip-outline" clipPath={`url(#flip-clip-${s.postal})`} />
+          </g>
+        ))}
+      </g>
+
       {/* Highlight outline for hovered/pinned state drawn on top */}
       {STATE_SHAPES.filter((s) => s.postal === hovered || s.postal === pinned).map((s) => (
         <path key={`hl-${s.postal}`} d={s.d} className={`state-highlight ${s.postal === pinned ? 'pinned' : ''}`} />
@@ -113,7 +125,7 @@ function USMapImpl({ office, mode, races, noRaceParty, hovered, pinned, flashed,
               <text className="state-label" fill={ink} textAnchor="middle" dy="0.35em">
                 {s.postal}
               </text>
-              {f.flip ? <circle className="flip-dot" cx={0} cy={11} r={3.2} fill="#fff" /> : null}
+              {f.flip ? <circle className="flip-dot" cx={0} cy={12} r={4} fill="#fff" /> : null}
             </g>
           );
         })}
@@ -145,10 +157,11 @@ function USMapImpl({ office, mode, races, noRaceParty, hovered, pinned, flashed,
             >
               <line x1={s.centroid[0]} y1={s.centroid[1]} x2={calloutX - 2} y2={y + 10} className="callout-line" />
               <rect x={calloutX} y={y} width={44} height={20} rx={3} fill={fill} className="callout-box" />
+              {f.flip ? <rect x={calloutX + 1.5} y={y + 1.5} width={41} height={17} rx={2} className="flip-outline callout-flip" /> : null}
               <text x={calloutX + 22} y={y + 10} dy="0.35em" textAnchor="middle" className="state-label" fill={f.race ? inkFor(f.hatch ? RAMP[f.hatch].lean : f.fill) : '#5d6679'}>
                 {postal}
               </text>
-              {f.flip ? <circle cx={calloutX + 50} cy={y + 10} r={3.2} fill="#fff" /> : null}
+              {f.flip ? <circle className="flip-dot" cx={calloutX + 51} cy={y + 10} r={4} fill="#fff" /> : null}
             </g>
           );
         })}

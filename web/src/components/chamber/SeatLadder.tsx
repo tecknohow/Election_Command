@@ -62,7 +62,7 @@ export function SeatLadder({ chamber, races, onHover }: { chamber: ChamberSummar
               <div
                 key={r.id}
                 data-race-id={r.id}
-                className={`ladder-cell ${cur && !r.winner ? `hatch-${cur}` : ''} ${i === tipIdx ? 'tip' : ''}`}
+                className={`ladder-cell ${cur && !r.winner ? `hatch-${cur}` : ''} ${i === tipIdx ? 'tip' : ''} ${r.flip ? 'flip' : ''}`}
                 style={{ background: cur && !r.winner ? undefined : fill, ['--seg' as string]: cur ? RAMP[cur].likely : fill }}
                 onMouseMove={(e) => onHover(r.id, e)}
                 onMouseLeave={() => onHover(null)}
@@ -71,7 +71,7 @@ export function SeatLadder({ chamber, races, onHover }: { chamber: ChamberSummar
                   {r.state}
                 </span>
                 <span className="lc-sub" style={{ color: inkFor(fill) }}>
-                  {r.winner ? '✔' : cur ? `${(r.margin ?? 0).toFixed(0)}` : Math.round(Math.max(pd, 1 - pd) * 100)}
+                  {r.flip ? 'FLIP' : r.winner ? '✔' : cur ? `${(r.margin ?? 0).toFixed(0)}` : Math.round(Math.max(pd, 1 - pd) * 100)}
                 </span>
                 {seat === need ? <span className="ladder-line" title={`Seat ${need}`} /> : null}
               </div>
@@ -84,7 +84,7 @@ export function SeatLadder({ chamber, races, onHover }: { chamber: ChamberSummar
         </div>
       </div>
       <div className="ladder-legend muted small">
-        Ordered most-Democratic → most-Republican · number = win probability (%) before results, lead margin while counting · ✔ called · white bar = seat {need}
+        Ordered most-Democratic → most-Republican · number = win probability (%) before results, lead margin while counting · ✔ called · <i className="flip-legend"><i className="flip-dot-legend" /></i>FLIP = called for the other party · white bar = seat {need}
       </div>
     </section>
   );

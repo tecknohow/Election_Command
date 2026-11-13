@@ -341,6 +341,33 @@
   outline: 2px solid var(--accent);
   z-index: 1;
 }
+.ladder-cell.flip::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 1.5px dashed #fff;
+  border-radius: 0.15rem;
+  pointer-events: none;
+}
+.ladder-cell.flip::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1.5px #0b0e14;
+  pointer-events: none;
+  z-index: 3;
+}
+.ladder-cell.flip .lc-sub {
+  font-family: var(--mono);
+  font-weight: 800;
+  font-size: 0.58rem;
+  letter-spacing: 0.02em;
+}
 .lc-state {
   font-family: var(--mono);
   font-weight: 800;
@@ -436,10 +463,19 @@
   stroke: #fff;
   stroke-width: 0.35;
 }
+/* Flipped seat: dashed white outline + white dot (same marker as the maps and the ladder) */
 .tile-flip {
   fill: none;
-  stroke: var(--accent);
-  stroke-width: 0.45;
+  stroke: #fff;
+  stroke-width: 0.4;
+  stroke-dasharray: 1.1 0.6;
+  pointer-events: none;
+}
+.tile-flip-dot {
+  fill: #fff;
+  stroke: #0b0e14;
+  stroke-width: 0.25;
+  pointer-events: none;
 }
 .tile-st {
   font-size: 2.9px;

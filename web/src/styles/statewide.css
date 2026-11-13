@@ -1,0 +1,191 @@
+/* ------------------------------------------------------------------ Statewide & county dashboards */
+.state-view {
+  height: 100%;
+  display: grid;
+  gap: var(--gap);
+  padding: var(--gap);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 0.95fr);
+  grid-template-rows: auto minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-areas:
+    'head      head  head'
+    'statewide map   side'
+    'statewide house local';
+}
+.sv-head {
+  grid-area: head;
+  padding: 0.6rem 0.9rem;
+  gap: 0.4rem;
+}
+.sv-head-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+.sv-head-row h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+.sv-head-note {
+  margin-left: auto;
+}
+.sv-select {
+  background: var(--panel-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.95rem;
+}
+.sv-select.small {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.45rem;
+  max-width: 16rem;
+}
+.sv-stack {
+  flex-direction: column;
+  gap: var(--gap);
+}
+.sv-stack > .panel {
+  flex: 1;
+  min-height: 0;
+}
+.sv-stack > .sv-leg-panel {
+  flex: none;
+}
+.sv-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.3rem 0.85rem 0.6rem;
+}
+.sv-row {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  gap: 0.2rem;
+}
+.sv-row.link {
+  cursor: pointer;
+}
+.sv-row.link:hover .sv-row-title {
+  color: var(--accent);
+}
+.sv-row-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+a.sv-ext {
+  color: inherit;
+  text-decoration: none;
+}
+a.sv-ext:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.sv-row-title {
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+.sv-row-sub {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.sv-cand {
+  display: grid;
+  grid-template-columns: 0.55rem minmax(0, 1fr) 5.5rem 3.4rem;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.84rem;
+}
+.sv-cand > i {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+}
+.sv-cand-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sv-cand.won .sv-cand-name {
+  font-weight: 700;
+}
+.sv-cand-bar {
+  height: 0.4rem;
+  background: var(--panel-3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.sv-cand-bar b {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+}
+.sv-cand .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.sv-map-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  padding: 0.4rem 0.6rem;
+}
+.sv-map-body svg {
+  width: 100%;
+  height: 100%;
+}
+.sv-map .rv-county {
+  cursor: pointer;
+}
+.sv-leg {
+  display: grid;
+  gap: 0.4rem;
+}
+.sv-leg-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+.sv-leg-count {
+  font-weight: 800;
+}
+.sv-county-btn {
+  display: grid;
+  gap: 0.1rem;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 0.45rem 0;
+  color: var(--text);
+  cursor: pointer;
+}
+.sv-county-btn:hover b {
+  color: var(--accent);
+}
+.sv-sub {
+  margin: 0.7rem 0 0.2rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+@media (max-width: 1100px) {
+  .state-view {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-rows: minmax(20rem, auto);
+    grid-template-areas: 'head' 'statewide' 'map' 'side' 'house' 'local';
+    height: auto;
+  }
+}

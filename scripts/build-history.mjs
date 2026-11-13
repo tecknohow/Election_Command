@@ -28,6 +28,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as shapefile from 'shapefile';
+import { OLD_LINES_2026 } from './district-lines.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cache = path.join(root, '.cache', 'history');
@@ -54,6 +55,16 @@ async function cached(name, url, binary = false) {
 const cnn = async (code) => JSON.parse(await cached(`cnn-${code}.json`, `https://politics.api.cnn.io/results/national-races/${code}.json`));
 const round = (x, d = 2) => (x == null ? null : +x.toFixed(d));
 
+/**
+ * Independents (not minor parties) stand in for a missing major party: the opposite side of the
+ * major-party candidate they faced, as the live dashboard does (web/src/lib/history.ts sides()).
+ */
+const INDEPENDENT = new Set(['IND', 'NPA', 'UNA', 'UNR']);
+function standIn(cands, have) {
+  if (cands.filter((c) => c.majorParty === have).length > 1) return null; // same-party top two
+  return cands.filter((c) => INDEPENDENT.has(c.majorParty)).sort((a, b) => (b.voteNum ?? 0) - (a.voteNum ?? 0))[0] ?? null;
+}
+
 /** D-R summary of one CNN contest. */
 function summarize(r) {
   const cands = r.candidates ?? [];
@@ -63,8 +74,11 @@ function summarize(r) {
     cands.reduce((s, c) => s + (c.voteNum ?? 0), 0),
   );
   const top = (p) => cands.filter((c) => c.majorParty === p).sort((a, b) => (b.voteNum ?? 0) - (a.voteNum ?? 0))[0];
-  const d = top('DEM');
-  const rr = top('REP');
+  let d = top('DEM');
+  let rr = top('REP');
+  let indep = null;
+  if (d && !rr && (rr = standIn(cands, 'DEM'))) indep = 'R';
+  else if (rr && !d && (d = standIn(cands, 'REP'))) indep = 'D';
   const winner = cands.find((c) => c.winner);
   const side = (c) => (c ? { name: c.fullName, pct: total ? round((c.voteNum / total) * 100, 1) : null } : null);
   let kind = 'DR';
@@ -75,7 +89,7 @@ function summarize(r) {
   else kind = 'other';
   const margin = d && rr && total ? round(((d.voteNum - rr.voteNum) / total) * 100) : null;
   const wParty = winner?.majorParty === 'DEM' ? 'D' : winner?.majorParty === 'REP' ? 'R' : winner ? 'I' : null;
-  return { margin, kind, d: side(d), r: side(rr), winner: winner ? { name: winner.fullName, party: wParty } : null, total };
+  return { margin, kind, d: side(d), r: side(rr), ...(indep ? { indep } : {}), winner: winner ? { name: winner.fullName, party: wParty } : null, total };
 }
 
 // ------------------------------------------------------------ Senate, by seat class
@@ -228,6 +242,7 @@ async function landAreas(year, congress, fips) {
 }
 const linesChanged = new Set();
 for (const [fips, st] of Object.entries(FIPS)) {
+  if (OLD_LINES_2026.has(st)) continue; // the new map wasn't used in the general (see district-lines.mjs)
   const [a, b] = [await landAreas(2024, 119, fips), await landAreas(2026, 120, fips)];
   for (const cd of Object.keys(b)) if (!a[cd] || Math.abs(a[cd] - b[cd]) / b[cd] > 0.002) linesChanged.add(`${st}-H-${cd}`);
 }
@@ -239,7 +254,7 @@ for (const r of house[2024].filter((x) => x.ecKey.split('-')[1] === 'HG')) {
   const parts = r.ecKey.split('-');
   const id = `${r.stateAbbreviation}-H-${Number(parts[3]) || 1}`;
   const s = summarize(r);
-  house2024[id] = { margin: s.margin, kind: s.kind, d: s.d, r: s.r, winner: s.winner, linesChanged: linesChanged.has(id) };
+  house2024[id] = { margin: s.margin, kind: s.kind, d: s.d, r: s.r, ...(s.indep ? { indep: s.indep } : {}), winner: s.winner, linesChanged: linesChanged.has(id) };
 }
 // New districts with no 2024 counterpart (e.g. a state that gained a seat) still get a flag.
 for (const id of linesChanged) house2024[id] ??= { margin: null, kind: 'new', d: null, r: null, winner: null, linesChanged: true };
@@ -261,6 +276,7 @@ for (const r of pres) {
 // 2024 presidential margin for every 2026 race, from NYT's own comparison data on the 2026 lines
 // (districts redrawn since 2024 get the presidential result *inside the new boundaries*).
 const presByRace = {};
+const presMissing = [];
 for (const slug of ['senate', 'governor', 'house']) {
   const file = JSON.parse(await cached(`nyt-2026-${slug}.json`, `https://static01.nyt.com/elections-assets/pages/data/2026-11-03/results-${slug}.json`));
   for (const r of file.races ?? []) {
@@ -269,8 +285,33 @@ for (const slug of ['senate', 'governor', 'house']) {
     const id = r.office_id === 'H' ? `${ru.state_postal}-H-${Number(r.seat_number ?? 0) || 1}` : `${ru.state_postal}-${r.office_id}`;
     const cmp = Object.entries(ru.historical_comparison_race_data ?? {}).find(([k]) => /-P-2024-/.test(k));
     if (cmp) presByRace[id] = round(cmp[1].margin);
+    else if (r.office_id === 'H') presMissing.push({ id, state: ru.name, seat: Number(r.seat_number ?? 0) || 1 });
   }
 }
+
+// NYT gives no 2024 presidential comparison for districts on unchanged lines it compares with their
+// own 2024 House race instead (Missouri). Fall back to the district's Wikipedia article: its
+// "Recent election results from statewide races" table (computed with Dave's Redistricting), which
+// gives whole percents, e.g. "Harris 61–37%". Only districts on today's lines qualify.
+const presApprox = [];
+const ORD = (n) => n + (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] ?? 'th');
+for (const m of presMissing) {
+  const st = m.id.slice(0, 2);
+  if (!OLD_LINES_2026.has(st)) continue; // redrawn: the article's table may be on the old lines
+  const perState = presMissing.filter((x) => x.id.startsWith(st)).length;
+  const title = `${m.state}'s ${perState === 1 && m.seat === 1 && /AK|DE|ND|SD|VT|WY/.test(st) ? 'at-large' : ORD(m.seat)} congressional district`;
+  const url = `https://en.wikipedia.org/w/api.php?action=parse&page=${encodeURIComponent(title)}&prop=wikitext&format=json&formatversion=2&redirects=1`;
+  const wt = JSON.parse(await cached(`wiki-${m.id}.json`, url)).parse?.wikitext ?? '';
+  const row = wt.match(/\[\[2024 United States presidential election in [^|\]]+\|President\]\][^\n]*\n[^\n]*?\[\[(?:Kamala Harris|Donald Trump)\|(Harris|Trump)\]\]\s*(\d+)%?\s*[–-]\s*(\d+)%/);
+  if (!row) {
+    console.log(`  ${m.id}: no 2024 presidential row on Wikipedia`);
+    continue;
+  }
+  const lead = Number(row[2]) - Number(row[3]);
+  presByRace[m.id] = row[1] === 'Harris' ? lead : -lead;
+  presApprox.push(m.id);
+}
+if (presApprox.length) console.log(`2024 presidential margin from Wikipedia (whole percents): ${presApprox.join(' ')}`);
 
 // ------------------------------------------------------------ County baselines: the seat's last race
 // For Senate and governor races, the drill-down compares each county with the same seat's previous
@@ -320,8 +361,10 @@ for (const [id, prev] of [...Object.entries(senate), ...Object.entries(gov)]) {
   const byCand = new Map();
   for (const u of list) for (const c of u.candidates ?? []) byCand.set(c.candidateId, { party: c.majorParty, votes: (byCand.get(c.candidateId)?.votes ?? 0) + (c.voteNum ?? 0) });
   const top = (p) => [...byCand.entries()].filter(([, v]) => v.party === p).sort((a, b) => b[1].votes - a[1].votes)[0]?.[0];
-  const dId = top('DEM');
-  const rId = top('REP');
+  // An independent standing in for a missing party (see standIn) takes that side here too.
+  const topInd = () => [...byCand.entries()].filter(([, v]) => INDEPENDENT.has(v.party)).sort((a, b) => b[1].votes - a[1].votes)[0]?.[0];
+  const dId = prev.indep === 'D' ? topInd() : top('DEM');
+  const rId = prev.indep === 'R' ? topInd() : top('REP');
   const sums = new Map();
   let unmatched = 0;
   let unmatchedVotes = 0;
@@ -408,14 +451,15 @@ const out = {
   generated: new Date().toISOString().slice(0, 10),
   sources: {
     results: 'CNN results API (politics.api.cnn.io), 2020-2024 national race files',
-    lines: 'US Census Bureau TIGER/Line, congressional districts cd119 (2024) vs cd120 (2026)',
+    lines: `US Census Bureau TIGER/Line, congressional districts cd119 (2024) vs cd120 (2026); ${[...OLD_LINES_2026].join(', ')} kept on cd119 (new map not used in the general)`,
+    pres2024Approx: "Wikipedia district articles (Dave's Redistricting), whole percents, where NYT has no presidential comparison",
     midterms: 'Wikipedia election infoboxes, 1994-2022 (CC BY-SA 4.0)',
   },
   senate,
   governor: gov,
   house2024,
   houseVote,
-  pres2024: { national: { ...presNat, margin: round(((presNat.D - presNat.R) / presNat.total) * 100) }, byState: presByState, byRace: presByRace },
+  pres2024: { national: { ...presNat, margin: round(((presNat.D - presNat.R) / presNat.total) * 100) }, byState: presByState, byRace: presByRace, approxByRace: presApprox },
   midterms,
   linesChangedStates: changedStates,
 };

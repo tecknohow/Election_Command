@@ -69,7 +69,13 @@ export function TileMap({ races, notUp, onHover, title }: { races: Record<string
                 onMouseLeave={() => onHover(null)}
               >
                 <rect width={S * G} height={S * G} rx={0.8} fill={fill} />
-                {race?.flip ? <rect width={S * G} height={S * G} rx={0.8} className="tile-flip" /> : null}
+                {race?.flip ? (
+                  <>
+                    <rect x={0.45} y={0.45} width={S * G - 0.9} height={S * G - 0.9} rx={0.5} className="tile-flip" />
+                    <circle cx={S * G - 1.35} cy={1.35} r={0.75} className="tile-flip-dot" />
+                    <title>Flipped</title>
+                  </>
+                ) : null}
                 <text x={(S * G) / 2} y={S * G * 0.45} textAnchor="middle" className="tile-st" fill={ink}>
                   {st}
                 </text>

@@ -23,7 +23,7 @@ export function PrevResults({ race, compact = false }: { race: Race; compact?: b
   const who = prev?.winner ? `${prev.winner.name}${prev.winner.party ? ` (${prev.winner.party})` : ''}` : '';
   const tip = [
     prev
-      ? `${race.office === 'H' ? '2024 House' : `Previous race for this seat (${prev.label})`}: ${prevText(prev)}${who ? `, won by ${who}` : ''}${prev.d && prev.r ? ` — ${prev.d.name} ${prev.d.pct}%, ${prev.r.name} ${prev.r.pct}%` : ''}`
+      ? `${race.office === 'H' ? '2024 House' : `Previous race for this seat (${prev.label})`}: ${prevText(prev)}${who ? `, won by ${who}` : ''}${prev.d && prev.r ? ` — ${prev.d.name}${prev.indep === 'D' ? ' (I)' : ''} ${prev.d.pct}%, ${prev.r.name}${prev.indep === 'R' ? ' (I)' : ''} ${prev.r.pct}%` : ''}${prev.indep ? '; the independent counted on the ' + (prev.indep === 'D' ? 'Democratic' : 'Republican') + ' side' : ''}`
       : null,
     prev?.linesChanged ? 'This district was redrawn after 2024; the 2024 House result was on the old lines. The presidential margin is computed inside the new lines.' : null,
     pres != null ? `2024 presidential margin within these boundaries: ${fmtLean(pres)}` : race.office === 'H' ? 'No 2024 presidential estimate for the new lines yet.' : null,

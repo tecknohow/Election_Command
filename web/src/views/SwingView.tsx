@@ -109,9 +109,9 @@ function SwingTiles({ races }: { races: Race[] }) {
         'DEM House seats vs before',
         hc ? `${hc.change > 0 ? '+' : ''}${hc.change}` : '—',
         hc
-          ? `net seats flipped, called · ${hcExpected ? `${hcExpected.change > 0 ? '+' : ''}${hcExpected.change} expected with leads` : ''}`
+          ? `net seats flipped, called · ${hcExpected ? `${hcExpected.change > 0 ? '+' : ''}${hcExpected.change} projected` : ''}`
           : hcExpected
-            ? `none called yet · ${hcExpected.change > 0 ? '+' : ''}${hcExpected.change} expected with leads`
+            ? `none called yet · ${hcExpected.change > 0 ? '+' : ''}${hcExpected.change} projected`
             : 'net seats flipped; appears with calls',
         hc ? (hc.change > 0 ? PARTY_COLOR.D : hc.change < 0 ? PARTY_COLOR.R : undefined) : undefined,
       )}
@@ -431,7 +431,7 @@ function MidtermHistory({ races }: { races: Race[] }) {
         <div className="sw-hist-row now">
           <span className="sw-year">
             <i className="party-chip" style={{ background: PARTY_COLOR[PRES_PARTY_2026] }} />
-            2026 <small className="muted" title="Won + leading, so it can be compared with past midterms' final results">proj.</small>
+            2026 <small className="muted" title="Called races plus each uncalled race's projected winner (NYT model, else Polymarket), so it can be compared with past midterms' final results">proj.</small>
           </span>
           <span className="sw-track">
             <i className="sw-zero" />
@@ -450,7 +450,7 @@ function MidtermHistory({ races }: { races: Race[] }) {
           </>
         ) : (
           <>
-            Bars: House seats gained or lost by the president’s party. Swing: change in the national House vote from the presidential year before, toward the out-party. 2026 fills in live, projected from races won or led.
+            Bars: House seats gained or lost by the president’s party. Swing: change in the national House vote from the presidential year before, toward the out-party. 2026 fills in live, projected from calls, NYT's model and Polymarket odds.
           </>
         )}
       </div>

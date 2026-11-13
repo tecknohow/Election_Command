@@ -53,6 +53,8 @@ export interface MarketData {
   byParty: Partial<Record<Party, number>>;
   volume: number | null;
   updatedAt: string;
+  /** The market closed or resolved and dropped out of discovery: last known prices, kept for reference. */
+  closed?: boolean;
 }
 
 export type RaceStatus =
@@ -113,6 +115,11 @@ export interface Race {
     nyt?: Rating;
   };
   market?: MarketData;
+  /**
+   * Who is expected to win: the AP call; else NYT's live model (House and Senate, once votes are
+   * counted); else the Polymarket favorite; else the forecast rating; else the current leader.
+   */
+  projected?: { party: Party; source: 'call' | 'nyt' | 'polymarket' | 'forecast' | 'leader' } | null;
   /** Which provider the vote numbers came from. */
   source: string;
   /** Link to an authoritative results page. */
@@ -138,6 +145,8 @@ export interface ChamberSummary {
   before: PartyCounts;
   won: PartyCounts;
   leading: PartyCounts;
+  /** Seats not up plus the projected winner of every race up (see Race.projected). */
+  expected: PartyCounts;
   /** Races up this cycle. */
   racesTotal: number;
   racesCalled: number;
@@ -280,6 +289,12 @@ export interface RaceCounties {
   updatedAt: string | null;
   source: string;
   units: CountyUnit[];
+  /**
+   * What each unit's baselineMargin is: NYT compares redrawn districts with the 2024 presidential
+   * race inside the new lines, and districts on unchanged lines (e.g. Missouri) with the seat's
+   * own 2024 House race. Absent = 2024 presidential.
+   */
+  baseline?: 'pres2024' | 'house2024';
 }
 
 export type RacePatch = Partial<Race> & { id: string };
@@ -331,3 +346,87 @@ export type StreamEvent =
   | { type: 'news'; version: number; data: NewsItem[] }
   | { type: 'sources'; version: number; data: SourceStatus[] }
   | { type: 'meta'; version: number; data: { mode: Snapshot['mode']; sim: SimStatus; pollClosings: PollClosing[]; bopPoint?: BopHistoryPoint } };
+
+// ------------------------------------------------------------------ statewide & local races
+
+/**
+ * Every other race in a state's NYT/AP results file: statewide offices (AG, secretary of state,
+ * treasurer…), state legislature, regional boards, and local offices and measures. Served per
+ * state over REST (`/api/states/:st`), not on the live stream.
+ */
+export type StateRaceKind = 'statewide' | 'legislature' | 'district' | 'local' | 'measure';
+
+export interface StateCandidate {
+  id: string;
+  name: string;
+  /** D / R / I, or null for nonpartisan contests and Yes/No measures. */
+  party: Party | null;
+  partyName: string;
+  votes: number;
+  pct: number;
+  winner: boolean;
+  incumbent: boolean;
+}
+
+export interface StateRace {
+  /** NYT race id, e.g. "CA-AG-…-2026-11-03". */
+  id: string;
+  state: string;
+  kind: StateRaceKind;
+  /** "Attorney General", "State Assembly", "Mayor", "Local Measure". */
+  office: string;
+  /** "District 12", "Los Angeles", "Fresno District 1"; null for single statewide offices. */
+  seat: string | null;
+  /** Display title, e.g. "Mayor · Los Angeles", "Fresno Measure S". */
+  title: string;
+  /** Measures: what a yes vote does. */
+  description: string | null;
+  candidates: StateCandidate[];
+  totalVotes: number;
+  expectedVotes: number | null;
+  eevp: number | null;
+  called: boolean;
+  calledBy: string | null;
+  runoff: boolean;
+  uncontested: boolean;
+  /** True when every candidate runs without a party label (most local offices). */
+  nonpartisan: boolean;
+  /** County FIPS codes the race covers: from its county results, or inferred from the place name. Empty = whole state. */
+  counties: string[];
+  /** How `counties` was determined. */
+  countySource: 'results' | 'name' | 'statewide' | 'unknown';
+  /** County-by-county results are available (`/api/states/:st/counties/:fips`). */
+  hasCountyResults: boolean;
+  url: string | null;
+  updatedAt: string | null;
+}
+
+export interface StateSummary {
+  state: string;
+  /** False until NYT publishes the state's results file. */
+  published: boolean;
+  updatedAt: string | null;
+  counties: { fips: string; name: string }[];
+  races: StateRace[];
+}
+
+/** One race's result inside one county. */
+export interface CountyRaceResult {
+  raceId: string;
+  totalVotes: number;
+  eevp: number | null;
+  /** Votes per candidate id. */
+  votes: Record<string, number>;
+}
+
+export interface CountySummary {
+  state: string;
+  fips: string;
+  name: string;
+  /** Statewide and districted state races with results in this county. */
+  stateRaces: { race: StateRace; result: CountyRaceResult | null }[];
+  /** County, city and other local races (and local measures) located in this county. */
+  local: StateRace[];
+  /** Senate / governor / House races from the main feed with results in this county. */
+  main: { raceId: string; result: CountyRaceResult }[];
+}

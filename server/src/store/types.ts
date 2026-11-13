@@ -27,6 +27,11 @@ export interface RaceInput {
   baselineMargin?: number | null;
   /** Ranked-choice tabulation, when the provider reports it. */
   rcv?: boolean;
+  /**
+   * NYT live model: projected final margin of the candidate currently leading the count, as
+   * quantiles (fractions; median at index 2). Negative median = the runner-up is projected to win.
+   */
+  model?: { quantiles: number[] } | null;
   url: string | null;
   updatedAt: string | null;
   source: string;
