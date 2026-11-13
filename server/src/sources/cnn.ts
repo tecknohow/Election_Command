@@ -118,6 +118,7 @@ async function pull(code: string, office: Office): Promise<boolean> {
 export function startCnn() {
   const p = new Poller({
     id: 'cnn',
+    results: true,
     name: 'CNN results',
     role: 'Secondary results + early calls (failover if NYT is stale)',
     hotIntervalS: config.intervals.cnn.hot,

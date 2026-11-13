@@ -1,4 +1,7 @@
 import type { RaceCounties } from '../../../shared/src/types.js';
+import { archivePhase } from '../lib/guard.js';
+
+const votes = (rc: RaceCounties) => rc.units.reduce((s, u) => s + u.totalVotes, 0);
 
 /**
  * County-level (sub-state) results per race. Kept out of the main snapshot (it would add
@@ -12,6 +15,10 @@ class CountyStore {
   dirty = false;
 
   set(rc: RaceCounties) {
+    // After election night, county results only grow or get corrected; a refresh with under half
+    // the votes (or no units) is a stripped or partial file, so the saved results stay.
+    const prev = this.byRace.get(rc.raceId);
+    if (prev && archivePhase() && (!rc.units.length || votes(rc) < votes(prev) * 0.5)) return;
     this.byRace.set(rc.raceId, rc);
     this.dirty = true;
   }

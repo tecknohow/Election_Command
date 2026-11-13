@@ -234,6 +234,11 @@ export function RaceView() {
           </h1>
           <WatchStar id={race.id} />
           <span className={`badge status-${race.status}`}>{statusText(race)}</span>
+          {race.certified ? (
+            <span className="badge certified" title="The state has certified this result">
+              Certified
+            </span>
+          ) : null}
           {race.flip && race.winner ? (
             <span className="badge flip" style={{ background: PARTY_COLOR[race.winner] }}>
               {race.winner} GAIN

@@ -19,7 +19,7 @@ import {
 } from './http/security.js';
 import { hub, simStatus } from './http/stream.js';
 import { logger } from './lib/log.js';
-import { allPollerStatus, stopAllPollers } from './lib/poller.js';
+import { allPollerStatus, setResultsGate, stopAllPollers } from './lib/poller.js';
 import { simulator } from './sim/simulator.js';
 import { startBallot } from './sources/ballot.js';
 import { startCnn } from './sources/cnn.js';
@@ -197,6 +197,10 @@ if (existsSync(webDist)) {
   // SPA fallback: any non-API route serves index.html (client-side routing).
   app.setNotFoundHandler((req, reply) => {
     if (req.url.startsWith('/api/') || req.method !== 'GET') return reply.code(404).send({ error: 'not found' });
+    // A missing file (a path with an extension, e.g. /assets/index-1a2b.js) is a 404, never the
+    // SPA page: serving HTML as a script blanks the page silently. That happens when a new build is
+    // put in place without restarting (@fastify/static lists files once, at startup).
+    if (/\.[a-z0-9]+$/i.test(req.url.split('?')[0])) return reply.code(404).send({ error: 'not found' });
     return (reply.header('Cache-Control', 'no-cache') as unknown as { sendFile: (f: string) => unknown }).sendFile('index.html');
   });
   log.info(`serving web app from ${webDist}`);
@@ -207,6 +211,7 @@ if (existsSync(webDist)) {
 // ------------------------------------------------------------------ boot
 
 await loadState();
+setResultsGate(() => store.resultsGate());
 startNyt();
 startCnn();
 startWikipedia();

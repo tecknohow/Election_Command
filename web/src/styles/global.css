@@ -306,6 +306,10 @@ kbd {
 .badge.flip {
   color: #0b0e14;
 }
+.badge.certified {
+  background: #16302a;
+  color: var(--ok);
+}
 .badge.hold {
   background: var(--panel-3);
   color: var(--muted);

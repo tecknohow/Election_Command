@@ -21,6 +21,17 @@ export interface PollerOptions {
    * use as the status detail line.
    */
   run: () => Promise<boolean | string | void>;
+  /** A results feed: stops once results are locked (every race certified, or RESULTS_LOCK_AT; see setResultsGate). */
+  results?: boolean;
+}
+
+/**
+ * Results lock, wired up by index.ts to ElectionStore.resultsGate(): `frozen` stops results feeds;
+ * `note` (certification progress) is shown in their Sources-panel detail.
+ */
+let resultsGate: () => { frozen: boolean; note: string | null } = () => ({ frozen: false, note: null });
+export function setResultsGate(fn: typeof resultsGate) {
+  resultsGate = fn;
 }
 
 const pollers: Poller[] = [];
@@ -89,6 +100,15 @@ export class Poller {
 
   private async tick() {
     if (this.running) return;
+    if (this.opts.results) {
+      const gate = resultsGate();
+      if (gate.frozen) {
+        // No request; check again next interval (cheap).
+        this.status.detail = gate.note ?? 'stopped: results locked';
+        this.schedule(this.baseInterval());
+        return;
+      }
+    }
     this.running = true;
     const t0 = Date.now();
     this.status.lastAttempt = new Date().toISOString();
@@ -102,6 +122,8 @@ export class Poller {
       this.status.lastSuccess = new Date().toISOString();
       if (r === false) this.status.notModified++;
       if (typeof r === 'string') this.status.detail = r;
+      const note = this.opts.results ? resultsGate().note : null;
+      if (note) this.status.detail = `${note}${typeof r === 'string' ? ` · ${r}` : ''}`;
     } catch (err) {
       this.status.failures++;
       this.status.ok = false;

@@ -1,6 +1,7 @@
 import type { BallotMeasure, MeasureChoice, MeasureType, NewsItem } from '../../../shared/src/types.js';
 import { STATE_BY_POSTAL } from '../../../shared/src/states.js';
 import { config, staleAfterFor } from '../config.js';
+import { archivePhase, shrankTooMuch } from '../lib/guard.js';
 import { logger } from '../lib/log.js';
 import { store, type ElectionStore } from './store.js';
 
@@ -137,7 +138,22 @@ export class MeasureStore {
   private timer: NodeJS.Timeout | null = null;
 
   ingest(provider: Provider, items: MeasureInput[]) {
-    this.inputs.set(provider, { fetchedAt: Date.now(), items: new Map(items.map((i) => [i.key, i])) });
+    const next = new Map(items.map((i) => [i.key, i]));
+    const prev = this.inputs.get(provider);
+    if (prev && provider !== 'sim') {
+      // A list that suddenly has under half the measures is a broken or partial response.
+      if (shrankTooMuch(prev.items.size, next.size)) {
+        log.warn(`${provider}: now lists ${next.size} measures (was ${prev.items.size}); keeping the saved results`);
+        return;
+      }
+      // After election night, a measure whose file disappears or whose count vanishes keeps its last result.
+      if (archivePhase())
+        for (const [key, old] of prev.items) {
+          const cur = next.get(key);
+          if (!cur || (old.totalVotes > 0 && !cur.totalVotes)) next.set(key, old);
+        }
+    }
+    this.inputs.set(provider, { fetchedAt: Date.now(), items: next });
     this.schedule();
   }
 

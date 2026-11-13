@@ -1,6 +1,8 @@
 import type { CountyRaceResult, CountySummary, StateCandidate, StateRace, StateRaceKind, StateSummary } from '../../../shared/src/types.js';
 import { PLACES, placeKey } from '../geo/places.js';
 import { nytParty } from '../sources/nyt.js';
+import { shrankTooMuch } from '../lib/guard.js';
+import { logger } from '../lib/log.js';
 import { countyStore } from './counties.js';
 import { store } from './store.js';
 
@@ -117,8 +119,38 @@ interface StateEntry {
   updatedAt: string;
 }
 
+const log = logger('statewide');
+
+/** StateEntry as saved to statewide.json (Maps as plain objects). */
+interface SavedEntry {
+  races: StateRace[];
+  units: Record<string, Record<string, CountyRaceResult>>;
+  updatedAt: string;
+}
+
 class StateRaceStore {
   private byState = new Map<string, StateEntry>();
+  /** Changed since the last save (persist.ts writes statewide.json). */
+  dirty = false;
+
+  get size() {
+    return this.byState.size;
+  }
+
+  toPersisted(): Record<string, SavedEntry> {
+    const out: Record<string, SavedEntry> = {};
+    for (const [st, e] of this.byState)
+      out[st] = { races: e.races, units: Object.fromEntries([...e.units].map(([id, m]) => [id, Object.fromEntries(m)])), updatedAt: e.updatedAt };
+    return out;
+  }
+
+  loadPersisted(p: Record<string, SavedEntry> | undefined) {
+    for (const [st, e] of Object.entries(p ?? {})) {
+      if (!Array.isArray(e?.races)) continue;
+      const units = new Map(Object.entries(e.units ?? {}).map(([id, m]) => [id, new Map(Object.entries(m))]));
+      this.byState.set(st, { races: e.races, units, updatedAt: e.updatedAt });
+    }
+  }
 
   ingest(st: string, raw: NytStateRace[]) {
     const races: StateRace[] = [];
@@ -197,7 +229,13 @@ class StateRaceStore {
         updatedAt: ru.provider_updated_at ?? r.updated_at ?? null,
       });
     }
+    const prev = this.byState.get(st);
+    if (prev && shrankTooMuch(prev.races.length, races.length)) {
+      log.warn(`${st}: state file now lists ${races.length} races (was ${prev.races.length}); keeping the saved ones`);
+      return;
+    }
     this.byState.set(st, { races, units, updatedAt: new Date().toISOString() });
+    this.dirty = true;
   }
 
   summary(st: string): StateSummary {

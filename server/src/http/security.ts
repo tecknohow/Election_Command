@@ -13,13 +13,14 @@ export const adminEnabled = () => config.security.adminToken.length >= 16;
 /**
  * Strict CSP: only our own scripts/styles/connections; images also from NYT's CDN (candidate
  * headshots). Inline style *attributes* are needed for data-driven colors (React style={}).
+ * CSP_SCRIPT_SRC_EXTRA / CSP_CONNECT_SRC_EXTRA add origins for add-ons a proxy injects.
  */
 const CSP = [
   "default-src 'self'",
-  "script-src 'self'",
+  ["script-src 'self'", ...config.security.cspScriptSrcExtra].join(' '),
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https://static01.nyt.com",
-  "connect-src 'self'",
+  ["connect-src 'self'", ...config.security.cspConnectSrcExtra].join(' '),
   "font-src 'self'",
   "object-src 'none'",
   "base-uri 'self'",

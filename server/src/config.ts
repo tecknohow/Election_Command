@@ -15,6 +15,31 @@ const bool = (key: string, dflt: boolean) => {
   return ['1', 'true', 'yes', 'on'].includes(v.toLowerCase());
 };
 
+/**
+ * When results stop changing for good: the results feeds (NYT, CNN, Polymarket) keep polling until
+ * NYT marks every race certified, or until this moment, whichever comes first. Default: noon ET on
+ * Jan 3, 2027, when the new Congress is sworn in. "never" polls until every race is certified.
+ */
+const lockAt = (key: string, dflt: string): number | null => {
+  const v = (env[key] ?? dflt).trim();
+  if (/^(never|off|none)$/i.test(v)) return null;
+  const t = Date.parse(v);
+  if (Number.isFinite(t)) return t;
+  console.warn(`[config] ${key}="${v}" is not a date; using ${dflt}`);
+  return Date.parse(dflt);
+};
+
+/** Extra https origins for a CSP directive, e.g. "https://static.cloudflareinsights.com". */
+const origins = (key: string): string[] =>
+  (env[key] ?? '')
+    .split(/[\s,]+/)
+    .filter(Boolean)
+    .filter((o) => {
+      const ok = /^https:\/\/[a-z0-9.-]+(:\d+)?$/i.test(o);
+      if (!ok) console.warn(`[config] ignoring ${key} entry "${o}": expected an https origin like https://example.com`);
+      return ok;
+    });
+
 export const config = {
   port: num('PORT', 8080),
   host: env.HOST ?? '0.0.0.0',
@@ -53,6 +78,16 @@ export const config = {
     news: bool('ENABLE_NEWS', true),
   },
 
+  /** See lockAt above: results feeds stop when every race is certified or at this time (ms), if set. */
+  resultsLockAt: lockAt('RESULTS_LOCK_AT', '2027-01-03T17:00:00Z'),
+
+  /** Saved-data safety: rotating gzip snapshots of the data files in DATA_DIR/backups. */
+  backups: {
+    /** Snapshots kept per file (one at startup, then hourly). 0 disables them. */
+    keep: num('BACKUP_KEEP', 48),
+    intervalMs: num('BACKUP_INTERVAL_MIN', 60) * 60_000,
+  },
+
   sim: {
     /** Allow the (admin-only) simulator. Also requires ADMIN_TOKEN. */
     allowed: bool('SIM_ALLOWED', true),
@@ -82,6 +117,13 @@ export const config = {
     apiRatePerMin: num('API_RATE_PER_MIN', 120),
     /** Admin sign-in attempts per IP per 15 minutes. */
     loginAttempts: num('LOGIN_ATTEMPTS_PER_15M', 8),
+    /**
+     * Extra origins allowed by the Content-Security-Policy, for site-wide add-ons injected in front
+     * of the app (e.g. Cloudflare Web Analytics: CSP_SCRIPT_SRC_EXTRA=https://static.cloudflareinsights.com
+     * and CSP_CONNECT_SRC_EXTRA=https://cloudflareinsights.com). Space- or comma-separated.
+     */
+    cspScriptSrcExtra: origins('CSP_SCRIPT_SRC_EXTRA'),
+    cspConnectSrcExtra: origins('CSP_CONNECT_SRC_EXTRA'),
   },
 };
 

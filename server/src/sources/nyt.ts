@@ -54,6 +54,8 @@ interface NytRace {
   race_type_id: string;
   seat_number: string | null;
   uncontested: boolean;
+  /** The state has certified this race's result. */
+  certified?: boolean;
   tabulation_method?: string | null;
   race_call_status: string | null;
   rating: string | null;
@@ -123,6 +125,7 @@ export function normalizeNytRace(r: NytRace): RaceInput | null {
     gainedBy: r.outcome?.gained ? nytParty(r.outcome.gained) : null,
     pollClose: null,
     uncontested: !!r.uncontested,
+    certified: !!r.certified,
     rating: parseNytRating(r.rating),
     model: ru.nyt_model_estimates?.margin_quantile?.length === 5 ? { quantiles: ru.nyt_model_estimates.margin_quantile } : null,
     baselineMargin: comparison(ru.historical_comparison_race_data).margin,
@@ -298,7 +301,8 @@ async function pull(slug: string, office: Office): Promise<boolean> {
 
 // ------------------------------------------------- per-district House files (county parts)
 let houseFileHasCounties = true;
-const districtFetched = new Map<string, number>();
+/** When each district's file was last read, and the race's vote total at that moment. */
+const districtFetched = new Map<string, { at: number; votes: number }>();
 /** How often to re-check a district's file: often while it's still counting, rarely once done. */
 const DISTRICT_RECHECK_COUNTING_MS = 10 * 60_000;
 const DISTRICT_RECHECK_DONE_MS = 6 * 60 * 60_000;
@@ -312,8 +316,8 @@ function districtUrl(state: string, district: number, atLarge: boolean): string 
 
 /**
  * Once the national House file no longer carries county parts, fetch one district's own file per
- * run: districts never fetched first, then ones still counting (every 10 min), then the rest
- * (every 6 h). ETags make unchanged files a 304.
+ * run: districts never fetched first, then ones undecided or whose total has moved (every 10 min),
+ * then the rest (every 6 h). ETags make unchanged files a 304.
  */
 async function pullDistrict(): Promise<string | false> {
   if (houseFileHasCounties) return false;
@@ -324,13 +328,16 @@ async function pullDistrict(): Promise<string | false> {
   const due = (r: (typeof house)[number]) => {
     const last = districtFetched.get(r.id);
     if (last == null) return -Infinity;
-    const counting = r.status !== 'called' || (r.eevp ?? 100) < 99;
-    return last + (counting ? DISTRICT_RECHECK_COUNTING_MS : DISTRICT_RECHECK_DONE_MS);
+    // Still counting: not yet decided, or its total (from the national House file, polled every few
+    // minutes) has moved since this district's file was last read. Called races keep counting for
+    // weeks (California), so a call alone doesn't mean done.
+    const counting = (r.status !== 'called' && r.status !== 'runoff') || r.totalVotes !== last.votes;
+    return last.at + (counting ? DISTRICT_RECHECK_COUNTING_MS : DISTRICT_RECHECK_DONE_MS);
   };
   const next = house.filter((r) => due(r) <= now).sort((a, b) => due(a) - due(b))[0];
   if (!next) return false;
   const url = districtUrl(next.state, next.district ?? 1, perState.get(next.state) === 1);
-  districtFetched.set(next.id, now);
+  districtFetched.set(next.id, { at: now, votes: next.totalVotes });
   if (!url) return false;
   const res = await fetchJson<NytFile>(url, { conditional: true, timeoutMs: 30_000 });
   if (!res.changed) return false;
@@ -341,6 +348,7 @@ async function pullDistrict(): Promise<string | false> {
 export function startNyt() {
   const statewide = new Poller({
     id: 'nyt',
+    results: true,
     name: 'NYT / AP results',
     role: 'Primary results: Senate + Governor (votes, EEVP, AP calls, ratings)',
     hotIntervalS: config.intervals.nyt.hot,
@@ -353,6 +361,7 @@ export function startNyt() {
   });
   const house = new Poller({
     id: 'nyt-house',
+    results: true,
     name: 'NYT / AP House results',
     role: 'Primary results: 435 House races (~350 KB gzipped)',
     hotIntervalS: config.intervals.nytHouse.hot,
@@ -363,6 +372,7 @@ export function startNyt() {
   });
   const counties = new Poller({
     id: 'nyt-counties',
+    results: true,
     name: 'NYT / AP county results',
     role: 'County-level Senate + Governor results for race drill-downs (~170 KB gzipped each)',
     hotIntervalS: config.intervals.nytCounties.hot,
@@ -376,6 +386,7 @@ export function startNyt() {
   });
   const districts = new Poller({
     id: 'nyt-house-districts',
+    results: true,
     name: 'NYT / AP House district files',
     role: "County parts of House districts, one district file at a time, once NYT's national House file stops carrying them",
     hotIntervalS: 4,

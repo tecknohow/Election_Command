@@ -212,11 +212,28 @@ All settings are environment variables, usually set in `.env`.
 | `HOT_START` / `HOT_END` | `2026-11-03T20:00Z` / `2026-11-05T12:00Z` | Fast-polling window; slower cadence outside it |
 | `STALE_AFTER_S` | `180` | Fail over from NYT to CNN after this much staleness (or after two missed NYT polls, whichever is longer) |
 | `ENABLE_NYT`, `ENABLE_CNN`, `ENABLE_POLYMARKET`, `ENABLE_WIKIPEDIA`, `ENABLE_NEWS` | `true` | Toggle individual sources |
+| `RESULTS_LOCK_AT` | `2027-01-03T17:00:00Z` | Results feeds (NYT, CNN, Polymarket) keep updating every count until NYT shows every race certified, then stop and serve the saved results. If some race is still uncertified at this time (noon ET Jan 3, when the new Congress is sworn in), they stop then. `never` waits for certification only. State files (measures, Statewide), Wikipedia and news are never stopped |
+| `DATA_DIR` | `./data` (`/data` in Docker) | Where saved data and backups live |
+| `BACKUP_KEEP` / `BACKUP_INTERVAL_MIN` | `48` / `60` | Gzip snapshots of the data files kept in `DATA_DIR/backups` (one at startup, then every interval). `0` disables them |
+| `CSP_SCRIPT_SRC_EXTRA` / `CSP_CONNECT_SRC_EXTRA` | *(none)* | Extra https origins allowed by the Content-Security-Policy, for add-ons a proxy injects. Cloudflare Web Analytics: `https://static.cloudflareinsights.com` / `https://cloudflareinsights.com` |
 | `NEWS_FEEDS` | built-in list | `Name\|url\|filter;…` (filter=1 applies the election keyword filter; filter=issues keeps only election-day trouble stories) |
 | `MAX_STREAMS` / `MAX_STREAMS_PER_IP` | `150` / `16` | Live-connection caps |
 | `API_RATE_PER_MIN` | `120` | REST requests per IP per minute |
 
-State persists in the Docker volume `ec_data`: `state.json` (races, news, history) and `counties.json` (county results). Back them up with `docker compose cp election-command:/data/state.json ./state-backup.json` (and the same for `counties.json`).
+### Saved data
+
+Everything the server collects is saved in `DATA_DIR` (the Docker volume `ec_data`), so restarts and upgrades keep it:
+
+- `state.json`: races from every source, calls, news, the seats-over-the-night history, ballot measures, market odds and ratings (every 30 s and on shutdown);
+- `counties.json`: county results for every race;
+- `statewide.json`: the Statewide view's other offices and local races;
+- `backups/`: gzip snapshots of all three, taken at startup and hourly (the newest 48 of each are kept).
+
+To restore a snapshot, stop the server, `gunzip -c backups/state-<time>.json.gz > state.json`, and start it. A data file that can't be parsed at startup is renamed `<name>.unreadable-<time>` instead of being overwritten.
+
+Upstream files that degrade can't wipe saved results: a refreshed file listing under half the races, measures or Statewide races it had is ignored, and after election night (`HOT_END`) a race, measure or county result that drops out of a file or loses its count keeps its last saved values.
+
+With Docker, `docker compose up -d --build` keeps the volume; never run `docker compose down -v`, and keep the checkout's directory name (the volume's name comes from it). Copy everything out with `docker compose cp election-command:/data ./data-backup`.
 
 ## Development
 

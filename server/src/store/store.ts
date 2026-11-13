@@ -20,6 +20,7 @@ import type {
 } from '../../../shared/src/types.js';
 import { OFFICE_LABEL, STATE_BY_POSTAL } from '../../../shared/src/states.js';
 import { config, staleAfterFor } from '../config.js';
+import { archivePhase, shrankTooMuch } from '../lib/guard.js';
 import { allPollerStatus } from '../lib/poller.js';
 import { logger } from '../lib/log.js';
 import {
@@ -85,6 +86,9 @@ export class ElectionStore extends EventEmitter {
   clock: () => number = () => Date.now();
 
   private recomputeTimer: NodeJS.Timeout | null = null;
+  /** Results locked: every race certified, or past RESULTS_LOCK_AT. Results feeds stop. */
+  private frozen = false;
+  private frozenNote = '';
   private lastBopPointAt = 0;
 
   // ---------------------------------------------------------------- inputs
@@ -93,10 +97,23 @@ export class ElectionStore extends EventEmitter {
     let byOffice = this.batches.get(batch.provider);
     if (!byOffice) this.batches.set(batch.provider, (byOffice = new Map()));
     for (const office of batch.offices) {
-      byOffice.set(office, {
-        fetchedAt: batch.fetchedAt,
-        races: new Map(batch.races.filter((r) => r.office === office).map((r) => [r.id, r])),
-      });
+      const next = new Map(batch.races.filter((r) => r.office === office).map((r) => [r.id, r]));
+      const prev = byOffice.get(office);
+      if (prev && batch.provider !== 'sim') {
+        // A file that suddenly lists under half the races is broken or stripped: keep what we have.
+        if (shrankTooMuch(prev.races.size, next.size)) {
+          log.warn(`${batch.provider} ${office}: file now lists ${next.size} races (was ${prev.races.size}); keeping the saved results`);
+          continue;
+        }
+        // After election night, a race that drops out of the file, or whose count vanishes, keeps
+        // its last result.
+        if (archivePhase())
+          for (const [id, old] of prev.races) {
+            const cur = next.get(id);
+            if (!cur || (old.totalVotes > 0 && !cur.totalVotes)) next.set(id, old);
+          }
+      }
+      byOffice.set(office, { fetchedAt: batch.fetchedAt, races: next });
     }
     for (const r of batch.races) {
       if (r.pollClose && !this.pollClosingMap.has(r.state)) this.pollClosingMap.set(r.state, r.pollClose);
@@ -244,7 +261,8 @@ export class ElectionStore extends EventEmitter {
       const cnn = this.batch('cnn', office);
       const sim = this.mode === 'simulation' ? this.batch('sim', office) : undefined;
       const ids = new Set<string>([...(nyt?.races.keys() ?? []), ...(cnn?.races.keys() ?? [])]);
-      const nytFresh = nyt && now - nyt.fetchedAt < staleAfterFor(office === 'H' ? config.intervals.nytHouse : config.intervals.nyt, now);
+      // Results locked: polling has stopped, so NYT's saved results never go stale (and never lose to CNN's).
+      const nytFresh = nyt && (this.frozen || now - nyt.fetchedAt < staleAfterFor(office === 'H' ? config.intervals.nytHouse : config.intervals.nyt, now));
       const useCnnVotes = !!cnn && (!nytFresh || !nyt) && (!nyt || cnn.fetchedAt > nyt.fetchedAt);
 
       for (const id of ids) {
@@ -426,6 +444,7 @@ export class ElectionStore extends EventEmitter {
       margin: leaderC && second ? +(leaderC.pct - second.pct).toFixed(2) : leaderC ? 100 : null,
       flip,
       uncontested: inp.uncontested,
+      certified: !!inp.certified,
       // Alaska uses RCV for all general elections; Maine for federal races.
       rcv,
       expectedLater,
@@ -643,6 +662,30 @@ export class ElectionStore extends EventEmitter {
   }
 
   // ---------------------------------------------------------------- persistence
+
+  /**
+   * Results lock. Every count keeps updating until the state certifies it: the results feeds
+   * (NYT, CNN, Polymarket) stop only when NYT marks every race certified, or at RESULTS_LOCK_AT
+   * (noon ET, Jan 3, 2027: the new Congress is sworn in and results can no longer change).
+   * Certification comes from the NYT race files themselves, so it is checked on every poll.
+   */
+  resultsGate(): { frozen: boolean; note: string | null } {
+    if (this.frozen) return { frozen: true, note: this.frozenNote };
+    const live = [...this.races.values()];
+    const lockAt = config.resultsLockAt;
+    const lock = (why: string) => {
+      this.frozen = true;
+      this.frozenNote = `stopped: ${why}; serving the saved results`;
+      log.info(`results locked (${why}); results feeds stopped`);
+      return { frozen: true, note: this.frozenNote };
+    };
+    if (lockAt != null && Date.now() >= lockAt) return lock(`past ${new Date(lockAt).toISOString().slice(0, 10)}, when the newly elected took office`);
+    if (!live.length) return { frozen: false, note: null };
+    const certified = live.filter((r) => r.certified).length;
+    if (certified === live.length) return lock('every race certified');
+    // Shown on the results feeds once election night is over: certification progress.
+    return { frozen: false, note: archivePhase() ? `${certified}/${live.length} races certified; polling until all are${lockAt != null ? ` or ${new Date(lockAt).toISOString().slice(0, 10)}` : ''}` : null };
+  }
 
   toPersisted() {
     const batches: Record<string, Record<string, { fetchedAt: number; races: RaceInput[] }>> = {};

@@ -262,6 +262,7 @@ function publish() {
 export function startPolymarket() {
   const disc = new Poller({
     id: 'polymarket-discovery',
+    results: true,
     name: 'Polymarket discovery',
     role: 'Locates each race\'s market (Gamma API)',
     hotIntervalS: config.intervals.polymarketDiscovery.hot,
@@ -277,6 +278,7 @@ export function startPolymarket() {
   });
   const prices = new Poller({
     id: 'polymarket',
+    results: true,
     name: 'Polymarket prices',
     role: 'Live win probabilities (CLOB midpoints)',
     hotIntervalS: config.intervals.polymarketPrices.hot,

@@ -103,6 +103,8 @@ export interface Race {
   /** True when the projected winner's party differs from the prior holder. */
   flip: boolean;
   uncontested: boolean;
+  /** The state has certified the result (NYT/AP). Results feeds stop once every race is. */
+  certified?: boolean;
   /** Ranked-choice tabulation (first-choice votes shown; final result may take days). */
   rcv?: boolean;
   /** Majority required, otherwise a runoff (e.g. Georgia). */
